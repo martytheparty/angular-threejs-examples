@@ -1,0 +1,16 @@
+{
+  "name": "te",
+  "version": "1.0.0",
+  "description": "\"# angular-threejs-examples\"",
+  "main": "index.js",
+  "scripts": {
+    "nghelp": "ng --help",
+    "ngcreate": "ng new tjs-angular"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/cli": "^21.2.13"
+  }
+}
