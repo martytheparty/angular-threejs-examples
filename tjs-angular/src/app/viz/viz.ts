@@ -28,7 +28,7 @@ export class VizComponent implements AfterViewInit {
     
     camera.position.z = 10;
     const scene = new THREE.Scene();
-    const geometry = new THREE.BoxGeometry( 3, 3, 3 );
+    const geometry = new THREE.PlaneGeometry( 3, 3);
     const material = new THREE.MeshNormalMaterial();
 
     const mesh = new THREE.Mesh( geometry, material );
