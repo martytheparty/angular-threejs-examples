@@ -31,17 +31,38 @@ export class VizComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const loader = new THREE.TextureLoader();
+    const bulldogTexture = loader.load('/bulldog.jpg');
+    bulldogTexture.flipY = false;
+
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
     camera.position.z = 10;
     const scene = new THREE.Scene();
-    const geometry = new THREE.BoxGeometry( 3, 3, 3 );
-    const material = new THREE.MeshNormalMaterial();
+    const geometry = new THREE.PlaneGeometry( 3, 3);
+    const frontMaterial = new THREE.MeshBasicMaterial({
+      color: 0xff0000, // red
+      side: THREE.FrontSide
+    });
 
-    const mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    const backMaterial = new THREE.MeshBasicMaterial({
+       map: bulldogTexture,
+      side: THREE.BackSide
+    });
+
+    const frontMesh = new THREE.Mesh(geometry, frontMaterial);
+    const backMesh = new THREE.Mesh(geometry, backMaterial);
+
+    const group = new THREE.Group();
+
+    group.add(frontMesh);
+    group.add(backMesh);
+
+    scene.add(group);
+
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
     renderer.setAnimationLoop( animate );
@@ -57,15 +78,15 @@ export class VizComponent implements AfterViewInit {
     function animate( time: number ) {
 
       if(controlsService.x() > 0) {
-        mesh.rotation.x = time / controlsService.x();
+        group.rotation.x = time / controlsService.x();
       }
 
       if(controlsService.y() > 0) {
-        mesh.rotation.y = time / controlsService.y();
+        group.rotation.y = time / controlsService.y();
       }
 
       if(controlsService.z() > 0) {
-        mesh.rotation.z = time / controlsService.z();
+        group.rotation.z = time / controlsService.z();
       }
 
       renderer.render( scene, camera );
