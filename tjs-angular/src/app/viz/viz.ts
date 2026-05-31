@@ -29,11 +29,28 @@ export class VizComponent implements AfterViewInit {
     camera.position.z = 10;
     const scene = new THREE.Scene();
     const geometry = new THREE.PlaneGeometry( 3, 3);
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+    const frontMaterial = new THREE.MeshBasicMaterial({
+      color: 0xff0000, // red
+      side: THREE.FrontSide
+    });
 
-    const mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+    const backMaterial = new THREE.MeshBasicMaterial({
+      color: 0x000000, // black
+      side: THREE.BackSide
+    });
+
+    const frontMesh = new THREE.Mesh(geometry, frontMaterial);
+    const backMesh = new THREE.Mesh(geometry, backMaterial);
+
+    const group = new THREE.Group();
+
+    group.add(frontMesh);
+    group.add(backMesh);
+
+    scene.add(group);
+
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
     renderer.setAnimationLoop( animate );
@@ -47,8 +64,8 @@ export class VizComponent implements AfterViewInit {
 
     function animate( time: number ) {
 
-      mesh.rotation.x = time / 2000;
-      mesh.rotation.y = time / 1000;
+      group.rotation.x = time / 2000;
+      group.rotation.y = time / 1000;
 
       renderer.render( scene, camera );
 
