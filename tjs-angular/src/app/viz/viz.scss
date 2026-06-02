@@ -1,4 +1,11 @@
 .visualization {
     width: 100vw;
     height: 100vh;
+    position: absolute;
+}
+
+app-controls {
+    position: absolute;
+    background-color: antiquewhite;
+    z-index: 1;
 }

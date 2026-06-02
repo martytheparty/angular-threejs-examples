@@ -2,14 +2,21 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  inject,
   ViewChild
 } from '@angular/core';
 
 import * as THREE from 'three';
+import {
+  ControlsComponent
+} from './controls/controls';
+import { ControlsService } from './controls-service';
 
 @Component({
   selector: 'app-viz',
-  imports: [],
+  imports: [
+    ControlsComponent
+  ],
   templateUrl: './viz.html',
   styleUrl: './viz.scss',
 })
@@ -17,6 +24,7 @@ export class VizComponent implements AfterViewInit {
 
   @ViewChild('visualization', { static: true })
   visualization!: ElementRef<HTMLDivElement>;
+  controlsService: ControlsService = inject(ControlsService);
 
   constructor() {
 
@@ -44,11 +52,21 @@ export class VizComponent implements AfterViewInit {
     );
 
     // animation
+    const controlsService = this.controlsService;
 
     function animate( time: number ) {
 
-      mesh.rotation.x = time / 2000;
-      mesh.rotation.y = time / 1000;
+      if(controlsService.x() > 0) {
+        mesh.rotation.x = time / controlsService.x();
+      }
+
+      if(controlsService.y() > 0) {
+        mesh.rotation.y = time / controlsService.y();
+      }
+
+      if(controlsService.z() > 0) {
+        mesh.rotation.z = time / controlsService.z();
+      }
 
       renderer.render( scene, camera );
 

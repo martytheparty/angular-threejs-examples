@@ -1,0 +1,17 @@
+<div class="parent">
+    <div 
+        (click)="setControlSelected('x')"
+        [ngClass]="{'selected': controlsService.selected() === 'x'}"
+    >X: {{controlsService.x()}}
+    </div>
+    <div
+        (click)="setControlSelected('y')"
+        [ngClass]="{'selected': controlsService.selected() === 'y'}"
+    >Y: {{controlsService.y()}}
+    </div>
+    <div
+        (click)="setControlSelected('z')"
+        [ngClass]="{'selected': controlsService.selected() === 'z'}"
+    >Z: {{controlsService.z()}}
+    </div>
+</div>

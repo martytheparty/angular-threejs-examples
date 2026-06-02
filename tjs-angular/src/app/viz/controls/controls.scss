@@ -1,0 +1,12 @@
+.parent {
+    display: flex;
+
+    div {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .selected {
+        border: 1px solid red;
+    }
+}
