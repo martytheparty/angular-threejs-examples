@@ -32,22 +32,24 @@ export class VizComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const loader = new THREE.TextureLoader();
-    const bulldogTexture = loader.load('/bulldog.jpg');
-    bulldogTexture.flipY = false;
+    const frontTexture = loader.load('/front.png');
+    const backTexture = loader.load('/back.png');
+    //frontTexture.flipY = false;
+    backTexture.flipY = false;
 
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 10;
+    camera.position.z = 5;
     const scene = new THREE.Scene();
     const geometry = new THREE.PlaneGeometry( 3, 3);
     const frontMaterial = new THREE.MeshBasicMaterial({
-      color: 0xff0000, // red
+      map: frontTexture,
       side: THREE.FrontSide
     });
 
     const backMaterial = new THREE.MeshBasicMaterial({
-       map: bulldogTexture,
+       map: backTexture,
       side: THREE.BackSide
     });
 
