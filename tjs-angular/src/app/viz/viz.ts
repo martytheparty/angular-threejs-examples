@@ -11,6 +11,7 @@ import {
   ControlsComponent
 } from './controls/controls';
 import { ControlsService } from './controls-service';
+import { VizAnimation } from './viz.animation.class';
 
 @Component({
   selector: 'app-viz',
@@ -26,10 +27,6 @@ export class VizComponent implements AfterViewInit {
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
 
-  constructor() {
-
-  }
-
   ngAfterViewInit(): void {
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
@@ -44,32 +41,20 @@ export class VizComponent implements AfterViewInit {
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setSize( width, height );
 
-    renderer.setAnimationLoop( animate );
-    //document.body.appendChild( renderer.domElement );
+    const animation = new VizAnimation(mesh);
+
+    renderer.setAnimationLoop( 
+      () => {
+          animation.setRotationXSpeed(this.controlsService.x());
+          animation.setRotationYSpeed(this.controlsService.y());
+          animation.setRotationZSpeed(this.controlsService.z());
+          animation.animate();
+          renderer.render(scene, camera);
+        }
+     );
 
     this.visualization.nativeElement.appendChild(
       renderer.domElement
     );
-
-    // animation
-    const controlsService = this.controlsService;
-
-    function animate( time: number ) {
-
-      if(controlsService.x() > 0) {
-        mesh.rotation.x = time / controlsService.x();
-      }
-
-      if(controlsService.y() > 0) {
-        mesh.rotation.y = time / controlsService.y();
-      }
-
-      if(controlsService.z() > 0) {
-        mesh.rotation.z = time / controlsService.z();
-      }
-
-      renderer.render( scene, camera );
-
-    }
   }
 }
