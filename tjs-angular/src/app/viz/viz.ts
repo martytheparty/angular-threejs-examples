@@ -11,6 +11,7 @@ import {
   ControlsComponent
 } from './controls/controls';
 import { ControlsService } from './controls-service';
+import { VizAnimation } from './viz.animation.class';
 
 @Component({
   selector: 'app-viz',
@@ -26,10 +27,6 @@ export class VizComponent implements AfterViewInit {
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
 
-  constructor() {
-
-  }
-
   ngAfterViewInit(): void {
     const loader = new THREE.TextureLoader();
     const frontTexture = loader.load('/front.png');
@@ -40,7 +37,7 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 5;
+    camera.position.z = 3;
     const scene = new THREE.Scene();
     const geometry = new THREE.PlaneGeometry( 3, 3);
     const frontMaterial = new THREE.MeshBasicMaterial({
@@ -67,32 +64,20 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
-    renderer.setAnimationLoop( animate );
-    //document.body.appendChild( renderer.domElement );
+    const animation = new VizAnimation(group);
+
+    renderer.setAnimationLoop( 
+      () => {
+          animation.setRotationXSpeed(this.controlsService.x());
+          animation.setRotationYSpeed(this.controlsService.y());
+          animation.setRotationZSpeed(this.controlsService.z());
+          animation.animate();
+          renderer.render(scene, camera);
+        }
+     );
 
     this.visualization.nativeElement.appendChild(
       renderer.domElement
     );
-
-    // animation
-    const controlsService = this.controlsService;
-
-    function animate( time: number ) {
-
-      if(controlsService.x() > 0) {
-        group.rotation.x = time / controlsService.x();
-      }
-
-      if(controlsService.y() > 0) {
-        group.rotation.y = time / controlsService.y();
-      }
-
-      if(controlsService.z() > 0) {
-        group.rotation.z = time / controlsService.z();
-      }
-
-      renderer.render( scene, camera );
-
-    }
   }
 }

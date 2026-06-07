@@ -22,7 +22,6 @@ constructor() {
 
   handleKeyboard(keyboardEvent: KeyboardEvent) {
     const key: string = keyboardEvent.key;
-    console.log(key, "key");
     if (key === 'ArrowUp' ) this.increment();
     if (key === 'ArrowDown' ) this.decrement();
   }
