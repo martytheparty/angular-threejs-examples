@@ -58,11 +58,11 @@ export class VizComponent implements AfterViewInit {
     const animation = new VizAnimation(group);
 
     renderer.setAnimationLoop( 
-      () => {
+      (time: number) => {
           animation.setRotationXSpeed(this.controlsService.x());
           animation.setRotationYSpeed(this.controlsService.y());
           animation.setRotationZSpeed(this.controlsService.z());
-          animation.animate();
+          animation.animate(time);
           renderer.render(scene, camera);
         }
      );
