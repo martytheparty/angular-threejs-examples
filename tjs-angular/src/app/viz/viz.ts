@@ -29,17 +29,17 @@ export class VizComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const loader = new THREE.TextureLoader();
-    const frontTexture = loader.load('/front.png');
-    const backTexture = loader.load('/back.png');
-    //frontTexture.flipY = false;
+    const frontTexture = loader.load('/zoetrope.png');
+    frontTexture.colorSpace = THREE.SRGBColorSpace;
+    const backTexture = loader.load('/zoetrope.png');
     backTexture.flipY = false;
 
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 3;
+    camera.position.z = 5;
     const scene = new THREE.Scene();
-    const geometry = new THREE.PlaneGeometry( 3, 3);
+    const geometry = new THREE.CircleGeometry( 3, 8);
     const frontMaterial = new THREE.MeshBasicMaterial({
       map: frontTexture,
       side: THREE.FrontSide
