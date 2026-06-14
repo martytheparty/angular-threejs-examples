@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ControlsComponent {
   controlsService: ControlsService = inject(ControlsService);
 
-  setControlSelected(selected: "x"|"y"|"z"):void {
+  setControlSelected(selected: "x"|"y"|"z"|"s"):void {
     this.controlsService.setSelected(selected);
   }
 }

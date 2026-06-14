@@ -14,4 +14,10 @@
         [ngClass]="{'selected': controlsService.selected() === 'z'}"
     >Z: {{controlsService.z()}}
     </div>
+    <div
+        (click)="setControlSelected('s')"
+        [ngClass]="{'selected': controlsService.selected() === 's'}"
+    >S: {{controlsService.s()}}
+    </div>
+
 </div>

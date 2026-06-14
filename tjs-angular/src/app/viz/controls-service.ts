@@ -12,8 +12,9 @@ export class ControlsService {
   x: WritableSignal<number> = signal<number>(0);
   y: WritableSignal<number> = signal<number>(0);
   z: WritableSignal<number> = signal<number>(0);
+  s: WritableSignal<number> = signal<number>(3);
 
-  selected: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
+  selected: WritableSignal<'x'|'y'|'z'|'s'> = signal<'x'|'y'|'z'|'s'>('x');
 
 constructor() {
     fromEvent<KeyboardEvent>(window, 'keydown')
@@ -33,6 +34,8 @@ constructor() {
       this.setY(this.y() + 1); 
     } else if (this.selected() === 'z') {
       this.setZ(this.z() + 1); 
+    } else if (this.selected() === 's') {
+      this.setS(this.s() + 1); 
     }
   }
 
@@ -43,10 +46,16 @@ constructor() {
       this.setY(this.y() - 1); 
     } else if (this.selected() === 'z') {
       this.setZ(this.z() - 1); 
+    } else if (this.selected() === 's') {
+      if (this.s() > 3) {
+        this.setS(this.s() - 1); 
+      }
     }
   }
 
-
+  setS(newS: number): void {
+    this.s.set(newS);
+  }
 
   setX(newX: number): void {
     this.x.set(newX);
@@ -60,7 +69,7 @@ constructor() {
     this.z.set(z);
   }
 
-  setSelected(selected: 'x'|'y'|'z'): void {
+  setSelected(selected: 'x'|'y'|'z'|'s'): void {
     this.selected.set(selected);
   }
 }
