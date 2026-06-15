@@ -89,9 +89,10 @@ export class VizComponent implements AfterViewInit {
   createGroup(): THREE.Object3D {
 
     const loader = new THREE.TextureLoader();
-    const frontTexture = loader.load('/zoetrope.png');
+    const frontTexture = loader.load('/patriotic.jpg');
     frontTexture.colorSpace = THREE.SRGBColorSpace;
-    const backTexture = loader.load('/zoetrope.png');
+    const backTexture = loader.load('/patriotic.jpg');
+    backTexture.colorSpace = THREE.SRGBColorSpace;
     backTexture.flipY = false;
 
     const geometry = new THREE.CircleGeometry( 3, this.segmentCount);

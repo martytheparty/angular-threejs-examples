@@ -5,12 +5,14 @@ export class VizAnimation {
     private rotationXSpeed = 0.01;
     private rotationYSpeed = 0.01;
     private rotationZSpeed = 0.01;
+    createDateTime = Date.now();
 
     constructor(
         private readonly element: THREE.Object3D
     ) {}
 
     animate() {
+        console.log("Created at", this.createDateTime);
         this.element.rotation.x += this.rotationXSpeed;
         this.element.rotation.y += this.rotationYSpeed;
         this.element.rotation.z += this.rotationZSpeed;
