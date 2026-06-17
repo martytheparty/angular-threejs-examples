@@ -12,7 +12,6 @@ export class VizAnimation {
     ) {}
 
     animate() {
-        console.log("Created at", this.createDateTime);
         this.element.rotation.x += this.rotationXSpeed;
         this.element.rotation.y += this.rotationYSpeed;
         this.element.rotation.z += this.rotationZSpeed;
