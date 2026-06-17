@@ -65,30 +65,16 @@ export class VizComponent implements AfterViewInit {
   }
 
   createGroup(): THREE.Object3D {
+    const geometry = new THREE.TetrahedronGeometry(3);
+    const material = new THREE.MeshNormalMaterial();
+    const tetrahedron = new THREE.Mesh(geometry, material);
 
-    const loader = new THREE.TextureLoader();
-    const frontTexture = loader.load('/patriotic.jpg');
-    frontTexture.colorSpace = THREE.SRGBColorSpace;
-    const backTexture = loader.load('/patriotic.jpg');
-    backTexture.colorSpace = THREE.SRGBColorSpace;
-    backTexture.flipY = false;
-
-    const geometry = new THREE.CircleGeometry( 3, this.segmentCount);
-    const frontMaterial = new THREE.MeshBasicMaterial({
-      map: frontTexture,
-      side: THREE.FrontSide
-    });
-
-    const backMaterial = new THREE.MeshBasicMaterial({
-       map: backTexture,
-      side: THREE.BackSide
-    });
-
-    const frontMesh = new THREE.Mesh(geometry, frontMaterial);
-    const backMesh = new THREE.Mesh(geometry, backMaterial);
+    //const tetrahedron2 = new THREE.Mesh(geometry, material);
+    //tetrahedron2.rotation.y = Math.PI / 2;
 
     this.group = new THREE.Group();
     this.group.add(tetrahedron);
+    //this.group.add(tetrahedron2);
 
     return this.group;
   }
