@@ -41,16 +41,17 @@ export class VizComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const config = this.vizConfig() as VizInterface;
     const width = window.innerWidth, height = window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
+    this.camera = new THREE.PerspectiveCamera( 70, (width /2) / height, 0.01, 20 );
     
     this.camera.position.z = config.cameraZPosition;
     this.camera.position.y = config.cameraYPosition;
     this.camera.lookAt(0,0,0);
     this.scene = new THREE.Scene();
+    this.createGroup();
     this.addGroupToScene(this.group, this.scene);
 
     this.renderer.setClearColor(0xaaaaaa); // white
-    this.renderer.setSize( width, height );
+    this.renderer.setSize( width/2, height );
 
     this.setAnimation(this.renderer, this.camera);
 
@@ -74,7 +75,7 @@ export class VizComponent implements AfterViewInit {
   }
 
   createGroup(): THREE.Object3D {
-    const geometry = new THREE.CylinderGeometry( 2, 2, 10, 8 );
+    const geometry = new THREE.CylinderGeometry( .01, 2, 10, 32 );
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
     const cylinder = new THREE.Mesh(geometry, material);
 

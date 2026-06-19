@@ -10,7 +10,7 @@ export class VizService {
       index: 0,
       showMenu: true,
       cameraXPosition: 0,
-      cameraYPosition: 10,
+      cameraYPosition: 0,
       cameraZPosition: 0
     },
     1: {
