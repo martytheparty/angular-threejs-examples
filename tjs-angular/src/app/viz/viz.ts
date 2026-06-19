@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   inject,
+  input,
   ViewChild
 } from '@angular/core';
 
@@ -22,6 +23,7 @@ import { VizAnimation } from './viz.animation.class';
   styleUrl: './viz.scss',
 })
 export class VizComponent implements AfterViewInit {
+  showControls = input(true);
   @ViewChild('visualization', { static: true })
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
@@ -33,7 +35,7 @@ export class VizComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const width = window.innerWidth, height = window.innerHeight;
-    this.camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
+    this.camera = new THREE.PerspectiveCamera( 70, (width /2) / height, 0.01, 20 );
     
     this.camera.position.z = 5;
     this.scene = new THREE.Scene();
@@ -41,7 +43,7 @@ export class VizComponent implements AfterViewInit {
     this.addGroupToScene(this.group, this.scene);
 
     this.renderer.setClearColor(0xaaaaaa); // white
-    this.renderer.setSize( width, height );
+    this.renderer.setSize( width/2, height );
 
     this.setAnimation(this.renderer, this.camera);
 
