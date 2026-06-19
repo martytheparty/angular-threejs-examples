@@ -69,12 +69,12 @@ export class VizComponent implements AfterViewInit {
     const material = new THREE.MeshNormalMaterial();
     const tetrahedron = new THREE.Mesh(geometry, material);
 
-    //const tetrahedron2 = new THREE.Mesh(geometry, material);
-    //tetrahedron2.rotation.y = Math.PI / 2;
+    const tetrahedron2 = new THREE.Mesh(geometry, material);
+    tetrahedron2.rotation.y = Math.PI / 2;
 
     this.group = new THREE.Group();
     this.group.add(tetrahedron);
-    //this.group.add(tetrahedron2);
+    this.group.add(tetrahedron2);
 
     return this.group;
   }
