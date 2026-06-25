@@ -35,7 +35,7 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     this.camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    this.camera.position.z = 5;
+    this.camera.position.z = 10;
     this.camera.position.y = 0;
     this.camera.lookAt(0,0,0);
     this.scene = new THREE.Scene();
@@ -68,11 +68,15 @@ export class VizComponent implements AfterViewInit {
 
   createGroup(): THREE.Object3D {
     const sphereGeometry = new THREE.SphereGeometry(2);
+    const sphereSmallGeometry = new THREE.SphereGeometry(.4);
     const material = new THREE.MeshNormalMaterial();
     const sphere = new THREE.Mesh(sphereGeometry, material);  
+    const sphereSmall = new THREE.Mesh(sphereSmallGeometry, material);
+    sphereSmall.position.set(-4, 0, 0) 
 
     this.group = new THREE.Group();
     this.group.add(sphere);
+    this.group.add(sphereSmall);
 
     return this.group;
   }
