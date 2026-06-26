@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { VizComponent } from './viz/viz';
+import { VizService } from './viz/viz-service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,6 @@ import { VizComponent } from './viz/viz';
   styleUrl: './app.scss'
 })
 export class App {
+
+  vizService: VizService = inject(VizService);
 }
