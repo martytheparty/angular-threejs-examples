@@ -1,8 +1,10 @@
 import { 
   AfterViewInit,
   Component,
+  effect,
   ElementRef,
   inject,
+  input,
   ViewChild
 } from '@angular/core';
 
@@ -12,6 +14,8 @@ import {
 } from './controls/controls';
 import { ControlsService } from './controls-service';
 import { VizAnimation } from './viz.animation.class';
+import { VizInterface } from './viz-interface';
+import { VizService } from './viz-service';
 
 @Component({
   selector: 'app-viz',
@@ -22,9 +26,12 @@ import { VizAnimation } from './viz.animation.class';
   styleUrl: './viz.scss',
 })
 export class VizComponent implements AfterViewInit {
+  vizConfig = input<VizInterface>();
   @ViewChild('visualization', { static: true })
+
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
+  vizService: VizService = inject(VizService);
 
   scene = new THREE.Scene();
   group: THREE.Object3D = new THREE.Group();
@@ -32,14 +39,14 @@ export class VizComponent implements AfterViewInit {
   camera: THREE.PerspectiveCamera | undefined ;
 
   ngAfterViewInit(): void {
+    const config = this.vizConfig() as VizInterface;
     const width = window.innerWidth, height = window.innerHeight;
     this.camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    this.camera.position.z = 0;
-//    this.camera.position.y = 0;
+    this.camera.position.z = config.cameraZPosition;
+    this.camera.position.y = config.cameraYPosition;
     this.camera.lookAt(0,0,0);
     this.scene = new THREE.Scene();
-    this.group = this.createGroup();
     this.addGroupToScene(this.group, this.scene);
 
     this.renderer.setClearColor(0xaaaaaa); // white

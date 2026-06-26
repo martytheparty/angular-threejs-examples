@@ -1,1 +1,4 @@
-<app-viz></app-viz>
+<div style="display: flex;">
+    <app-viz [vizConfig]="vizService.getVisualizationData(0)"></app-viz>
+    <app-viz [vizConfig]="vizService.getVisualizationData(1)"></app-viz>
+</div>

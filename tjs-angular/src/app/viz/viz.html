@@ -1,2 +1,5 @@
-<app-controls></app-controls>
+@if(vizConfig()?.showMenu) {
+    <app-controls></app-controls>
+}
+
 <div #visualization class="visualization"></div>
