@@ -46,7 +46,7 @@ export class VizComponent implements AfterViewInit {
 
     this.camera.position.z = config.cameraZPosition;
     this.camera.position.y = config.cameraYPosition;
-    this.camera.lookAt(0,0,0);
+    this.camera.lookAt(config.cameraXLookAt,config.cameraYLookAt,config.cameraZLookAt);
     this.scene = new THREE.Scene();
     this.group = this.createGroup();
     this.addGroupToScene(this.group, this.scene);
