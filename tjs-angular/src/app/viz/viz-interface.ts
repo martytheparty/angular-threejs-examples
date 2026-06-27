@@ -4,6 +4,9 @@ export interface VizInterface {
     cameraXPosition: number;
     cameraYPosition: number;
     cameraZPosition: number; 
+    cameraXLookAt: number;
+    cameraYLookAt: number;
+    cameraZLookAt: number; 
 }
 
 export interface VizIndexDictionary {
