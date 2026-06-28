@@ -9,22 +9,34 @@ export class VizService {
     0: {
       index: 0,
       showMenu: true,
-      cameraXPosition: -1,
-      cameraYPosition: 0,
-      cameraZPosition: 0,
-      cameraXLookAt: -4,
-      cameraYLookAt: 0,
-      cameraZLookAt: 0
+      camera: {
+        position: {
+          x: -1,
+          y: 0,
+          z: 0
+        },
+        lookAt: {
+          x: -4,
+          y: 0,
+          z: 0
+        }
+      }
     },
     1: {
       index: 1,
       showMenu: false,
-      cameraXPosition: 0,
-      cameraYPosition: 0,
-      cameraZPosition: 10,
-      cameraXLookAt: 0,
-      cameraYLookAt: 0,
-      cameraZLookAt: 0
+      camera: {
+        position: {
+          x: 0,
+          y: 60,
+          z: 0
+        },
+        lookAt: {
+          x: 0,
+          y: 0,
+          z: 0
+        }
+      }
     }
   };
 

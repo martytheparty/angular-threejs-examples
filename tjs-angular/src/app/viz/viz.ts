@@ -42,14 +42,17 @@ export class VizComponent implements AfterViewInit {
     const config = this.vizConfig() as VizInterface;
     const width = window.innerWidth, height = window.innerHeight;
 
-    this.camera = new THREE.PerspectiveCamera( 70, (width /2) / height, 0.01, 20 );    
+    this.camera = new THREE.PerspectiveCamera( 70, (width /2) / height, 0.01, 120 );    
 
-    this.camera.position.z = config.cameraZPosition;
-    this.camera.position.y = config.cameraYPosition;
-    this.camera.lookAt(config.cameraXLookAt,config.cameraYLookAt,config.cameraZLookAt);
+    this.camera.position.z = config.camera.position.z;
+    this.camera.position.y = config.camera.position.y;
+    this.camera.lookAt(config.camera.lookAt.x, config.camera.lookAt.y, config.camera.lookAt.z);
     this.scene = new THREE.Scene();
     this.group = this.createGroup();
     this.addGroupToScene(this.group, this.scene);
+
+    const sun = this.createSphere(5, -36, 0, 0);
+    this.addMeshToScene(sun, this.scene);
 
     this.renderer.setClearColor(0xaaaaaa); // white
     this.renderer.setSize( width/2, height );
@@ -81,7 +84,7 @@ export class VizComponent implements AfterViewInit {
     const material = new THREE.MeshNormalMaterial();
     const sphere = new THREE.Mesh(sphereGeometry, material);  
     const sphereSmall = new THREE.Mesh(sphereSmallGeometry, material);
-    sphereSmall.position.set(-4, 0, 0) 
+    sphereSmall.position.set(-3, 0, 0);
 
     this.group = new THREE.Group();
     this.group.add(sphere);
@@ -90,7 +93,20 @@ export class VizComponent implements AfterViewInit {
     return this.group;
   }
 
+  createSphere(radius: number, x: number, y: number, z: number): THREE.Object3D {
+    const sphereGeometry = new THREE.SphereGeometry(radius);
+    const material = new THREE.MeshNormalMaterial();
+    const sphere = new THREE.Mesh(sphereGeometry, material);  
+    sphere.position.set(x, y, z);
+
+    return sphere;
+  }
+
   addGroupToScene( group: THREE.Object3D, scene: THREE.Scene): void {
     scene.add(group);
+  }
+
+  addMeshToScene(mesh: THREE.Object3D, scene: THREE.Scene): void {
+    scene.add(mesh);
   }
 }
