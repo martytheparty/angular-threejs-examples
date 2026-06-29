@@ -4,7 +4,8 @@ export interface VizInterface {
     camera: {
       position: {x: number, y: number, z: number},
       lookAt: {x: number, y: number, z: number}
-    }
+    },
+    rendererBgColor: number
 }
 
 export interface VizIndexDictionary {

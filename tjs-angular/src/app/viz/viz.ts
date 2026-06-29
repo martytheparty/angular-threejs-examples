@@ -52,9 +52,9 @@ export class VizComponent implements AfterViewInit {
     this.addGroupToScene(this.group, this.scene);
 
     const sun = this.createSphere(5, -36, 0, 0);
-    this.addMeshToScene(sun, this.scene);
+    this.addGroupToScene(sun, this.scene);
 
-    this.renderer.setClearColor(0xaaaaaa); // white
+    this.renderer.setClearColor(config.rendererBgColor);
     this.renderer.setSize( width/2, height );
 
     this.setAnimation(this.renderer, this.camera);
@@ -81,9 +81,14 @@ export class VizComponent implements AfterViewInit {
   createGroup(): THREE.Object3D {
     const sphereGeometry = new THREE.SphereGeometry(2);
     const sphereSmallGeometry = new THREE.SphereGeometry(.4);
-    const material = new THREE.MeshNormalMaterial();
-    const sphere = new THREE.Mesh(sphereGeometry, material);  
-    const sphereSmall = new THREE.Mesh(sphereSmallGeometry, material);
+    const earthMaterial = new THREE.MeshBasicMaterial({
+      color: 0x007f8b
+    });
+    const sphere = new THREE.Mesh(sphereGeometry, earthMaterial);  
+    const moonMaterial = new THREE.MeshBasicMaterial({
+      color: 0xaaaaaa
+    });
+    const sphereSmall = new THREE.Mesh(sphereSmallGeometry, moonMaterial);
     sphereSmall.position.set(-3, 0, 0);
 
     this.group = new THREE.Group();
@@ -95,18 +100,19 @@ export class VizComponent implements AfterViewInit {
 
   createSphere(radius: number, x: number, y: number, z: number): THREE.Object3D {
     const sphereGeometry = new THREE.SphereGeometry(radius);
-    const material = new THREE.MeshNormalMaterial();
-    const sphere = new THREE.Mesh(sphereGeometry, material);  
+    const sunMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffcc33
+    });
+    const sphere = new THREE.Mesh(sphereGeometry, sunMaterial);  
     sphere.position.set(x, y, z);
+    const group = new THREE.Group();
+    group.add(sphere);
 
-    return sphere;
+    return group;
   }
 
   addGroupToScene( group: THREE.Object3D, scene: THREE.Scene): void {
     scene.add(group);
   }
 
-  addMeshToScene(mesh: THREE.Object3D, scene: THREE.Scene): void {
-    scene.add(mesh);
-  }
 }

@@ -20,7 +20,8 @@ export class VizService {
           y: 0,
           z: 0
         }
-      }
+      },
+      rendererBgColor: 0x000000
     },
     1: {
       index: 1,
@@ -36,7 +37,8 @@ export class VizService {
           y: 0,
           z: 0
         }
-      }
+      },
+      rendererBgColor: 0x000000
     }
   };
 
