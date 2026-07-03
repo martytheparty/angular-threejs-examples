@@ -43,9 +43,10 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     this.camera = new THREE.PerspectiveCamera( 70, (width /2) / height, 0.01, 20 );
     
-    this.camera.position.z = config.cameraZPosition;
-    this.camera.position.y = config.cameraYPosition;
-    this.camera.lookAt(config.cameraXLookAt,config.cameraYLookAt,config.cameraZLookAt);
+    this.camera.position.z = config.camera.position.z;
+    this.camera.position.y = config.camera.position.y;
+    this.camera.position.x = config.camera.position.x;
+    this.camera.lookAt(config.camera.lookat.x, config.camera.lookat.y, config.camera.lookat.z);
     this.scene = new THREE.Scene();
     this.createGroup();
     this.addGroupToScene(this.group, this.scene);

@@ -1,12 +1,10 @@
 export interface VizInterface {
     index: number;
     showMenu: boolean;
-    cameraXPosition: number;
-    cameraYPosition: number;
-    cameraZPosition: number; 
-    cameraXLookAt: number;
-    cameraYLookAt: number;
-    cameraZLookAt: number; 
+    camera: { 
+      position: {x: number, y: number, z: number},
+      lookat: {x: number, y: number, z: number}
+    }
 }
 
 export interface VizIndexDictionary {
