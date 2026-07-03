@@ -10,8 +10,8 @@ export class VizService {
       index: 0,
       showMenu: true,
       camera: {
-        position: {x: -1, y: 0, z: 0},
-        lookat: {x:0, y: 0, z: 0}
+        position: {x: 0, y: 0, z: 0},
+        lookat: {x:0, y: 0, z: 10}
       }
     },
     1: {

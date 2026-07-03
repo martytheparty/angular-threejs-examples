@@ -76,8 +76,57 @@ export class VizComponent implements AfterViewInit {
   }
 
   createGroup(): THREE.Object3D {
-    const geometry = new THREE.CylinderGeometry( .01, 2, 10, 32 );
-    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const geometry: THREE.BufferGeometry = new THREE.CylinderGeometry( 0, 3, 6, 16 ).toNonIndexed();;
+
+
+
+    //const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+
+    const colors: number[] = [];
+
+    const verticesPerSegment = 3; // 2 triangles = 6 vertices
+    const segments = 16;
+    const numberOfColors = 3;
+
+    const red   = [1, 0, 0];
+    const white = [1, 1, 1];
+    const blue  = [0, 0, 1];
+
+    console.log(geometry, geometry.attributes['position'].count);
+
+    for (let i = 0; i < geometry.attributes['position'].count; i++) {
+
+      // Which side panel are we in?
+      const segment = Math.floor(i / verticesPerSegment) % segments;
+
+      let color;
+
+      switch (segment % numberOfColors) {
+        case 0:
+          color = red;
+          break;
+        case 1:
+          color = white;
+          break;
+        default:
+          color = blue;
+      }
+
+      colors.push(...color);
+    }
+
+    console.log('colors', colors);
+    
+    geometry.setAttribute(
+      'color',
+      new THREE.Float32BufferAttribute(colors, 3)
+    );
+
+const material = new THREE.MeshBasicMaterial({
+  vertexColors: true,
+  side: THREE.DoubleSide
+});
+
     const cylinder = new THREE.Mesh(geometry, material);
 
     this.group = new THREE.Group();
