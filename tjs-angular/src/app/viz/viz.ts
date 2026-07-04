@@ -67,12 +67,12 @@ export class VizComponent implements AfterViewInit {
   }
 
   createGroup(): THREE.Object3D {
-    const geometry = new THREE.BoxGeometry(3,3,3);
+    const geometry = new THREE.DodecahedronGeometry(3, 0);
     const material = new THREE.MeshNormalMaterial();
-    const box = new THREE.Mesh(geometry, material);
+    const dodecahedron = new THREE.Mesh(geometry, material);
 
     this.group = new THREE.Group();
-    this.group.add(box);
+    this.group.add(dodecahedron);
 
     return this.group;
   }
