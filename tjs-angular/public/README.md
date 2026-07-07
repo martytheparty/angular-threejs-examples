@@ -1,0 +1,1 @@
+The fontvfile was copied from \node_modules\three\examples\fonts\gentilis_regular.typeface.json

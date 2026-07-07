@@ -7,6 +7,9 @@ import {
 } from '@angular/core';
 
 import * as THREE from 'three';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
 import {
   ControlsComponent
 } from './controls/controls';
@@ -35,11 +38,11 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     this.camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    this.camera.position.z = 5;
-    this.camera.position.y = 5;
+    this.camera.position.z = 10;
+    this.camera.position.y = 0;
     this.camera.lookAt(0,0,0);
     this.scene = new THREE.Scene();
-    this.group = this.createGroup();
+    this.createGroup();
     this.addGroupToScene(this.group, this.scene);
 
     this.renderer.setClearColor(0xaaaaaa); // white
@@ -66,15 +69,25 @@ export class VizComponent implements AfterViewInit {
      );
   }
 
-  createGroup(): THREE.Object3D {
-    const geometry = new THREE.BoxGeometry(3,3,3);
-    const material = new THREE.MeshNormalMaterial();
-    const box = new THREE.Mesh(geometry, material);
-
+  createGroup(): void {
+    const loader = new FontLoader();
     this.group = new THREE.Group();
-    this.group.add(box);
 
-    return this.group;
+    loader.load('/helvetiker_regular.typeface.json', (font) => {
+      const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
+      font,
+      size: 1,
+      depth: 0.2,
+    });
+
+    geometry.center();
+    const material = new THREE.MeshNormalMaterial();
+    const abc = new THREE.Mesh(geometry, material);
+
+    this.group.add(abc);
+
+    });
+
   }
 
   addGroupToScene( group: THREE.Object3D, scene: THREE.Scene): void {
