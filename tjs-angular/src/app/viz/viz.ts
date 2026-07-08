@@ -73,7 +73,7 @@ export class VizComponent implements AfterViewInit {
     const loader = new FontLoader();
     this.group = new THREE.Group();
 
-    loader.load('/helvetiker_regular.typeface.json', (font) => {
+    loader.load('/helvetiker_bold.typeface.json', (font) => {
       const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
       font,
       size: 1,
