@@ -31,6 +31,7 @@ export class VizComponent implements AfterViewInit {
 
   scene = new THREE.Scene();
   group: THREE.Object3D = new THREE.Group();
+  meshes: THREE.Object3D[] = [];
   renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer( { antialias: true } );
   camera: THREE.PerspectiveCamera | undefined ;
 
@@ -56,7 +57,7 @@ export class VizComponent implements AfterViewInit {
   }
 
   setAnimation(renderer: THREE.WebGLRenderer, camera: THREE.PerspectiveCamera ): void {
-    const animation = new VizAnimation(this.group);
+    const animation = new VizAnimation(this.group, this.meshes);
 
     renderer.setAnimationLoop( 
       () => {
@@ -85,6 +86,24 @@ export class VizComponent implements AfterViewInit {
     const abc = new THREE.Mesh(geometry, material);
 
     this.group.add(abc);
+    this.meshes.push(abc);
+
+    });
+
+    loader.load('/helvetiker_regular.typeface.json', (font) => {
+      const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
+      font,
+      size: 1,
+      depth: 0.2,
+    });
+
+    geometry.center();
+    const material = new THREE.MeshNormalMaterial();
+    const abc = new THREE.Mesh(geometry, material);
+    const secondGroup = new THREE.Group();
+    secondGroup.add(abc);
+
+    this.meshes.push(abc);
 
     });
 
