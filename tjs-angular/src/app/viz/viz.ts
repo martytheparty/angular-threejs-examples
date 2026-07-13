@@ -74,7 +74,7 @@ export class VizComponent implements AfterViewInit {
     const loader = new FontLoader();
     this.group = new THREE.Group();
 
-    loader.load('/optimer_bold.typeface.json', (font) => {
+    loader.load('/droid_serif_bold.typeface.json', (font) => {
       const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
       font,
       size: 1,
@@ -90,7 +90,7 @@ export class VizComponent implements AfterViewInit {
 
     });
 
-    loader.load('/optimer_regular.typeface.json', (font) => {
+    loader.load('/droid_serif_regular.typeface.json', (font) => {
       const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
       font,
       size: 1,
