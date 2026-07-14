@@ -74,7 +74,7 @@ export class VizComponent implements AfterViewInit {
     const loader = new FontLoader();
     this.group = new THREE.Group();
 
-    loader.load('/droid_serif_bold.typeface.json', (font) => {
+    loader.load('/droid_sans_bold.typeface.json', (font) => {
       const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
       font,
       size: 1,
@@ -90,7 +90,7 @@ export class VizComponent implements AfterViewInit {
 
     });
 
-    loader.load('/droid_serif_regular.typeface.json', (font) => {
+    loader.load('/droid_sans_regular.typeface.json', (font) => {
       const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
       font,
       size: 1,
@@ -107,6 +107,20 @@ export class VizComponent implements AfterViewInit {
 
     });
 
+    loader.load('/droid_sans_mono_regular.typeface.json', (font) => {
+      const geometry = new TextGeometry('ABCDEFGHIJKLMNOPQRSTUVWXYZ', {
+      font,
+      size: 1,
+      depth: 0.2,
+    });
+
+    geometry.center();
+    const material = new THREE.MeshNormalMaterial();
+    const abc = new THREE.Mesh(geometry, material);
+    const thirdGroup = new THREE.Group();
+    thirdGroup.add(abc);
+    this.meshes.push(abc);
+    });
   }
 
   addGroupToScene( group: THREE.Object3D, scene: THREE.Scene): void {

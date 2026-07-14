@@ -20,13 +20,19 @@ export class VizAnimation {
         if (secondsElapsed !== this.lastTime) {
             this.lastTime = secondsElapsed;
 
-            if (secondsElapsed%2 === 0) { // even number get the 0th object
+            if (secondsElapsed%3 === 0) { // even number get the 0th object
                 // first remove the 1st object from the scene
+                this.group.remove(this.meshes[2]);
                 this.group.remove(this.meshes[1]);
                 this.group.add(this.meshes[0]);
+            } else if(secondsElapsed%3 === 0) {
+                this.group.remove(this.meshes[0]);
+               this.group.remove(this.meshes[2]);
+                this.group.add(this.meshes[1]);
             } else { // odd number get the first object
                 this.group.remove(this.meshes[0]);
-                this.group.add(this.meshes[1]);
+                this.group.remove(this.meshes[1]);
+                this.group.add(this.meshes[2]);
             }
 
         } 
