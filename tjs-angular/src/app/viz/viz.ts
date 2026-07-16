@@ -28,35 +28,26 @@ export class VizComponent implements AfterViewInit {
   controlsService: ControlsService = inject(ControlsService);
 
   ngAfterViewInit(): void {
-    const loader = new THREE.TextureLoader();
-    const frontTexture = loader.load('/front.png');
-    const backTexture = loader.load('/back.png');
-    //frontTexture.flipY = false;
-    backTexture.flipY = false;
 
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 3;
+    camera.position.z = 8;
     const scene = new THREE.Scene();
-    const geometry = new THREE.PlaneGeometry( 3, 3);
-    const frontMaterial = new THREE.MeshBasicMaterial({
-      map: frontTexture,
-      side: THREE.FrontSide
-    });
+    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const geometry = new THREE.CapsuleGeometry(
+                      1,   // radius
+                      4,   // length
+                      32,   // cap segments
+                      32    // radial segments
+                    );
 
-    const backMaterial = new THREE.MeshBasicMaterial({
-       map: backTexture,
-      side: THREE.BackSide
-    });
 
-    const frontMesh = new THREE.Mesh(geometry, frontMaterial);
-    const backMesh = new THREE.Mesh(geometry, backMaterial);
+    const mesh = new THREE.Mesh(geometry, material);
 
     const group = new THREE.Group();
+    group.add(mesh);
 
-    group.add(frontMesh);
-    group.add(backMesh);
 
     scene.add(group);
 
