@@ -25,9 +25,9 @@ export class VizAnimation {
         this.previousTime = time;
 
 
-        this.element.rotation.x += this.rotationXSpeed * Math.PI * 2 * deltaSeconds;
-        this.element.rotation.y += this.rotationYSpeed * Math.PI * 2 * deltaSeconds;
-        this.element.rotation.z += this.rotationZSpeed * Math.PI * 2 * deltaSeconds;
+        this.element.rotation.x += this.rotationXSpeed * Math.PI * 2 * deltaSeconds*.1;
+        this.element.rotation.y += this.rotationYSpeed * Math.PI * 2 * deltaSeconds*.1;
+        this.element.rotation.z += this.rotationZSpeed * Math.PI * 2 * deltaSeconds*.1;
     }
 
     setRotationXSpeed(rotationXSpeed: number): void {

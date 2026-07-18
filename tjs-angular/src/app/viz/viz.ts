@@ -32,15 +32,17 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 8;
+    camera.position.z = 16;
     const scene = new THREE.Scene();
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
-    const geometry = new THREE.TorusGeometry(
-      5,    // radius
-      .1,    // tube
-      40,   // radial segments
-      8   // tubular segments
-    );
+ const geometry = new THREE.TorusKnotGeometry(
+  3,    // radius
+  1,    // tube
+  128,  // tubular segments
+  16,   // radial segments
+  3,    // p
+  6     // q
+);
 
 
     const mesh = new THREE.Mesh(geometry, material);
