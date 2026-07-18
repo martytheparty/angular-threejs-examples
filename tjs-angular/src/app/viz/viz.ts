@@ -35,12 +35,12 @@ export class VizComponent implements AfterViewInit {
     camera.position.z = 8;
     const scene = new THREE.Scene();
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
-    const geometry = new THREE.CapsuleGeometry(
-                      1,   // radius
-                      4,   // length
-                      32,   // cap segments
-                      32    // radial segments
-                    );
+    const geometry = new THREE.TorusGeometry(
+      5,    // radius
+      .1,    // tube
+      40,   // radial segments
+      8   // tubular segments
+    );
 
 
     const mesh = new THREE.Mesh(geometry, material);
