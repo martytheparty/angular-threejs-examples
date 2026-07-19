@@ -34,20 +34,10 @@ export class VizComponent implements AfterViewInit {
     
     camera.position.z = 16;
     const scene = new THREE.Scene();
-    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
- const geometry = new THREE.TorusKnotGeometry(
-  3,    // radius
-  1,    // tube
-  128,  // tubular segments
-  16,   // radial segments
-  3,    // p
-  6     // q
-);
 
-
-    const mesh = new THREE.Mesh(geometry, material);
 
     const group = new THREE.Group();
+    const mesh = this.getMesh(1);
     group.add(mesh);
 
 
@@ -57,7 +47,7 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
-    const animation = new VizAnimation(group);
+    const animation = new VizAnimation(group, this.getMesh);
 
     renderer.setAnimationLoop( 
       (time: number) => {
@@ -72,5 +62,20 @@ export class VizComponent implements AfterViewInit {
     this.visualization.nativeElement.appendChild(
       renderer.domElement
     );
+  }
+
+  getMesh(p: number): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const geometry = new THREE.TorusKnotGeometry(
+      3,    // radius
+      1,    // tube
+      128,  // tubular segments
+      16,   // radial segments
+      p,    // p
+      1     // q
+    );
+    const mesh = new THREE.Mesh(geometry, material);
+
+    return mesh;
   }
 }

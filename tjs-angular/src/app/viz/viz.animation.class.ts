@@ -2,17 +2,40 @@ import * as THREE from 'three';
 
 export class VizAnimation {
 
+    private g = 1;
+
+    private startTime = 0;
     private previousTime = 0;
+    private currentTime = 0;
+    private elapsedSeconds = 0;
+    private previousSeconds = 0;
 
     private rotationXSpeed = 0;
     private rotationYSpeed = 0;
     private rotationZSpeed = 0;
 
     constructor(
-        private readonly element: THREE.Object3D
+        private readonly group: THREE.Object3D,
+        private readonly meshFunction: Function
     ) {}
 
     animate(time: number) {
+        if (this.startTime === 0) {
+            this.startTime = Math.floor(time / 1000);
+        }
+
+        this.currentTime = Math.floor(time / 1000);
+
+        this.elapsedSeconds = this.currentTime - this.startTime;
+
+        if (this.elapsedSeconds !== this.previousSeconds ) {
+            this.previousSeconds = this.elapsedSeconds;
+            console.log("remove current elements and add new element", time);
+            this.group.remove(this.group.children[0]);
+            this.g = this.g + 1;
+            const mesh = this.meshFunction(this.g);
+            this.group.add(mesh);
+        }
 
         // first frame
         if (this.previousTime === 0) {
@@ -25,9 +48,9 @@ export class VizAnimation {
         this.previousTime = time;
 
 
-        this.element.rotation.x += this.rotationXSpeed * Math.PI * 2 * deltaSeconds*.1;
-        this.element.rotation.y += this.rotationYSpeed * Math.PI * 2 * deltaSeconds*.1;
-        this.element.rotation.z += this.rotationZSpeed * Math.PI * 2 * deltaSeconds*.1;
+        this.group.rotation.x += this.rotationXSpeed * Math.PI * 2 * deltaSeconds*.1;
+        this.group.rotation.y += this.rotationYSpeed * Math.PI * 2 * deltaSeconds*.1;
+        this.group.rotation.z += this.rotationZSpeed * Math.PI * 2 * deltaSeconds*.1;
     }
 
     setRotationXSpeed(rotationXSpeed: number): void {
