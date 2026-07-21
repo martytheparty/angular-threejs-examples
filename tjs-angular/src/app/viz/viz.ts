@@ -64,15 +64,15 @@ export class VizComponent implements AfterViewInit {
     );
   }
 
-  getMesh(p: number): THREE.Mesh {
+  getMesh(q: number): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
     const geometry = new THREE.TorusKnotGeometry(
       3,    // radius
       1,    // tube
       128,  // tubular segments
       16,   // radial segments
-      p,    // p
-      1     // q
+      1,    // p
+      q     // q
     );
     const mesh = new THREE.Mesh(geometry, material);
 
