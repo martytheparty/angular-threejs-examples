@@ -16,7 +16,8 @@ export class VizAnimation {
 
     constructor(
         private readonly group: THREE.Object3D,
-        private readonly meshFunction: Function
+        private readonly meshFunction: Function,
+        private readonly camera: THREE.PerspectiveCamera
     ) {}
 
     animate(time: number) {
@@ -28,14 +29,19 @@ export class VizAnimation {
 
         this.elapsedSeconds = this.currentTime - this.startTime;
 
-        if (this.elapsedSeconds !== this.previousSeconds ) {
+        if (this.elapsedSeconds > (this.previousSeconds + 15) ) {
             this.previousSeconds = this.elapsedSeconds;
             console.log("remove current elements and add new element", time);
             this.group.remove(this.group.children[0]);
             this.g = this.g + 1;
             const mesh = this.meshFunction(this.g);
             this.group.add(mesh);
-        }
+            this.camera.position.z = 16;
+            this.camera.lookAt(0,0,0);
+        } else if (this.elapsedSeconds !== this.previousSeconds) {
+            this.camera.position.z = this.camera.position.z - .06;
+            this.camera.lookAt(0,0,0);
+        } 
 
         // first frame
         if (this.previousTime === 0) {

@@ -30,7 +30,7 @@ export class VizComponent implements AfterViewInit {
   ngAfterViewInit(): void {
 
     const width = window.innerWidth, height = window.innerHeight;
-    const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
+    const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 200 );
     
     camera.position.z = 16;
     const scene = new THREE.Scene();
@@ -47,7 +47,7 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
-    const animation = new VizAnimation(group, this.getMesh);
+    const animation = new VizAnimation(group, this.getMesh, camera);
 
     renderer.setAnimationLoop( 
       (time: number) => {
