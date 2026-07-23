@@ -1,9 +1,6 @@
 import * as THREE from 'three';
 
 export class VizAnimation {
-
-    private g = 1;
-
     private startTime = 0;
     private previousTime = 0;
     private currentTime = 0;
@@ -15,8 +12,7 @@ export class VizAnimation {
     private rotationZSpeed = 0;
 
     constructor(
-        private readonly group: THREE.Object3D,
-        private readonly meshFunction: Function
+        private readonly group: THREE.Object3D
     ) {}
 
     animate(time: number) {
@@ -25,24 +21,23 @@ export class VizAnimation {
         }
 
         this.currentTime = Math.floor(time / 1000);
-
         this.elapsedSeconds = this.currentTime - this.startTime;
 
-        if (this.elapsedSeconds !== this.previousSeconds ) {
-            this.previousSeconds = this.elapsedSeconds;
-            console.log("remove current elements and add new element", time);
-            this.group.remove(this.group.children[0]);
-            this.g = this.g + 1;
-            const mesh = this.meshFunction(this.g);
-            this.group.add(mesh);
-        }
+        // if (this.elapsedSeconds !== this.previousSeconds ) {
+        //     this.previousSeconds = this.elapsedSeconds;
+        //     console.log("remove current elements and add new element", time);
+        //     this.group.remove(this.group.children[0]);
+        //     this.g = this.g + 1;
+        //     const mesh = this.meshFunction();
+        //     this.group.add(mesh);
+        // }
 
-        // first frame
-        if (this.previousTime === 0) {
-            this.previousTime = time;
-        }
+        // // first frame
+        // if (this.previousTime === 0) {
+        //     this.previousTime = time;
+        // }
 
-                // milliseconds -> seconds
+        // milliseconds -> seconds
         const deltaSeconds = (time - this.previousTime) / 1000;
 
         this.previousTime = time;

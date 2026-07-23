@@ -32,12 +32,12 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 16;
+    camera.position.z = 8;
     const scene = new THREE.Scene();
 
 
     const group = new THREE.Group();
-    const mesh = this.getMesh(1);
+    const mesh = this.getMesh();
     group.add(mesh);
 
 
@@ -47,7 +47,7 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
-    const animation = new VizAnimation(group, this.getMesh);
+    const animation = new VizAnimation(group);
 
     renderer.setAnimationLoop( 
       (time: number) => {
@@ -64,16 +64,15 @@ export class VizComponent implements AfterViewInit {
     );
   }
 
-  getMesh(p: number): THREE.Mesh {
+  getMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
-    const geometry = new THREE.TorusKnotGeometry(
-      3,    // radius
-      1,    // tube
-      128,  // tubular segments
-      16,   // radial segments
-      p,    // p
-      1     // q
-    );
+    const shape = new THREE.Shape();
+    shape.moveTo(0, 0);
+    shape.lineTo(2, 0);
+    shape.lineTo(1, 2);
+    shape.closePath();
+    const geometry = new THREE.ShapeGeometry(shape);
+    geometry.center();
     const mesh = new THREE.Mesh(geometry, material);
 
     return mesh;
