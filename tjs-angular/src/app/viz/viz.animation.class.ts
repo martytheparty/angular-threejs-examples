@@ -3,6 +3,7 @@ import * as THREE from 'three';
 export class VizAnimation {
 
     private g = 1;
+    private p = 1;
 
     private startTime = 0;
     private previousTime = 0;
@@ -32,9 +33,11 @@ export class VizAnimation {
         if (this.elapsedSeconds > (this.previousSeconds + 15) ) {
             this.previousSeconds = this.elapsedSeconds;
             console.log("remove current elements and add new element", time);
+
             this.group.remove(this.group.children[0]);
-            this.g = this.g + 1;
-            const mesh = this.meshFunction(this.g);
+            this.g = Math.floor(Math.random() * 998) + 2;
+            this.p = Math.floor(Math.random() * 998) + 2;
+            const mesh = this.meshFunction(this.g, this.p);
             this.group.add(mesh);
             this.camera.position.z = 16;
             this.camera.lookAt(0,0,0);

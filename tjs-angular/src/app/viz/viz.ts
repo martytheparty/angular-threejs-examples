@@ -37,7 +37,7 @@ export class VizComponent implements AfterViewInit {
 
 
     const group = new THREE.Group();
-    const mesh = this.getMesh(1);
+    const mesh = this.getMesh(1, 1);
     group.add(mesh);
 
 
@@ -64,7 +64,7 @@ export class VizComponent implements AfterViewInit {
     );
   }
 
-  getMesh(p: number): THREE.Mesh {
+  getMesh(p: number, q: number): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
     const geometry = new THREE.TorusKnotGeometry(
       3,    // radius
@@ -72,7 +72,7 @@ export class VizComponent implements AfterViewInit {
       128,  // tubular segments
       16,   // radial segments
       p,    // p
-      1     // q
+      q     // q
     );
     const mesh = new THREE.Mesh(geometry, material);
 
