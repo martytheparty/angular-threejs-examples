@@ -37,8 +37,9 @@ export class VizComponent implements AfterViewInit {
 
 
     const group = new THREE.Group();
-    const mesh = this.getMesh();
-    group.add(mesh);
+    const squareMesh = this.getSquareMesh();
+    const triangleMesh = this.getTriangeMesh();
+    group.add(triangleMesh);
 
 
     scene.add(group);
@@ -47,7 +48,7 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
 
-    const animation = new VizAnimation(group);
+    const animation = new VizAnimation(group, squareMesh, triangleMesh);
 
     renderer.setAnimationLoop( 
       (time: number) => {
@@ -64,17 +65,33 @@ export class VizComponent implements AfterViewInit {
     );
   }
 
-  getMesh(): THREE.Mesh {
+  getTriangeMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
-    const shape = new THREE.Shape();
-    shape.moveTo(0, 0);
-    shape.lineTo(2, 0);
-    shape.lineTo(1, 2);
-    shape.closePath();
-    const geometry = new THREE.ShapeGeometry(shape);
+    const square = new THREE.Shape();
+    square.moveTo(0, 0);
+    square.lineTo(2, 0);
+    square.lineTo(1, 2);
+    square.closePath();
+    const geometry = new THREE.ShapeGeometry(square);
     geometry.center();
     const mesh = new THREE.Mesh(geometry, material);
 
     return mesh;
   }
+
+  getSquareMesh(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const square = new THREE.Shape();
+    square.moveTo(0, 0);
+    square.lineTo(2, 0);
+    square.lineTo(2, 2);
+    square.lineTo(0, 2);
+    square.closePath();
+    const geometry = new THREE.ShapeGeometry(square);
+    geometry.center();
+    const mesh = new THREE.Mesh(geometry, material);
+
+    return mesh;
+  }
+
 }

@@ -12,10 +12,13 @@ export class VizAnimation {
     private rotationZSpeed = 0;
 
     constructor(
-        private readonly group: THREE.Object3D
+        private readonly group: THREE.Object3D,
+        private readonly squareMesh: THREE.Mesh,
+        private readonly triangleMesh: THREE.Mesh
     ) {}
 
     animate(time: number) {
+
         if (this.startTime === 0) {
             this.startTime = Math.floor(time / 1000);
         }
@@ -23,14 +26,21 @@ export class VizAnimation {
         this.currentTime = Math.floor(time / 1000);
         this.elapsedSeconds = this.currentTime - this.startTime;
 
-        // if (this.elapsedSeconds !== this.previousSeconds ) {
-        //     this.previousSeconds = this.elapsedSeconds;
-        //     console.log("remove current elements and add new element", time);
-        //     this.group.remove(this.group.children[0]);
-        //     this.g = this.g + 1;
-        //     const mesh = this.meshFunction();
-        //     this.group.add(mesh);
-        // }
+        if (this.elapsedSeconds !== this.previousSeconds ) { // toggle back and forth
+            this.previousSeconds = this.elapsedSeconds;
+
+            this.group.remove(this.group.children[0]);
+
+            const remainder = this.elapsedSeconds%2; // results in 0 for even numbers and 1 for odd numbers
+
+            if (remainder === 0) {
+                console.log("Square Mesh");
+                this.group.add(this.squareMesh);
+            } else {
+                console.log("Triange Mesh");
+                this.group.add(this.triangleMesh);
+            }
+        }
 
         // // first frame
         // if (this.previousTime === 0) {
