@@ -39,6 +39,11 @@ export class VizComponent implements AfterViewInit {
     const group = new THREE.Group();
     const squareMesh = this.getSquareMesh();
     const triangleMesh = this.getTriangeMesh();
+    // this is confusing I need to come up with a better way to do this...
+    // maybe pass in the offset
+    const middleMesh = this.getMidleMesh(.5);
+    const middleMesh2 = this.getMidleMesh(.25);
+    const middleMesh3 = this.getMidleMesh(.75);
     group.add(triangleMesh);
 
 
@@ -47,8 +52,19 @@ export class VizComponent implements AfterViewInit {
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
+    const meshes: THREE.Mesh[] = [];
+    meshes.push(triangleMesh);
+    meshes.push(middleMesh3);
+    meshes.push(middleMesh);
+    meshes.push(middleMesh2);
+    meshes.push(squareMesh);
+    meshes.push(middleMesh2);
+    meshes.push(middleMesh);
+    meshes.push(middleMesh3);
 
-    const animation = new VizAnimation(group, squareMesh, triangleMesh);
+
+
+    const animation = new VizAnimation(group, meshes);
 
     renderer.setAnimationLoop( 
       (time: number) => {
@@ -86,6 +102,29 @@ export class VizComponent implements AfterViewInit {
     square.lineTo(2, 0);
     square.lineTo(2, 2);
     square.lineTo(0, 2);
+    square.closePath();
+    const geometry = new THREE.ShapeGeometry(square);
+    geometry.center();
+    const mesh = new THREE.Mesh(geometry, material);
+
+    return mesh;
+  }
+
+  getMidleMesh(offset: number): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const square = new THREE.Shape();
+    const xLength = 2; // this is the total length
+    const middleX = xLength/2; // this is the middle
+    const startX = 0; //this is the first spot
+    const endX = xLength;
+//    const distance = (xLength - middleX)/(position + 1); // this is how far (displacement) the point should be from the end.
+    const firstX = startX + offset;
+    const lastX = endX - offset;
+    square.moveTo(0, 0);
+    square.lineTo(2, 0);
+    square.lineTo(lastX, 2);
+    square.lineTo(firstX, 2);
+
     square.closePath();
     const geometry = new THREE.ShapeGeometry(square);
     geometry.center();
