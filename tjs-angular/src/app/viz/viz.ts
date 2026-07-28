@@ -37,14 +37,15 @@ export class VizComponent implements AfterViewInit {
 
 
     const group = new THREE.Group();
-    const squareMesh = this.getSquareMesh();
-    const triangleMesh = this.getTriangeMesh();
+    const starMesh = this.getStarMesh();
+    // const squareMesh = this.getSquareMesh();
+    // const triangleMesh = this.getTriangeMesh();
     // this is confusing I need to come up with a better way to do this...
     // maybe pass in the offset
-    const middleMesh = this.getMidleMesh(.5);
-    const middleMesh2 = this.getMidleMesh(.25);
-    const middleMesh3 = this.getMidleMesh(.75);
-    group.add(triangleMesh);
+    // const middleMesh = this.getMidleMesh(.5);
+    // const middleMesh2 = this.getMidleMesh(.25);
+    // const middleMesh3 = this.getMidleMesh(.75);
+    group.add(starMesh);
 
 
     scene.add(group);
@@ -53,14 +54,15 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
     const meshes: THREE.Mesh[] = [];
-    meshes.push(triangleMesh);
-    meshes.push(middleMesh3);
-    meshes.push(middleMesh);
-    meshes.push(middleMesh2);
-    meshes.push(squareMesh);
-    meshes.push(middleMesh2);
-    meshes.push(middleMesh);
-    meshes.push(middleMesh3);
+    meshes.push(starMesh);
+    // meshes.push(triangleMesh);
+    // meshes.push(middleMesh3);
+    // meshes.push(middleMesh);
+    // meshes.push(middleMesh2);
+    // meshes.push(squareMesh);
+    // meshes.push(middleMesh2);
+    // meshes.push(middleMesh);
+    // meshes.push(middleMesh3);
 
 
 
@@ -80,6 +82,39 @@ export class VizComponent implements AfterViewInit {
       renderer.domElement
     );
   }
+
+  getStarMesh(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide
+    });
+
+    const star = new THREE.Shape();
+
+    const outerRadius = 3;
+    const innerRadius = 1.4;
+    const points = 5;
+
+    for (let i = 0; i < points * 2; i++) {
+      const angle = (i * Math.PI) / points - Math.PI / 2;
+      const radius = (i % 2 === 0) ? outerRadius : innerRadius;
+
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
+
+      if (i === 0) {
+        star.moveTo(x, y);
+      } else {
+        star.lineTo(x, y);
+      }
+    }
+
+  star.closePath();
+
+  const geometry = new THREE.ShapeGeometry(star);
+  geometry.center();
+
+  return new THREE.Mesh(geometry, material);
+}
 
   getTriangeMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
