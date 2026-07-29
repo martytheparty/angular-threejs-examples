@@ -110,7 +110,13 @@ export class VizComponent implements AfterViewInit {
 
   star.closePath();
 
-  const geometry = new THREE.ShapeGeometry(star);
+  // const geometry = new THREE.ShapeGeometry(star);
+  const geometry = new THREE.ExtrudeGeometry(star, {
+  depth: 0.5,
+  bevelEnabled: true,
+  bevelThickness: 0.1,
+  bevelSize: 0.1
+});
   geometry.center();
 
   return new THREE.Mesh(geometry, material);
