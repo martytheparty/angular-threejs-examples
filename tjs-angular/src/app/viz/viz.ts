@@ -37,7 +37,8 @@ export class VizComponent implements AfterViewInit {
 
 
     const group = new THREE.Group();
-    const starMesh = this.getStarMesh();
+    const gearMesh = this.getGearMesh();
+    //const starMesh = this.getStarMesh();
     // const squareMesh = this.getSquareMesh();
     // const triangleMesh = this.getTriangeMesh();
     // this is confusing I need to come up with a better way to do this...
@@ -45,7 +46,7 @@ export class VizComponent implements AfterViewInit {
     // const middleMesh = this.getMidleMesh(.5);
     // const middleMesh2 = this.getMidleMesh(.25);
     // const middleMesh3 = this.getMidleMesh(.75);
-    group.add(starMesh);
+    group.add(gearMesh);
 
 
     scene.add(group);
@@ -54,7 +55,8 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
     const meshes: THREE.Mesh[] = [];
-    meshes.push(starMesh);
+    meshes.push(gearMesh);
+    //meshes.push(starMesh);
     // meshes.push(triangleMesh);
     // meshes.push(middleMesh3);
     // meshes.push(middleMesh);
@@ -82,6 +84,74 @@ export class VizComponent implements AfterViewInit {
       renderer.domElement
     );
   }
+
+getGearMesh(): THREE.Mesh {
+  const material = new THREE.MeshNormalMaterial({
+    side: THREE.DoubleSide
+  });
+
+  const gear = new THREE.Shape();
+
+  const teeth = 10;
+  const outerRadius = 1.8;
+  const rootRadius = 1.1;
+
+  const segmentsPerTooth = 6;
+
+  for (let i = 0; i < teeth * segmentsPerTooth; i++) {
+    const segment = i % segmentsPerTooth;
+
+    let radius: number;
+
+    switch (segment) {
+      case 0: // valley before tooth
+        radius = rootRadius;
+        break;
+
+      case 1: // outside edge
+        radius = outerRadius;
+        break;
+
+      case 2: // flat top of tooth
+        radius = outerRadius;
+        break;
+
+      case 3: // falling edge
+        radius = rootRadius;
+        break;
+
+      default:
+        radius = rootRadius;
+    }
+
+    const angle =
+      (i / (teeth * segmentsPerTooth)) * Math.PI * 2 -
+      Math.PI / 2;
+
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+
+    if (i === 0) {
+      gear.moveTo(x, y);
+    } else {
+      gear.lineTo(x, y);
+    }
+  }
+
+  gear.closePath();
+
+ // const geometry = new THREE.ShapeGeometry(gear);
+   const geometry = new THREE.ExtrudeGeometry(gear, {
+    depth: 0.5,
+    bevelEnabled: true,
+    bevelThickness: 0.1,
+    bevelSize: 0.1
+  });
+
+  geometry.center();
+
+  return new THREE.Mesh(geometry, material);
+}
 
   getStarMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({
@@ -112,11 +182,11 @@ export class VizComponent implements AfterViewInit {
 
   // const geometry = new THREE.ShapeGeometry(star);
   const geometry = new THREE.ExtrudeGeometry(star, {
-  depth: 0.5,
-  bevelEnabled: true,
-  bevelThickness: 0.1,
-  bevelSize: 0.1
-});
+    depth: 0.5,
+    bevelEnabled: true,
+    bevelThickness: 0.1,
+    bevelSize: 0.1
+  });
   geometry.center();
 
   return new THREE.Mesh(geometry, material);
