@@ -12,6 +12,7 @@ import {
 } from './controls/controls';
 import { ControlsService } from './controls-service';
 import { VizAnimation } from './viz.animation.class';
+import { StlService } from './stl-service';
 
 @Component({
   selector: 'app-viz',
@@ -26,6 +27,7 @@ export class VizComponent implements AfterViewInit {
   @ViewChild('visualization', { static: true })
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
+  stlService: StlService = inject(StlService);
 
   ngAfterViewInit(): void {
 
@@ -38,6 +40,7 @@ export class VizComponent implements AfterViewInit {
 
     const group = new THREE.Group();
     const gearMesh = this.getGearMesh();
+    // this.stlService.exportMesh(gearMesh, 'gear.stl');
     //const starMesh = this.getStarMesh();
     // const squareMesh = this.getSquareMesh();
     // const triangleMesh = this.getTriangeMesh();

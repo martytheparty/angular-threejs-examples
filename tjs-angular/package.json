@@ -9,7 +9,8 @@
     "test": "ng test",
     "viz": "ng g c viz",
     "viz-controls": "ng g c viz/controls",
-    "controls-service": "ng g s viz/controls-service"
+    "controls-service": "ng g s viz/controls-service",
+    "stl-service": "ng g s viz/stl-service"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
