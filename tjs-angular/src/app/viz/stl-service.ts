@@ -8,23 +8,22 @@ import { Injectable } from '@angular/core';
 })
 export class StlService {
   exportMesh(mesh: THREE.Mesh, filename: string): void {
+    const exporter = new STLExporter();
 
-  const exporter = new STLExporter();
+    const data = exporter.parse(mesh, { binary: true });
 
-  const data = exporter.parse(mesh, { binary: true });
+    const blob = new Blob([data], {
+      type: 'application/octet-stream'
+    });
 
-  const blob = new Blob([data], {
-    type: 'application/octet-stream'
-  });
+    const url = URL.createObjectURL(blob);
 
-  const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
 
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  link.click();
-
-  URL.revokeObjectURL(url);
+    URL.revokeObjectURL(url);
 
   }
 }

@@ -39,7 +39,8 @@ export class VizComponent implements AfterViewInit {
 
 
     const group = new THREE.Group();
-    const gearMesh = this.getGearMesh();
+    const tubeMesh = this.getTubeMesh();
+    //const gearMesh = this.getGearMesh();
     // this.stlService.exportMesh(gearMesh, 'gear.stl');
     //const starMesh = this.getStarMesh();
     // const squareMesh = this.getSquareMesh();
@@ -49,7 +50,7 @@ export class VizComponent implements AfterViewInit {
     // const middleMesh = this.getMidleMesh(.5);
     // const middleMesh2 = this.getMidleMesh(.25);
     // const middleMesh3 = this.getMidleMesh(.75);
-    group.add(gearMesh);
+    group.add(tubeMesh);
 
 
     scene.add(group);
@@ -58,7 +59,8 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
     const meshes: THREE.Mesh[] = [];
-    meshes.push(gearMesh);
+    meshes.push(tubeMesh);
+    //meshes.push(gearMesh);
     //meshes.push(starMesh);
     // meshes.push(triangleMesh);
     // meshes.push(middleMesh3);
@@ -87,6 +89,28 @@ export class VizComponent implements AfterViewInit {
       renderer.domElement
     );
   }
+
+getTubeMesh(): THREE.Mesh {
+  const material = new THREE.MeshNormalMaterial({
+    side: THREE.DoubleSide,
+  });
+
+  const curve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(0, 3, 0),
+  ])
+  const geometry = new THREE.TubeGeometry(
+    curve,
+    32,    // tubular segments
+    1,  // radius
+    64,    // radial segments
+    false  // closed
+  );
+
+  geometry.center();
+
+  return new THREE.Mesh(geometry, material);
+}
 
 getGearMesh(): THREE.Mesh {
   const material = new THREE.MeshNormalMaterial({
@@ -181,19 +205,18 @@ getGearMesh(): THREE.Mesh {
       }
     }
 
-  star.closePath();
+    star.closePath();
 
-  // const geometry = new THREE.ShapeGeometry(star);
-  const geometry = new THREE.ExtrudeGeometry(star, {
-    depth: 0.5,
-    bevelEnabled: true,
-    bevelThickness: 0.1,
-    bevelSize: 0.1
-  });
-  geometry.center();
+    const geometry = new THREE.ExtrudeGeometry(star, {
+      depth: 0.5,
+      bevelEnabled: true,
+      bevelThickness: 0.1,
+      bevelSize: 0.1
+    });
+    geometry.center();
 
-  return new THREE.Mesh(geometry, material);
-}
+    return new THREE.Mesh(geometry, material);
+  }
 
   getTriangeMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
