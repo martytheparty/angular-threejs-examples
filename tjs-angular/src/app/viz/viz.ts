@@ -34,14 +34,15 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 8;
+    camera.position.z = 0;
     const scene = new THREE.Scene();
 
 
     const group = new THREE.Group();
-    const tubeMesh = this.getTubeMesh();
+    const shrinkingHelix = this.getShrinkingHelixMesh();
+    //const tubeMesh = this.getTubeMesh();
     //const gearMesh = this.getGearMesh();
-    // this.stlService.exportMesh(gearMesh, 'gear.stl');
+    // this.stlService.exportMesh(tubeMesh, 'tube.stl');
     //const starMesh = this.getStarMesh();
     // const squareMesh = this.getSquareMesh();
     // const triangleMesh = this.getTriangeMesh();
@@ -50,7 +51,7 @@ export class VizComponent implements AfterViewInit {
     // const middleMesh = this.getMidleMesh(.5);
     // const middleMesh2 = this.getMidleMesh(.25);
     // const middleMesh3 = this.getMidleMesh(.75);
-    group.add(tubeMesh);
+    group.add(shrinkingHelix);
 
 
     scene.add(group);
@@ -59,7 +60,7 @@ export class VizComponent implements AfterViewInit {
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
     const meshes: THREE.Mesh[] = [];
-    meshes.push(tubeMesh);
+    meshes.push(shrinkingHelix);
     //meshes.push(gearMesh);
     //meshes.push(starMesh);
     // meshes.push(triangleMesh);
@@ -268,6 +269,54 @@ getGearMesh(): THREE.Mesh {
     const mesh = new THREE.Mesh(geometry, material);
 
     return mesh;
+  }
+
+  getShrinkingHelixMesh(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide
+    });
+
+    const curve = this.getShrinkingHelixCurve();
+
+    const geometry = new THREE.TubeGeometry(
+      curve,
+      256,
+      0.08,
+      16,
+      false
+    );
+
+    return new THREE.Mesh(geometry, material);
+  }
+
+  getShrinkingHelixCurve(): THREE.CatmullRomCurve3 {
+    const points: THREE.Vector3[] = [];
+
+    const turns = 8;
+    const stepsPerTurn = 32;
+
+    const startRadius = 2.0;
+    const endRadius = 0.2;
+    const height = 6;
+
+    const totalSteps = turns * stepsPerTurn;
+
+    for (let i = 0; i <= totalSteps; i++) {
+      const t = i / totalSteps;
+
+      const angle = t * turns * Math.PI * 2;
+
+      // Radius shrinks linearly
+      const radius = startRadius * (1 - t) + endRadius * t;
+
+      const x = radius * Math.cos(angle);
+      const y = height * (t - 0.5);
+      const z = radius * Math.sin(angle);
+
+      points.push(new THREE.Vector3(x, y, z));
+    }
+
+    return new THREE.CatmullRomCurve3(points);
   }
 
 }
