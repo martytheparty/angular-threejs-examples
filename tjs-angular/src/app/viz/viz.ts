@@ -39,7 +39,8 @@ export class VizComponent implements AfterViewInit {
 
 
     const group = new THREE.Group();
-    const twoLathe = this.getSimpleTwoLathe()
+    const candleStick = this.getLatheCandleStick();
+    //const twoLathe = this.getSimpleTwoLathe()
     //const candleStick = this.getLatheCandleStick();
     //const shrinkingHelix = this.getShrinkingHelixMesh();
     //const tubeMesh = this.getTubeMesh();
@@ -55,14 +56,14 @@ export class VizComponent implements AfterViewInit {
     // const middleMesh3 = this.getMidleMesh(.75);
     //group.add(shrinkingHelix);
 
-    group.add(twoLathe);
+    group.add(candleStick);
     scene.add(group);
 
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
     const meshes: THREE.Mesh[] = [];
-    meshes.push(twoLathe);
+    meshes.push(candleStick);
     //meshes.push(shrinkingHelix);
     //meshes.push(gearMesh);
     //meshes.push(starMesh);
@@ -368,7 +369,8 @@ getLatheCandleStick(): THREE.Mesh {
       new THREE.Vector2(0.45, 4.10),
 
       // Center point to close the top
-      new THREE.Vector2(0.00, 4.10),
+      new THREE.Vector2(0.3, 3.0),
+      new THREE.Vector2(0.00, 3.0),
     ];
 
     const geometry = new THREE.LatheGeometry(points, 64);
