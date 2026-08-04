@@ -10,7 +10,8 @@
     "viz": "ng g c viz",
     "viz-controls": "ng g c viz/controls",
     "controls-service": "ng g s viz/controls-service",
-    "stl-service": "ng g s viz/stl-service"
+    "stl-service": "ng g s viz/stl-service",
+    "ng-22": "ng update @angular/core @angular/cli"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
