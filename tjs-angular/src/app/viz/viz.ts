@@ -34,12 +34,14 @@ export class VizComponent implements AfterViewInit {
     const width = window.innerWidth, height = window.innerHeight;
     const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
     
-    camera.position.z = 0;
+    camera.position.z = 5;
     const scene = new THREE.Scene();
 
 
     const group = new THREE.Group();
-    const shrinkingHelix = this.getShrinkingHelixMesh();
+    const twoLathe = this.getSimpleTwoLathe()
+    //const candleStick = this.getLatheCandleStick();
+    //const shrinkingHelix = this.getShrinkingHelixMesh();
     //const tubeMesh = this.getTubeMesh();
     //const gearMesh = this.getGearMesh();
     // this.stlService.exportMesh(tubeMesh, 'tube.stl');
@@ -51,16 +53,17 @@ export class VizComponent implements AfterViewInit {
     // const middleMesh = this.getMidleMesh(.5);
     // const middleMesh2 = this.getMidleMesh(.25);
     // const middleMesh3 = this.getMidleMesh(.75);
-    group.add(shrinkingHelix);
+    //group.add(shrinkingHelix);
 
-
+    group.add(twoLathe);
     scene.add(group);
 
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize( width, height );
     const meshes: THREE.Mesh[] = [];
-    meshes.push(shrinkingHelix);
+    meshes.push(twoLathe);
+    //meshes.push(shrinkingHelix);
     //meshes.push(gearMesh);
     //meshes.push(starMesh);
     // meshes.push(triangleMesh);
@@ -317,6 +320,61 @@ getGearMesh(): THREE.Mesh {
     }
 
     return new THREE.CatmullRomCurve3(points);
+  }
+
+getSimpleTwoLathe(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide,
+    });
+
+    const latheWidth = 1;
+    const latheHeight = 1;
+
+    const points: THREE.Vector2[] = [
+      new THREE.Vector2(latheWidth + 1, 0),
+      new THREE.Vector2(latheWidth, latheHeight),
+    ];
+
+    const geometry = new THREE.LatheGeometry(points, 64);
+    geometry.center();
+
+    return new THREE.Mesh(geometry, material);
+}
+
+getLatheCandleStick(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide,
+    });
+
+    const points: THREE.Vector2[] = [
+      // Base
+      new THREE.Vector2(0.00, 0.00),
+      new THREE.Vector2(1.20, 0.00),
+      new THREE.Vector2(1.10, 0.15),
+      new THREE.Vector2(0.90, 0.25),
+
+      // Stem
+      new THREE.Vector2(0.35, 0.50),
+      new THREE.Vector2(0.30, 2.50),
+
+      // Decorative ring
+      new THREE.Vector2(0.55, 2.70),
+      new THREE.Vector2(0.35, 2.90),
+
+      // Candle cup
+      new THREE.Vector2(0.70, 3.20),
+      new THREE.Vector2(0.80, 3.50),
+      new THREE.Vector2(0.55, 3.75),
+      new THREE.Vector2(0.45, 4.10),
+
+      // Center point to close the top
+      new THREE.Vector2(0.00, 4.10),
+    ];
+
+    const geometry = new THREE.LatheGeometry(points, 64);
+    geometry.center();
+
+    return new THREE.Mesh(geometry, material);
   }
 
 }
