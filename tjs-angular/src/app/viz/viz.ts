@@ -1,42 +1,38 @@
-import { 
+import {
   AfterViewInit,
   Component,
   ElementRef,
   inject,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import * as THREE from 'three';
-import {
-  ControlsComponent
-} from './controls/controls';
+import { ControlsComponent } from './controls/controls';
 import { ControlsService } from './controls-service';
 import { VizAnimation } from './viz.animation.class';
 import { StlService } from './stl-service';
 
 @Component({
   selector: 'app-viz',
-  imports: [
-    ControlsComponent
-  ],
+  imports: [ControlsComponent],
   templateUrl: './viz.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './viz.scss',
 })
 export class VizComponent implements AfterViewInit {
-
   @ViewChild('visualization', { static: true })
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
   stlService: StlService = inject(StlService);
 
   ngAfterViewInit(): void {
+    const width = window.innerWidth,
+      height = window.innerHeight;
+    const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 20);
 
-    const width = window.innerWidth, height = window.innerHeight;
-    const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
-    
     camera.position.z = 5;
     const scene = new THREE.Scene();
-
 
     const group = new THREE.Group();
     const candleStick = this.getLatheCandleStick();
@@ -59,9 +55,9 @@ export class VizComponent implements AfterViewInit {
     group.add(candleStick);
     scene.add(group);
 
-    const renderer = new THREE.WebGLRenderer( { antialias: true } );
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setClearColor(0xaaaaaa); // white
-    renderer.setSize( width, height );
+    renderer.setSize(width, height);
     const meshes: THREE.Mesh[] = [];
     meshes.push(candleStick);
     //meshes.push(shrinkingHelix);
@@ -76,118 +72,110 @@ export class VizComponent implements AfterViewInit {
     // meshes.push(middleMesh);
     // meshes.push(middleMesh3);
 
-
-
     const animation = new VizAnimation(group, meshes);
 
-    renderer.setAnimationLoop( 
-      (time: number) => {
-          animation.setRotationXSpeed(this.controlsService.x());
-          animation.setRotationYSpeed(this.controlsService.y());
-          animation.setRotationZSpeed(this.controlsService.z());
-          animation.animate(time);
-          renderer.render(scene, camera);
-        }
-     );
+    renderer.setAnimationLoop((time: number) => {
+      animation.setRotationXSpeed(this.controlsService.x());
+      animation.setRotationYSpeed(this.controlsService.y());
+      animation.setRotationZSpeed(this.controlsService.z());
+      animation.animate(time);
+      renderer.render(scene, camera);
+    });
 
-    this.visualization.nativeElement.appendChild(
-      renderer.domElement
+    this.visualization.nativeElement.appendChild(renderer.domElement);
+  }
+
+  getTubeMesh(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide,
+    });
+
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0, 0, 0),
+      new THREE.Vector3(0, 3, 0),
+    ]);
+    const geometry = new THREE.TubeGeometry(
+      curve,
+      32, // tubular segments
+      1, // radius
+      64, // radial segments
+      false, // closed
     );
+
+    geometry.center();
+
+    return new THREE.Mesh(geometry, material);
   }
 
-getTubeMesh(): THREE.Mesh {
-  const material = new THREE.MeshNormalMaterial({
-    side: THREE.DoubleSide,
-  });
+  getGearMesh(): THREE.Mesh {
+    const material = new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide,
+    });
 
-  const curve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(0, 3, 0),
-  ])
-  const geometry = new THREE.TubeGeometry(
-    curve,
-    32,    // tubular segments
-    1,  // radius
-    64,    // radial segments
-    false  // closed
-  );
+    const gear = new THREE.Shape();
 
-  geometry.center();
+    const teeth = 10;
+    const outerRadius = 1.8;
+    const rootRadius = 1.1;
 
-  return new THREE.Mesh(geometry, material);
-}
+    const segmentsPerTooth = 6;
 
-getGearMesh(): THREE.Mesh {
-  const material = new THREE.MeshNormalMaterial({
-    side: THREE.DoubleSide
-  });
+    for (let i = 0; i < teeth * segmentsPerTooth; i++) {
+      const segment = i % segmentsPerTooth;
 
-  const gear = new THREE.Shape();
+      let radius: number;
 
-  const teeth = 10;
-  const outerRadius = 1.8;
-  const rootRadius = 1.1;
+      switch (segment) {
+        case 0: // valley before tooth
+          radius = rootRadius;
+          break;
 
-  const segmentsPerTooth = 6;
+        case 1: // outside edge
+          radius = outerRadius;
+          break;
 
-  for (let i = 0; i < teeth * segmentsPerTooth; i++) {
-    const segment = i % segmentsPerTooth;
+        case 2: // flat top of tooth
+          radius = outerRadius;
+          break;
 
-    let radius: number;
+        case 3: // falling edge
+          radius = rootRadius;
+          break;
 
-    switch (segment) {
-      case 0: // valley before tooth
-        radius = rootRadius;
-        break;
+        default:
+          radius = rootRadius;
+      }
 
-      case 1: // outside edge
-        radius = outerRadius;
-        break;
+      const angle = (i / (teeth * segmentsPerTooth)) * Math.PI * 2 - Math.PI / 2;
 
-      case 2: // flat top of tooth
-        radius = outerRadius;
-        break;
+      const x = Math.cos(angle) * radius;
+      const y = Math.sin(angle) * radius;
 
-      case 3: // falling edge
-        radius = rootRadius;
-        break;
-
-      default:
-        radius = rootRadius;
+      if (i === 0) {
+        gear.moveTo(x, y);
+      } else {
+        gear.lineTo(x, y);
+      }
     }
 
-    const angle =
-      (i / (teeth * segmentsPerTooth)) * Math.PI * 2 -
-      Math.PI / 2;
+    gear.closePath();
 
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+    // const geometry = new THREE.ShapeGeometry(gear);
+    const geometry = new THREE.ExtrudeGeometry(gear, {
+      depth: 0.5,
+      bevelEnabled: true,
+      bevelThickness: 0.1,
+      bevelSize: 0.1,
+    });
 
-    if (i === 0) {
-      gear.moveTo(x, y);
-    } else {
-      gear.lineTo(x, y);
-    }
+    geometry.center();
+
+    return new THREE.Mesh(geometry, material);
   }
-
-  gear.closePath();
-
- // const geometry = new THREE.ShapeGeometry(gear);
-   const geometry = new THREE.ExtrudeGeometry(gear, {
-    depth: 0.5,
-    bevelEnabled: true,
-    bevelThickness: 0.1,
-    bevelSize: 0.1
-  });
-
-  geometry.center();
-
-  return new THREE.Mesh(geometry, material);
-}
 
   getStarMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
     });
 
     const star = new THREE.Shape();
@@ -198,7 +186,7 @@ getGearMesh(): THREE.Mesh {
 
     for (let i = 0; i < points * 2; i++) {
       const angle = (i * Math.PI) / points - Math.PI / 2;
-      const radius = (i % 2 === 0) ? outerRadius : innerRadius;
+      const radius = i % 2 === 0 ? outerRadius : innerRadius;
 
       const x = Math.cos(angle) * radius;
       const y = Math.sin(angle) * radius;
@@ -216,7 +204,7 @@ getGearMesh(): THREE.Mesh {
       depth: 0.5,
       bevelEnabled: true,
       bevelThickness: 0.1,
-      bevelSize: 0.1
+      bevelSize: 0.1,
     });
     geometry.center();
 
@@ -224,7 +212,7 @@ getGearMesh(): THREE.Mesh {
   }
 
   getTriangeMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
     const square = new THREE.Shape();
     square.moveTo(0, 0);
     square.lineTo(2, 0);
@@ -238,7 +226,7 @@ getGearMesh(): THREE.Mesh {
   }
 
   getSquareMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
     const square = new THREE.Shape();
     square.moveTo(0, 0);
     square.lineTo(2, 0);
@@ -253,13 +241,13 @@ getGearMesh(): THREE.Mesh {
   }
 
   getMidleMesh(offset: number): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({side: THREE.DoubleSide});
+    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
     const square = new THREE.Shape();
     const xLength = 2; // this is the total length
-    const middleX = xLength/2; // this is the middle
+    const middleX = xLength / 2; // this is the middle
     const startX = 0; //this is the first spot
     const endX = xLength;
-//    const distance = (xLength - middleX)/(position + 1); // this is how far (displacement) the point should be from the end.
+    //    const distance = (xLength - middleX)/(position + 1); // this is how far (displacement) the point should be from the end.
     const firstX = startX + offset;
     const lastX = endX - offset;
     square.moveTo(0, 0);
@@ -277,18 +265,12 @@ getGearMesh(): THREE.Mesh {
 
   getShrinkingHelixMesh(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
     });
 
     const curve = this.getShrinkingHelixCurve();
 
-    const geometry = new THREE.TubeGeometry(
-      curve,
-      256,
-      0.08,
-      16,
-      false
-    );
+    const geometry = new THREE.TubeGeometry(curve, 256, 0.08, 16, false);
 
     return new THREE.Mesh(geometry, material);
   }
@@ -323,7 +305,7 @@ getGearMesh(): THREE.Mesh {
     return new THREE.CatmullRomCurve3(points);
   }
 
-getSimpleTwoLathe(): THREE.Mesh {
+  getSimpleTwoLathe(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({
       side: THREE.DoubleSide,
     });
@@ -340,37 +322,37 @@ getSimpleTwoLathe(): THREE.Mesh {
     geometry.center();
 
     return new THREE.Mesh(geometry, material);
-}
+  }
 
-getLatheCandleStick(): THREE.Mesh {
+  getLatheCandleStick(): THREE.Mesh {
     const material = new THREE.MeshNormalMaterial({
       side: THREE.DoubleSide,
     });
 
     const points: THREE.Vector2[] = [
       // Base
-      new THREE.Vector2(0.00, 0.00),
-      new THREE.Vector2(1.20, 0.00),
-      new THREE.Vector2(1.10, 0.15),
-      new THREE.Vector2(0.90, 0.25),
+      new THREE.Vector2(0.0, 0.0),
+      new THREE.Vector2(1.2, 0.0),
+      new THREE.Vector2(1.1, 0.15),
+      new THREE.Vector2(0.9, 0.25),
 
       // Stem
-      new THREE.Vector2(0.35, 0.50),
-      new THREE.Vector2(0.30, 2.50),
+      new THREE.Vector2(0.35, 0.5),
+      new THREE.Vector2(0.3, 2.5),
 
       // Decorative ring
-      new THREE.Vector2(0.55, 2.70),
-      new THREE.Vector2(0.35, 2.90),
+      new THREE.Vector2(0.55, 2.7),
+      new THREE.Vector2(0.35, 2.9),
 
       // Candle cup
-      new THREE.Vector2(0.70, 3.20),
-      new THREE.Vector2(0.80, 3.50),
+      new THREE.Vector2(0.7, 3.2),
+      new THREE.Vector2(0.8, 3.5),
       new THREE.Vector2(0.55, 3.75),
-      new THREE.Vector2(0.45, 4.10),
+      new THREE.Vector2(0.45, 4.1),
 
       // Center point to close the top
       new THREE.Vector2(0.3, 3.0),
-      new THREE.Vector2(0.00, 3.0),
+      new THREE.Vector2(0.0, 3.0),
     ];
 
     const geometry = new THREE.LatheGeometry(points, 64);
@@ -378,5 +360,4 @@ getLatheCandleStick(): THREE.Mesh {
 
     return new THREE.Mesh(geometry, material);
   }
-
 }

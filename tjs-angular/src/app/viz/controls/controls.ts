@@ -1,22 +1,18 @@
-import {
-  inject,
-  Component
-} from '@angular/core';
+import { inject, Component, ChangeDetectionStrategy } from '@angular/core';
 import { ControlsService } from '../controls-service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-controls',
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './controls.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './controls.scss',
 })
 export class ControlsComponent {
   controlsService: ControlsService = inject(ControlsService);
 
-  setControlSelected(selected: "x"|"y"|"z"):void {
+  setControlSelected(selected: 'x' | 'y' | 'z'): void {
     this.controlsService.setSelected(selected);
   }
 }
