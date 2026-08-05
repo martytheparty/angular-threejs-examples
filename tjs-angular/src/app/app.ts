@@ -1,11 +1,11 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { VizComponent } from './viz/viz';
 
 @Component({
   selector: 'app-root',
   imports: [VizComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrl: './app.scss',
 })
-export class App {
-}
+export class App {}
