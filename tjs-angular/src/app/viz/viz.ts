@@ -1,75 +1,69 @@
-import { 
+import {
   AfterViewInit,
   Component,
   ElementRef,
   inject,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import * as THREE from 'three';
-import {
-  ControlsComponent
-} from './controls/controls';
+import { ControlsComponent } from './controls/controls';
 import { ControlsService } from './controls-service';
+import { VizAnimation } from './viz.animation.class';
+import { StlService } from './stl-service';
+import { MeshClass } from './mesh/mesh';
 
 @Component({
   selector: 'app-viz',
-  imports: [
-    ControlsComponent
-  ],
+  imports: [ControlsComponent],
   templateUrl: './viz.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './viz.scss',
 })
 export class VizComponent implements AfterViewInit {
-
   @ViewChild('visualization', { static: true })
   visualization!: ElementRef<HTMLDivElement>;
   controlsService: ControlsService = inject(ControlsService);
+  stlService: StlService = inject(StlService);
 
-  constructor() {
-
-  }
+  mesh: MeshClass = new MeshClass();
 
   ngAfterViewInit(): void {
-    const width = window.innerWidth, height = window.innerHeight;
-    const camera = new THREE.PerspectiveCamera( 70, width / height, 0.01, 20 );
-    
-    camera.position.z = 10;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 20);
+
+    camera.position.z = 5;
     const scene = new THREE.Scene();
-    const geometry = new THREE.BoxGeometry( 3, 3, 3 );
-    const material = new THREE.MeshNormalMaterial();
 
-    const mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
-    const renderer = new THREE.WebGLRenderer( { antialias: true } );
-    renderer.setSize( width, height );
+    const group = new THREE.Group();
+    const candleStick = this.mesh.getLatheCandleStick();
 
-    renderer.setAnimationLoop( animate );
-    //document.body.appendChild( renderer.domElement );
+    group.add(candleStick);
+    scene.add(group);
 
-    this.visualization.nativeElement.appendChild(
-      renderer.domElement
-    );
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setClearColor(0xaaaaaa); // white
+    renderer.setSize(width, height);
+    const meshes: THREE.Mesh[] = [];
+    meshes.push(candleStick);
 
-    // animation
-    const controlsService = this.controlsService;
+    const animation = new VizAnimation(group, meshes, this.controlsService);
 
-    function animate( time: number ) {
+    renderer.setAnimationLoop((time: number) => {
+      animation.setRotationXSpeed(this.controlsService.x());
+      animation.setRotationYSpeed(this.controlsService.y());
+      animation.setRotationZSpeed(this.controlsService.z());
 
-      if(controlsService.x() > 0) {
-        mesh.rotation.x = time / controlsService.x();
-      }
+      animation.setXPosition(this.controlsService.xPosition());
+      animation.setYPosition(this.controlsService.yPosition());
+      animation.setZPosition(this.controlsService.zPosition());
 
-      if(controlsService.y() > 0) {
-        mesh.rotation.y = time / controlsService.y();
-      }
+      animation.animate(time);
+      renderer.render(scene, camera);
+    });
 
-      if(controlsService.z() > 0) {
-        mesh.rotation.z = time / controlsService.z();
-      }
-
-      renderer.render( scene, camera );
-
-    }
+    this.visualization.nativeElement.appendChild(renderer.domElement);
   }
 }
