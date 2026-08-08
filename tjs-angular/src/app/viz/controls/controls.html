@@ -1,17 +1,79 @@
 <div class="parent">
-    <div 
-        (click)="setControlSelected('x')"
-        [ngClass]="{'selected': controlsService.selected() === 'x'}"
-    >X: {{controlsService.x()}}
-    </div>
-    <div
-        (click)="setControlSelected('y')"
-        [ngClass]="{'selected': controlsService.selected() === 'y'}"
-    >Y: {{controlsService.y()}}
-    </div>
-    <div
-        (click)="setControlSelected('z')"
-        [ngClass]="{'selected': controlsService.selected() === 'z'}"
-    >Z: {{controlsService.z()}}
-    </div>
+    <table>
+        <tr>
+            <th>&nbsp;</th>
+            <th>x</th>
+            <th>y</th>
+            <th>z</th>
+        </tr>
+        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='rotation'">
+            <td><div
+                    (click)="setAttribute('rotation')"
+                >rotation</div></td>
+            <td>
+                <div 
+                    (click)="setControlSelected('x')"
+                    [ngClass]="{'selected': controlsService.selected() === 'x'}"
+                >{{controlsService.x()}}
+                </div>
+            </td>
+            <td>
+                <div
+                    (click)="setControlSelected('y')"
+                    [ngClass]="{'selected': controlsService.selected() === 'y'}"
+                >{{controlsService.y()}}
+                </div>
+            </td>
+            <td>
+                <div
+                    (click)="setControlSelected('z')"
+                    [ngClass]="{'selected': controlsService.selected() === 'z'}"
+                >{{controlsService.z()}}
+                </div>
+            </td>
+        </tr>
+        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='position'">
+            <td>
+                <div 
+                (click)="setAttribute('position')">
+                    position
+                </div>
+            </td>
+            <td>
+                <div 
+                    (click)="setControlPositionSelected('x')"
+                    [ngClass]="{'selected': controlsService.selectedPosition() === 'x'}"
+                >{{controlsService.xPosition()}}
+                </div>
+            </td>
+            <td>
+                <div
+                    (click)="setControlPositionSelected('y')"
+                    [ngClass]="{'selected': controlsService.selectedPosition() === 'y'}"
+                >{{controlsService.yPosition()}}
+                </div>
+            </td>
+            <td>
+                <div
+                    (click)="setControlPositionSelected('z')"
+                    [ngClass]="{'selected': controlsService.selectedPosition() === 'z'}"
+                >{{controlsService.zPosition()}}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <label for="cars">Choose a mesh: </label>
+                <select (change)="selectMesh($event)">
+                    <option></option>
+                    @for(meshOption of meshClass.getList(); track meshOption) {
+                        <option value="{{meshOption}}">{{meshOption}}</option>
+                    }
+                </select>
+            </td>
+        </tr>
+    </table>
+
+
+
 </div>
