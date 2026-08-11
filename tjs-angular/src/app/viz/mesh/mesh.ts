@@ -14,7 +14,8 @@ export class MeshClass {
             'gear',
             'star',
             'square',
-            'shrinking helix'
+            'shrinking helix',
+            'triangle'
         ];
     }
 
@@ -47,18 +48,46 @@ export class MeshClass {
       return this.getShrinkingHelixMesh.bind(this);
     }
 
+    if (meshName === 'triangle') {
+      return this.getTriangleMesh.bind(this);
+    }
+
     return this.getLatheCandleStickMesh;
   }
 
   getMaterial(): THREE.Material {
+    return this.getBasicMaterial();
+  }
+
+// ✅ MeshBasicMaterial
+// ✅ MeshNormalMaterial
+// MeshLambertMaterial
+// MeshPhongMaterial
+// MeshStandardMaterial
+// MeshPhysicalMaterial
+// MeshToonMaterial
+
+  getBasicMaterial(): THREE.MeshBasicMaterial {
     return new THREE.MeshBasicMaterial({
       color: this.getColor(),
-      side: THREE.DoubleSide
+      side: THREE.DoubleSide,
+      wireframe: false,
+      transparent: false,
+      opacity: 1,
+    });
+  }
+
+  getNormalMaterial(): THREE.MeshNormalMaterial {
+    return new THREE.MeshNormalMaterial({
+      side: THREE.DoubleSide,
+      wireframe: true,
+      transparent: false,
+      opacity: 1,
     });
   }
 
   getColor(): THREE.ColorRepresentation {
-    return 0x00ff00;
+    return 0x0000FF;
   }
 
   getSphereMesh(): THREE.Mesh {
@@ -192,16 +221,15 @@ export class MeshClass {
     return new THREE.Mesh(geometry, this.getMaterial());
   }
 
-  getTriangeMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-    const square = new THREE.Shape();
-    square.moveTo(0, 0);
-    square.lineTo(2, 0);
-    square.lineTo(1, 2);
-    square.closePath();
-    const geometry = new THREE.ShapeGeometry(square);
+  getTriangleMesh(): THREE.Mesh {
+    const triangle = new THREE.Shape();
+    triangle.moveTo(0, 0);
+    triangle.lineTo(2, 0);
+    triangle.lineTo(1, 2);
+    triangle.closePath();
+    const geometry = new THREE.ShapeGeometry(triangle);
     geometry.center();
-    const mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, this.getMaterial());
 
     return mesh;
   }
