@@ -38,16 +38,16 @@ export class VizComponent implements AfterViewInit {
     const scene = new THREE.Scene();
 
     const group = new THREE.Group();
-    const candleStick = this.mesh.getLatheCandleStick();
+    const star = this.mesh.getStarMesh();
 
-    group.add(candleStick);
+    group.add(star);
     scene.add(group);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setClearColor(0xaaaaaa); // white
     renderer.setSize(width, height);
     const meshes: THREE.Mesh[] = [];
-    meshes.push(candleStick);
+    meshes.push(star);
 
     const animation = new VizAnimation(group, meshes, this.controlsService);
 

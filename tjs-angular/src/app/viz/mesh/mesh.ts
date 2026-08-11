@@ -1,37 +1,80 @@
 import * as THREE from 'three';
 
 export class MeshClass {
-    getList(): string[] {
+
+
+
+
+
+  static getList(): string[] {
         return [
+            'sphere',
             'candlestick',
             'tube',
-            'gear'
+            'gear',
+            'star',
+            'square',
+            'shrinking helix'
         ];
     }
 
   getMeshFunction(meshName: string): () => THREE.Mesh {
+    if (meshName === 'sphere') {
+      return this.getSphereMesh.bind(this);
+    }
+
     if (meshName === 'candlestick') {
-      return this.getLatheCandleStick
+      return this.getLatheCandleStickMesh.bind(this);
     }
 
     if (meshName === 'tube') {
-      return this.getTubeMesh;
+      return this.getTubeMesh.bind(this);
     }
 
     if (meshName === 'gear') {
-      return this.getGearMesh;
+      return this.getGearMesh.bind(this);
     }
 
+    if (meshName === 'star') {
+      return this.getStarMesh.bind(this);
+    }
 
+    if (meshName === 'square') {
+      return this.getSquareMesh.bind(this);
+    }
 
-    return this.getLatheCandleStick;
+    if (meshName === 'shrinking helix') {
+      return this.getShrinkingHelixMesh.bind(this);
+    }
 
+    return this.getLatheCandleStickMesh;
+  }
+
+  getMaterial(): THREE.Material {
+    return new THREE.MeshBasicMaterial({
+      color: this.getColor(),
+      side: THREE.DoubleSide
+    });
+  }
+
+  getColor(): THREE.ColorRepresentation {
+    return 0x00ff00;
+  }
+
+  getSphereMesh(): THREE.Mesh {
+    const geometry = new THREE.SphereGeometry(
+      1,   // radius
+      32,  // width segments
+      32,  // height segments
+    );
+
+    geometry.center();
+
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
    getTubeMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
+
 
     const curve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(0, 0, 0),
@@ -47,13 +90,10 @@ export class MeshClass {
 
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getGearMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const gear = new THREE.Shape();
 
@@ -113,18 +153,16 @@ export class MeshClass {
 
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getStarMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
+
 
     const star = new THREE.Shape();
 
-    const outerRadius = 3;
-    const innerRadius = 1.4;
+    const outerRadius = 1.8;
+    const innerRadius = 1;
     const points = 5;
 
     for (let i = 0; i < points * 2; i++) {
@@ -151,7 +189,7 @@ export class MeshClass {
     });
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getTriangeMesh(): THREE.Mesh {
@@ -169,7 +207,6 @@ export class MeshClass {
   }
 
   getSquareMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
     const square = new THREE.Shape();
     square.moveTo(0, 0);
     square.lineTo(2, 0);
@@ -178,7 +215,7 @@ export class MeshClass {
     square.closePath();
     const geometry = new THREE.ShapeGeometry(square);
     geometry.center();
-    const mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, this.getMaterial());
 
     return mesh;
   }
@@ -207,15 +244,12 @@ export class MeshClass {
   }
 
   getShrinkingHelixMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const curve = this.getShrinkingHelixCurve();
 
     const geometry = new THREE.TubeGeometry(curve, 256, 0.08, 16, false);
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getShrinkingHelixCurve(): THREE.CatmullRomCurve3 {
@@ -267,10 +301,8 @@ export class MeshClass {
     return new THREE.Mesh(geometry, material);
   }
 
-  getLatheCandleStick(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
+  getLatheCandleStickMesh(): THREE.Mesh {
+
 
     const points: THREE.Vector2[] = [
       // Base
@@ -301,6 +333,6 @@ export class MeshClass {
     const geometry = new THREE.LatheGeometry(points, 64);
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }   
 }

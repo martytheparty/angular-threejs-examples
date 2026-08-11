@@ -14,7 +14,7 @@ import { VizAnimation } from '../viz.animation.class';
 export class ControlsComponent {
 
   controlsService: ControlsService = inject(ControlsService);
-  meshClass: MeshClass = new MeshClass();
+  readonly MeshClass = MeshClass;
 
   constructor() {}
 
