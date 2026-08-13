@@ -15,7 +15,8 @@ export class MeshClass {
             'star',
             'square',
             'shrinking helix',
-            'triangle'
+            'triangle',
+            '2lathe'
         ];
     }
 
@@ -52,11 +53,15 @@ export class MeshClass {
       return this.getTriangleMesh.bind(this);
     }
 
+    if (meshName === '2lathe') {
+      return this.getSimpleTwoLathe.bind(this);
+    }
+
     return this.getLatheCandleStickMesh;
   }
 
   getMaterial(): THREE.Material {
-    return this.getBasicMaterial();
+    return this.getLambertMaterial()
   }
 
 // ✅ MeshBasicMaterial
@@ -83,6 +88,25 @@ export class MeshClass {
       wireframe: true,
       transparent: false,
       opacity: 1,
+    });
+  }
+
+  getLambertMaterial(): THREE.MeshLambertMaterial {
+    return new THREE.MeshLambertMaterial({
+      color: this.getColor(),
+      emissive: 0x000000,
+      emissiveIntensity: 1,
+      flatShading: false,
+      fog: true,
+      wireframe: false,
+      transparent: false,
+      opacity: 1,
+      side: THREE.DoubleSide,
+      depthTest: true,
+      depthWrite: true,
+      alphaTest: 0,
+      dithering: false,
+      toneMapped: true,
     });
   }
 
@@ -248,28 +272,6 @@ export class MeshClass {
     return mesh;
   }
 
-  getMidleMesh(offset: number): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-    const square = new THREE.Shape();
-    const xLength = 2; // this is the total length
-    const middleX = xLength / 2; // this is the middle
-    const startX = 0; //this is the first spot
-    const endX = xLength;
-    //    const distance = (xLength - middleX)/(position + 1); // this is how far (displacement) the point should be from the end.
-    const firstX = startX + offset;
-    const lastX = endX - offset;
-    square.moveTo(0, 0);
-    square.lineTo(2, 0);
-    square.lineTo(lastX, 2);
-    square.lineTo(firstX, 2);
-
-    square.closePath();
-    const geometry = new THREE.ShapeGeometry(square);
-    geometry.center();
-    const mesh = new THREE.Mesh(geometry, material);
-
-    return mesh;
-  }
 
   getShrinkingHelixMesh(): THREE.Mesh {
 
@@ -311,9 +313,6 @@ export class MeshClass {
   }
 
   getSimpleTwoLathe(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const latheWidth = 1;
     const latheHeight = 1;
@@ -326,7 +325,7 @@ export class MeshClass {
     const geometry = new THREE.LatheGeometry(points, 64);
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getLatheCandleStickMesh(): THREE.Mesh {

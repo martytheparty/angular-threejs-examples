@@ -37,6 +37,9 @@ export class VizComponent implements AfterViewInit {
     camera.position.z = 5;
     const scene = new THREE.Scene();
 
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+
     const group = new THREE.Group();
     const star = this.mesh.getStarMesh();
 
