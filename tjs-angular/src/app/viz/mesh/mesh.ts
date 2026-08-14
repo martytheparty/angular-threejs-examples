@@ -94,19 +94,19 @@ export class MeshClass {
   getLambertMaterial(): THREE.MeshLambertMaterial {
     return new THREE.MeshLambertMaterial({
       color: this.getColor(),
-      emissive: 0x000000,
-      emissiveIntensity: 1,
-      flatShading: false,
-      fog: true,
+      emissive: 0x000000, // can't be demonstrated without other object
+      emissiveIntensity: 1, // can't be demonstrated without other object
+      flatShading: false, // can't be demonstrated without other objects and directional light (need shadows)
+      fog: true, // can only be tested with scene
       wireframe: false,
       transparent: false,
       opacity: 1,
       side: THREE.DoubleSide,
-      depthTest: true,
-      depthWrite: true,
-      alphaTest: 0,
-      dithering: false,
-      toneMapped: true,
+      depthTest: true, // You need at least two objects whose rendered surfaces overlap from the camera's point of view.
+      depthWrite: true, // You need at least two objects whose rendered surfaces overlap from the camera's point of view.
+      alphaTest: 0, // You need a PNG surface that has pixels with an alpha less than the value here.  Then that pixel would be clear.
+      dithering: false, // ??
+      toneMapped: true, // ??
     });
   }
 
