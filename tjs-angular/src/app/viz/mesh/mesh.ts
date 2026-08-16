@@ -1,11 +1,6 @@
 import * as THREE from 'three';
 
 export class MeshClass {
-
-
-
-
-
   static getList(): string[] {
         return [
             'sphere',
@@ -61,13 +56,13 @@ export class MeshClass {
   }
 
   getMaterial(): THREE.Material {
-    return this.getLambertMaterial()
+    return this.getPhongMaterial();
   }
 
 // ✅ MeshBasicMaterial
 // ✅ MeshNormalMaterial
-// MeshLambertMaterial
-// MeshPhongMaterial
+// ✅ MeshLambertMaterial
+// ✅ MeshPhongMaterial
 // MeshStandardMaterial
 // MeshPhysicalMaterial
 // MeshToonMaterial
@@ -107,6 +102,35 @@ export class MeshClass {
       alphaTest: 0, // You need a PNG surface that has pixels with an alpha less than the value here.  Then that pixel would be clear.
       dithering: false, // ??
       toneMapped: true, // ??
+    });
+  }
+
+  getPhongMaterial(): THREE.MeshPhongMaterial {
+      return new THREE.MeshPhongMaterial({
+        color: this.getColor(),
+
+        emissive: 0x000000, // material self-emission; does not illuminate other objects
+        emissiveIntensity: 1, // controls the strength of emissive color
+
+        specular: 0x111111, // requires directional/point/spot light to see the highlight
+        shininess: 30, // controls the size/sharpness of the specular highlight
+
+        flatShading: false, // most visible with directional/point/spot lighting
+        fog: true, // can only be tested with scene.fog
+
+        wireframe: false,
+
+        transparent: false,
+        opacity: 1,
+
+        side: THREE.DoubleSide,
+
+        depthTest: true, // requires overlapping objects to demonstrate
+        depthWrite: true, // requires overlapping objects to demonstrate
+
+        alphaTest: 0, // requires texture pixels with varying alpha values
+        dithering: false, // useful for subtle color/alpha gradients
+        toneMapped: true, // relevant when using HDR/high-dynamic-range rendering
     });
   }
 
