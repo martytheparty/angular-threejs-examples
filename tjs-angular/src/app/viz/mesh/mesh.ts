@@ -56,14 +56,14 @@ export class MeshClass {
   }
 
   getMaterial(): THREE.Material {
-    return this.getPhongMaterial();
+    return this.getStandardMaterial();
   }
 
 // ✅ MeshBasicMaterial
 // ✅ MeshNormalMaterial
 // ✅ MeshLambertMaterial
 // ✅ MeshPhongMaterial
-// MeshStandardMaterial
+// ✅ MeshStandardMaterial
 // MeshPhysicalMaterial
 // MeshToonMaterial
 
@@ -133,6 +133,35 @@ export class MeshClass {
         toneMapped: true, // relevant when using HDR/high-dynamic-range rendering
     });
   }
+
+  getStandardMaterial(): THREE.MeshStandardMaterial {
+    return new THREE.MeshStandardMaterial({
+      color: this.getColor(),
+
+      roughness: 1, // 0 = very smooth/shiny, 1 = very rough
+      metalness: 0, // 0 = non-metal, 1 = metallic
+
+      emissive: 0x000000, // material self-emission; does not illuminate other objects
+      emissiveIntensity: 1, // controls emissive strength
+
+      flatShading: false, // more apparent with directional/point/spot lighting
+      fog: true, // can only be tested with scene.fog
+
+      wireframe: false,
+
+      transparent: false,
+      opacity: 1,
+
+      side: THREE.DoubleSide,
+
+      depthTest: true, // requires overlapping objects to demonstrate
+      depthWrite: true, // requires overlapping objects to demonstrate
+
+      alphaTest: 0, // requires texture pixels with varying alpha values
+      dithering: false, // useful for subtle color/alpha gradients
+      toneMapped: true, // relevant with HDR/high-dynamic-range rendering
+    });
+}
 
   getColor(): THREE.ColorRepresentation {
     return 0x0000FF;
