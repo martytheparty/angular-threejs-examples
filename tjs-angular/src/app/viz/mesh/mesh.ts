@@ -56,7 +56,7 @@ export class MeshClass {
   }
 
   getMaterial(): THREE.Material {
-    return this.getPhysicalMaterial();
+    return this.getToonMaterial();
   }
 
 // ✅ MeshBasicMaterial
@@ -240,8 +240,61 @@ export class MeshClass {
     });
   }
 
+  getToonMaterial(): THREE.MeshToonMaterial {
+
+  const gradientMap = new THREE.DataTexture(
+    new Uint8Array([
+       0,   0,   0, 255,   // dark
+     128, 128, 128, 255,   // middle
+     255, 255, 255, 255    // bright
+    ]),
+    3,
+    1,
+    THREE.RGBAFormat
+  );
+
+  gradientMap.minFilter = THREE.NearestFilter;
+  gradientMap.magFilter = THREE.NearestFilter;
+  gradientMap.needsUpdate = true;
+
+  return new THREE.MeshToonMaterial({
+    color: this.getColor(),
+
+    // Controls how much the material is affected by lighting.
+    // Toon shading uses discrete lighting bands rather than smooth shading.
+    gradientMap: gradientMap, // Optional texture controlling the toon shading steps.
+
+    // Material self-emission; does not illuminate other objects.
+    emissive: 0x000000,
+    emissiveIntensity: 1,
+
+    // Requires scene.fog.
+    fog: true,
+
+    wireframe: false,
+
+    transparent: false,
+    opacity: 1,
+
+    side: THREE.DoubleSide,
+
+    // Requires multiple overlapping objects to demonstrate.
+    depthTest: true,
+    depthWrite: true,
+
+    // Requires texture data containing varying alpha values.
+    alphaTest: 0,
+
+    // More meaningful with subtle color/alpha gradients.
+    dithering: false,
+
+    // More meaningful with HDR/high-dynamic-range rendering.
+    toneMapped: true,
+  });
+}
+
   getColor(): THREE.ColorRepresentation {
-    return 0x0000FF;
+    return 0xFF0000;
   }
 
   getSphereMesh(): THREE.Mesh {
