@@ -56,7 +56,7 @@ export class MeshClass {
   }
 
   getMaterial(): THREE.Material {
-    return this.getStandardMaterial();
+    return this.getPhysicalMaterial();
   }
 
 // ✅ MeshBasicMaterial
@@ -64,7 +64,7 @@ export class MeshClass {
 // ✅ MeshLambertMaterial
 // ✅ MeshPhongMaterial
 // ✅ MeshStandardMaterial
-// MeshPhysicalMaterial
+// ✅ MeshPhysicalMaterial
 // MeshToonMaterial
 
   getBasicMaterial(): THREE.MeshBasicMaterial {
@@ -161,7 +161,84 @@ export class MeshClass {
       dithering: false, // useful for subtle color/alpha gradients
       toneMapped: true, // relevant with HDR/high-dynamic-range rendering
     });
-}
+  }
+
+  getPhysicalMaterial(): THREE.MeshPhysicalMaterial {
+    return new THREE.MeshPhysicalMaterial({
+      color: this.getColor(),
+
+      // StandardMaterial properties.
+      // Much more meaningful with directional/point/spot lighting
+      // and/or environment reflections.
+      roughness: 1,
+      metalness: 0,
+
+      // Material appears to emit light but does not illuminate other objects.
+      emissive: 0x000000,
+      emissiveIntensity: 1,
+
+      // Adds a glossy clear-coat layer over the base material.
+      // Great for car paint, varnished surfaces, etc.
+      // Requires meaningful lighting/reflections to see clearly.
+      clearcoat: 0,
+      clearcoatRoughness: 0,
+
+      // Simulates a soft sheen on materials such as fabric.
+      // Requires appropriate lighting to demonstrate.
+      sheen: 0,
+      sheenColor: 0x000000,
+      sheenRoughness: 1,
+
+      // Simulates thin-film interference.
+      // Useful for soap bubbles, oil films, etc.
+      // Requires appropriate lighting/environment to see clearly.
+      iridescence: 0,
+      iridescenceIOR: 1.3,
+
+      // Simulates light transmission through the material.
+      // Requires transparency and an appropriate scene/environment.
+      // Best demonstrated with glass, water, wax, etc.
+      transmission: 0,
+      thickness: 0,
+
+      // Index of refraction.
+      // Only meaningful when transmission/refraction is being demonstrated.
+      ior: 1.5,
+
+      // Controls absorption of transmitted light.
+      // Requires transmission and non-zero thickness.
+      attenuationColor: 0xffffff,
+      attenuationDistance: Infinity,
+
+      // Much more apparent with directional/point/spot lighting.
+      flatShading: false,
+
+      // Requires scene.fog.
+      fog: true,
+
+      // Can be demonstrated with a single object.
+      wireframe: false,
+
+      // Requires alpha/transparency setup to demonstrate.
+      transparent: false,
+      opacity: 1,
+
+      side: THREE.DoubleSide,
+
+      // Requires multiple overlapping objects to demonstrate.
+      depthTest: true,
+      depthWrite: true,
+
+      // Requires texture data containing varying alpha values.
+      alphaTest: 0,
+
+      // More meaningful with subtle color/alpha gradients.
+      dithering: false,
+
+      // More meaningful with HDR/high-dynamic-range rendering.
+      toneMapped: true,
+    });
+  }
 
   getColor(): THREE.ColorRepresentation {
     return 0x0000FF;
