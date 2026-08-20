@@ -1,8 +1,13 @@
 import * as THREE from 'three';
+import { GeometryClass } from '../geometry/geometry-class';
 
 export class MeshClass {
+  GeometryClass = GeometryClass;
+
   static getList(): string[] {
         return [
+            'box',
+            'capsule',
             'sphere',
             'candlestick',
             'tube',
@@ -50,6 +55,14 @@ export class MeshClass {
 
     if (meshName === '2lathe') {
       return this.getSimpleTwoLathe.bind(this);
+    }
+
+    if (meshName === 'box') {
+      return this.getBoxMesh.bind(this);
+    }
+
+    if (meshName === 'capsule') {
+      return this.getCapsuleMesh.bind(this);
     }
 
     return this.getLatheCandleStickMesh;
@@ -297,14 +310,23 @@ export class MeshClass {
     return 0xFF0000;
   }
 
-  getSphereMesh(): THREE.Mesh {
-    const geometry = new THREE.SphereGeometry(
-      1,   // radius
-      32,  // width segments
-      32,  // height segments
-    );
+  // ✅ 
+  getBoxMesh(): THREE.Mesh {
+    const geometry = GeometryClass.getBoxGeometry();
 
-    geometry.center();
+    return new THREE.Mesh(geometry, this.getMaterial());
+  }
+
+    // ✅ 
+  getCapsuleMesh(): THREE.Mesh {
+    const geometry = GeometryClass.getCapsuleGeometry();
+
+    return new THREE.Mesh(geometry, this.getMaterial());
+  }
+
+  // ✅ 
+  getSphereMesh(): THREE.Mesh {
+    const geometry = GeometryClass.getSphereGeometry();
 
     return new THREE.Mesh(geometry, this.getMaterial());
   }
