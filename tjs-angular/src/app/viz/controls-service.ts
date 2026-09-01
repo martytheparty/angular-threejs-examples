@@ -4,6 +4,7 @@ import {
   WritableSignal
 } from '@angular/core';
 import { fromEvent } from 'rxjs';
+import { GroupData, ThreeGroup } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +26,20 @@ export class ControlsService {
   selectedMeshSignal: WritableSignal<string> = signal<string>("");
   selectedMesh: string = "";
 
+  groups: WritableSignal<ThreeGroup[]> = signal<ThreeGroup[]>([]);
+
 constructor() {
-    fromEvent<KeyboardEvent>(window, 'keydown')
+  fromEvent<KeyboardEvent>(window, 'keydown')
       .subscribe(this.handleKeyboard.bind(this));
+  }
+
+  reset(userData: GroupData): void {
+    this.x.set(userData.rotationX);
+    this.y.set(userData.rotationY);
+    this.z.set(userData.rotationZ);
+    this.xPosition.set(userData.positionX);
+    this.yPosition.set(userData.positionY);
+    this.zPosition.set(userData.positionZ);
   }
 
   setSelectedMesh(meshName: string): void {

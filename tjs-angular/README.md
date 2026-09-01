@@ -1,3 +1,7 @@
+
+3. Clock Service with master clock time.
+4. Update the rotation animation with reliable/consistent rotations like 1 rev/per second or maybe .1 rev per second
+
 # Branch main
 
 This branch (main - cube) was created based on the NPM ThreeJS Example.

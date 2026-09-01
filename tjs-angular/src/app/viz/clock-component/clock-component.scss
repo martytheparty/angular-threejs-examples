@@ -1,0 +1,13 @@
+.clock-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.clock {
+    min-width: 100px;
+}
