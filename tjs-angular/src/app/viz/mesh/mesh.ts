@@ -1,37 +1,108 @@
 import * as THREE from 'three';
+import { GeometryClass } from '../geometry/geometry-class';
+import { MaterialClass } from '../material/material-class';
 
 export class MeshClass {
-    getList(): string[] {
+  GeometryClass = GeometryClass;
+
+  static getList(): string[] {
         return [
+            'cube',
+            'capsule',
+            'sphere',
             'candlestick',
             'tube',
-            'gear'
+            'gear',
+            'star',
+            'square',
+            'shrinking helix',
+            'triangle',
+            '2lathe'
         ];
     }
 
   getMeshFunction(meshName: string): () => THREE.Mesh {
+    if (meshName === 'sphere') {
+      return this.getSphereMesh.bind(this);
+    }
+
     if (meshName === 'candlestick') {
-      return this.getLatheCandleStick
+      return this.getLatheCandleStickMesh.bind(this);
     }
 
     if (meshName === 'tube') {
-      return this.getTubeMesh;
+      return this.getTubeMesh.bind(this);
     }
 
     if (meshName === 'gear') {
-      return this.getGearMesh;
+      return this.getGearMesh.bind(this);
     }
 
+    if (meshName === 'star') {
+      return this.getStarMesh.bind(this);
+    }
 
+    if (meshName === 'square') {
+      return this.getSquareMesh.bind(this);
+    }
 
-    return this.getLatheCandleStick;
+    if (meshName === 'shrinking helix') {
+      return this.getShrinkingHelixMesh.bind(this);
+    }
 
+    if (meshName === 'triangle') {
+      return this.getTriangleMesh.bind(this);
+    }
+
+    if (meshName === '2lathe') {
+      return this.getSimpleTwoLathe.bind(this);
+    }
+
+    if (meshName === 'cube') {
+      return this.getBoxMesh.bind(this);
+    }
+
+    if (meshName === 'capsule') {
+      return this.getCapsuleMesh.bind(this);
+    }
+
+    return this.getLatheCandleStickMesh;
+  }
+
+  getMaterial(): THREE.Material {
+    return MaterialClass.getToonMaterial();
+  }
+
+// ✅ MeshBasicMaterial
+// ✅ MeshNormalMaterial
+// ✅ MeshLambertMaterial
+// ✅ MeshPhongMaterial
+// ✅ MeshStandardMaterial
+// ✅ MeshPhysicalMaterial
+// MeshToonMaterial
+
+  // ✅ 
+  getBoxMesh(): THREE.Mesh {
+    const geometry = GeometryClass.getBoxGeometry();
+
+    return new THREE.Mesh(geometry, this.getMaterial());
+  }
+
+    // ✅ 
+  getCapsuleMesh(): THREE.Mesh {
+    const geometry = GeometryClass.getCapsuleGeometry();
+
+    return new THREE.Mesh(geometry, this.getMaterial());
+  }
+
+  // ✅ 
+  getSphereMesh(): THREE.Mesh {
+    const geometry = GeometryClass.getSphereGeometry();
+
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
    getTubeMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const curve = new THREE.CatmullRomCurve3([
       new THREE.Vector3(0, 0, 0),
@@ -47,13 +118,10 @@ export class MeshClass {
 
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getGearMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const gear = new THREE.Shape();
 
@@ -113,18 +181,16 @@ export class MeshClass {
 
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getStarMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
+
 
     const star = new THREE.Shape();
 
-    const outerRadius = 3;
-    const innerRadius = 1.4;
+    const outerRadius = 1.8;
+    const innerRadius = 1;
     const points = 5;
 
     for (let i = 0; i < points * 2; i++) {
@@ -151,25 +217,23 @@ export class MeshClass {
     });
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
-  getTriangeMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-    const square = new THREE.Shape();
-    square.moveTo(0, 0);
-    square.lineTo(2, 0);
-    square.lineTo(1, 2);
-    square.closePath();
-    const geometry = new THREE.ShapeGeometry(square);
+  getTriangleMesh(): THREE.Mesh {
+    const triangle = new THREE.Shape();
+    triangle.moveTo(0, 0);
+    triangle.lineTo(2, 0);
+    triangle.lineTo(1, 2);
+    triangle.closePath();
+    const geometry = new THREE.ShapeGeometry(triangle);
     geometry.center();
-    const mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, this.getMaterial());
 
     return mesh;
   }
 
   getSquareMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
     const square = new THREE.Shape();
     square.moveTo(0, 0);
     square.lineTo(2, 0);
@@ -178,44 +242,19 @@ export class MeshClass {
     square.closePath();
     const geometry = new THREE.ShapeGeometry(square);
     geometry.center();
-    const mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, this.getMaterial());
 
     return mesh;
   }
 
-  getMidleMesh(offset: number): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
-    const square = new THREE.Shape();
-    const xLength = 2; // this is the total length
-    const middleX = xLength / 2; // this is the middle
-    const startX = 0; //this is the first spot
-    const endX = xLength;
-    //    const distance = (xLength - middleX)/(position + 1); // this is how far (displacement) the point should be from the end.
-    const firstX = startX + offset;
-    const lastX = endX - offset;
-    square.moveTo(0, 0);
-    square.lineTo(2, 0);
-    square.lineTo(lastX, 2);
-    square.lineTo(firstX, 2);
-
-    square.closePath();
-    const geometry = new THREE.ShapeGeometry(square);
-    geometry.center();
-    const mesh = new THREE.Mesh(geometry, material);
-
-    return mesh;
-  }
 
   getShrinkingHelixMesh(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const curve = this.getShrinkingHelixCurve();
 
     const geometry = new THREE.TubeGeometry(curve, 256, 0.08, 16, false);
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
   getShrinkingHelixCurve(): THREE.CatmullRomCurve3 {
@@ -249,9 +288,6 @@ export class MeshClass {
   }
 
   getSimpleTwoLathe(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
 
     const latheWidth = 1;
     const latheHeight = 1;
@@ -264,13 +300,11 @@ export class MeshClass {
     const geometry = new THREE.LatheGeometry(points, 64);
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }
 
-  getLatheCandleStick(): THREE.Mesh {
-    const material = new THREE.MeshNormalMaterial({
-      side: THREE.DoubleSide,
-    });
+  getLatheCandleStickMesh(): THREE.Mesh {
+
 
     const points: THREE.Vector2[] = [
       // Base
@@ -301,6 +335,6 @@ export class MeshClass {
     const geometry = new THREE.LatheGeometry(points, 64);
     geometry.center();
 
-    return new THREE.Mesh(geometry, material);
+    return new THREE.Mesh(geometry, this.getMaterial());
   }   
 }

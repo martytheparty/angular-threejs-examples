@@ -1,0 +1,38 @@
+<div class="clock-wrapper">
+    <div>
+        <mat-form-field>
+            <mat-label>Time Inc</mat-label>
+            <mat-select
+                (selectionChange)="setTimeInc($event)"
+                [value]="timeInc">
+                @for (time of times; track time) {
+                    <mat-option [value]="time">{{ time }}</mat-option>
+                }
+            </mat-select>
+             <mat-hint>Controls the time resolution.</mat-hint>
+        </mat-form-field>
+    </div>
+
+    <div class="clock">
+            <mat-form-field>
+                <mat-label>Time Period</mat-label>
+                <input
+                     (input)="clockService.setPeriod($any($event.target).valueAsNumber)"
+                    matInput
+                    type="number"
+                    step="1"
+                    [value]="clockService.getPeriod()"
+                >
+
+                <mat-hint>
+                <span class="clock-time">{{ time() }}</span>
+                <span class="clock-separator">/</span>
+                <span class="clock-period">{{ clockService.getPeriod() }} seconds</span>
+                </mat-hint>          
+            </mat-form-field>
+        <div>
+
+        </div>
+
+    </div>
+</div>

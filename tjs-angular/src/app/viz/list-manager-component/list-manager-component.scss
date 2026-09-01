@@ -1,0 +1,23 @@
+@use '@angular/material' as mat;
+
+.small-field {
+  width: 100px;
+
+  @include mat.form-field-density(-5);
+
+}
+
+.ff-wrapper {
+  margin-top: 10px;
+  max-height: 50px;
+}
+
+
+
+.import-text {
+  width: 100%;
+  min-width: 500px;
+  min-height: 400px;
+  box-sizing: border-box;
+  font-family: monospace;
+}

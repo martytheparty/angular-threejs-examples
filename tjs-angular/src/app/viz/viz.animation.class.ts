@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { ControlsService } from './controls-service';
 import { MeshClass } from './mesh/mesh';
+import { ClockService } from './clock-service';
 
 export class VizAnimation {
     private startTime = 0;
@@ -23,20 +24,21 @@ export class VizAnimation {
 
     constructor(
         private readonly group: THREE.Object3D,
-        private readonly meshes: THREE.Mesh[],
-        private readonly controlsService: ControlsService
+        private readonly controlsService: ControlsService,
+        private readonly clockService: ClockService
     ) {}
 
     animate(time: number) {
+       // console.log("animate function", this.animationCount);
         let updateMesh = false;
         let meshFunction;
         if (this.controlsService.selectedMesh != this.previousMesh) {
-            updateMesh = true;
-            this.previousMesh = this.controlsService.selectedMesh;
-            meshFunction = this.meshClass.getMeshFunction(this.previousMesh);
-            const mesh = meshFunction();
-            this.group.remove(this.group.children[0]);
-            this.group.add(mesh);
+            // updateMesh = true;
+            // this.previousMesh = this.controlsService.selectedMesh;
+            // meshFunction = this.meshClass.getMeshFunction(this.previousMesh);
+            // const mesh = meshFunction();
+            // this.group.remove(this.group.children[0]);
+            // this.group.add(mesh);
         }
 
         if (this.startTime === 0) {
@@ -46,27 +48,22 @@ export class VizAnimation {
         this.currentTime = Math.floor(time / 1000);
         this.elapsedSeconds = this.currentTime - this.startTime;
 
-        // if (this.elapsedSeconds !== this.previousSeconds ) { // toggle back and forth
-        //     this.previousSeconds = this.elapsedSeconds;
-        //     this.group.remove(this.group.children[0]);
-
-        //     const remainder = this.elapsedSeconds%this.meshes.length; // results in 0 for even numbers and 1 for odd numbers
-        //     this.group.add(this.meshes[remainder]);
-        // }
 
         // milliseconds -> seconds
         const deltaSeconds = (time - this.previousTime) / 1000;
 
         this.previousTime = time;
 
+        const currentTime = this.clockService.getElapsedMilliseconds()/1000;
+        const currentPeriod = this.clockService.getPeriod();
 
-        this.group.rotation.x += this.rotationXSpeed * Math.PI * 2 * deltaSeconds*.1;
-        this.group.rotation.y += this.rotationYSpeed * Math.PI * 2 * deltaSeconds*.1;
-        this.group.rotation.z += this.rotationZSpeed * Math.PI * 2 * deltaSeconds*.1;
+        this.group.rotation.x = this.getRotationRadians(currentTime, currentPeriod, this.rotationXSpeed);
+        this.group.rotation.y = this.getRotationRadians(currentTime, currentPeriod, this.rotationYSpeed);
+        this.group.rotation.z = this.getRotationRadians(currentTime, currentPeriod, this.rotationZSpeed);
 
-        this.group.position.x = this.positionX;
-        this.group.position.y = this.positionY;
-        this.group.position.z = this.positionZ;
+        this.group.position.x = this.group.userData['positionX'];
+        this.group.position.y = this.group.userData['positionY'];
+        this.group.position.z = this.group.userData['positionZ'];
     }
 
     setRotationXSpeed(rotationXSpeed: number): void {
@@ -91,6 +88,18 @@ export class VizAnimation {
 
     setZPosition(positionZ: number): void {
         this.positionZ = positionZ;
+    }
+
+    getRotationRadians(
+        time: number,
+        period: number,
+        rotationCount: number
+    ): number {
+        let radians = 0
+        if (time > 0 && period > 0) {
+           radians =  (time / period) * rotationCount * Math.PI * 2;
+        }
+        return radians;
     }
 
 
