@@ -14,4 +14,5 @@ export interface GroupData {
   positionY: number;
   positionZ: number;
   isAnimated: boolean;
+  color?: string;
 }

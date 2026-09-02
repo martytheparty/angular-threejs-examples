@@ -36,7 +36,7 @@ export class SceneService {
 
         this.initializeAnimation();
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 3);
         this.scene.add(ambientLight);
 
         effect(
@@ -170,6 +170,24 @@ export class SceneService {
                             animation.setXPosition(currentGroup.userData['positionX']);
                             animation.setYPosition(currentGroup.userData['positionY']);
                             animation.setZPosition(currentGroup.userData['positionZ']);
+
+                            const mesh = currentGroup.children[0] as THREE.Mesh;
+                            const material: THREE.Material | THREE.Material[] = mesh.material;
+
+                            if (Array.isArray(material)) {
+                                material.forEach(m => { 
+                                    const materialItem = m as THREE.MeshBasicMaterial;
+                                    if (currentGroup.userData['color']) {
+                                        materialItem.color.set(currentGroup.userData['color']);
+                                    }
+                                });
+                            } else {
+                                const materialItem = material as THREE.MeshBasicMaterial;
+                                if (currentGroup.userData['color']) {
+                                    materialItem.color.set(currentGroup.userData['color']);
+                                }
+                            }
+
 
                             animation.animate(time);
                         } 
