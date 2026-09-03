@@ -282,9 +282,9 @@
     "type": "Group",
     "userData": {
       "name": "red star",
-      "positionX": 0,
+      "positionX": -5,
       "positionY": 0,
-      "positionZ": 0,
+      "positionZ": -5,
       "rotationX": 0,
       "rotationY": 0,
       "rotationZ": 1,

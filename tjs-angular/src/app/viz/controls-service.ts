@@ -18,10 +18,15 @@ export class ControlsService {
   yPosition: WritableSignal<number> = signal<number>(0);
   zPosition: WritableSignal<number> = signal<number>(0);
 
+  rColor: WritableSignal<number> = signal<number>(0);
+  gColor: WritableSignal<number> = signal<number>(0);
+  bColor: WritableSignal<number> = signal<number>(0);
+
   selected: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
   selectedPosition: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
+  selectedColorPosition: WritableSignal<'r'|'g'|'b'> = signal<'r'|'g'|'b'>('r');
 
-  selectedAttribute: WritableSignal<'rotation'|'position'> = signal<'rotation'|'position'>('rotation');
+  selectedAttribute: WritableSignal<'rotation'|'position'|'color'> = signal<'rotation'|'position'>('rotation');
 
   selectedMeshSignal: WritableSignal<string> = signal<string>("");
   selectedMesh: string = "";
@@ -40,6 +45,18 @@ constructor() {
     this.xPosition.set(userData.positionX);
     this.yPosition.set(userData.positionY);
     this.zPosition.set(userData.positionZ);
+    if (userData.color) {
+      let color = userData.color as string;
+
+      if (color.length !== 7) {
+        color = "#FFFFFF";
+      }
+      
+      this.rColor.set(parseInt(color.substring(1,3),16));
+      this.gColor.set(parseInt(color.substring(3,5),16));
+      this.bColor.set(parseInt(color.substring(5,7),16));
+    }
+
   }
 
   setSelectedMesh(meshName: string): void {
@@ -47,7 +64,7 @@ constructor() {
     this.selectedMesh = meshName;
   }
 
-  setSelectedAttribute(attribute: 'rotation'|'position'): void {
+  setSelectedAttribute(attribute: 'rotation'|'position'|'color'): void {
     this.selectedAttribute.set(attribute);
   }
 
@@ -77,6 +94,22 @@ constructor() {
         this.zPosition.set(this.zPosition() + 1); 
       }
     }
+
+    if (this.selectedAttribute() === 'color') {
+      if(this.selectedColorPosition() === 'r') {
+        if (this.rColor() < 255) {
+          this.rColor.set(this.rColor() + 1); 
+        }
+      } else if (this.selectedColorPosition() === 'g') {
+        if (this.gColor() < 255) {
+          this.gColor.set(this.gColor() + 1); 
+        } 
+      } else if (this.selectedColorPosition() === 'b') {
+        if (this.bColor() < 255) {
+          this.bColor.set(this.bColor() + 1); 
+        } 
+      }
+    }
   }
 
   decrement(): void {
@@ -99,6 +132,23 @@ constructor() {
         this.zPosition.set(this.zPosition() - 1); 
       }
     }
+
+    if (this.selectedAttribute() === 'color') {
+      if(this.selectedColorPosition() === 'r') {
+        if (this.rColor() > 0) {
+          this.rColor.set(this.rColor() - 1); 
+        }
+      } else if (this.selectedColorPosition() === 'g') {
+        if (this.gColor() > 0) {
+          this.gColor.set(this.gColor() - 1); 
+        } 
+      } else if (this.selectedColorPosition() === 'b') {
+        if (this.bColor() > 0) {
+          this.bColor.set(this.bColor() - 1); 
+        } 
+      }
+    }
+
   }
 
 
@@ -121,5 +171,9 @@ constructor() {
 
   setSelectedPosition(selected: 'x'|'y'|'z'): void {
     this.selectedPosition.set(selected);
+  }
+
+  setSelectedColorPosition(selected: 'r'|'g'|'b'): void {
+    this.selectedColorPosition.set(selected);
   }
 }

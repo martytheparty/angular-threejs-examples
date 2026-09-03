@@ -62,6 +62,42 @@
             </td>
         </tr>
         <tr>
+            <th>&nbsp;</th>
+            <th>r</th>
+            <th>g</th>
+            <th>b</th>
+        </tr>
+        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='color'">
+            <td>
+                <div 
+                (click)="setAttribute('color')">
+                    color
+                </div>
+            </td>
+            <td>
+                <div 
+                    (click)="setColorPositionSelected('r')"
+                    [ngClass]="{'selected': controlsService.selectedColorPosition() === 'r'}"
+                >{{controlsService.rColor()}}
+                </div>
+            </td>
+            <td>
+                <div 
+                    (click)="setColorPositionSelected('g')"
+                    [ngClass]="{'selected': controlsService.selectedColorPosition() === 'g'}"
+                >{{controlsService.gColor()}}
+                </div>
+            </td>
+            <td>
+                <div 
+                    (click)="setColorPositionSelected('b')"
+                    [ngClass]="{'selected': controlsService.selectedColorPosition() === 'b'}"
+                >{{controlsService.bColor()}}
+                </div>
+            </td>
+        </tr>
+
+        <tr>
             <td colspan="4">
                 <label for="cars">Choose a mesh: </label>
                 <select (change)="selectMesh($event)">

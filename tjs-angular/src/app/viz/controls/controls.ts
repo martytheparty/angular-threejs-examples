@@ -18,7 +18,7 @@ export class ControlsComponent {
 
   constructor() {}
 
-  setAttribute(selected: 'rotation' | 'position'): void {
+  setAttribute(selected: 'rotation' | 'position' | 'color'): void {
     this.controlsService.setSelectedAttribute(selected);
   }
 
@@ -28,6 +28,10 @@ export class ControlsComponent {
 
   setControlPositionSelected(selected: 'x' | 'y' | 'z'): void {
     this.controlsService.setSelectedPosition(selected);
+  }
+
+  setColorPositionSelected(selected: 'r' | 'g' | 'b'): void {
+    this.controlsService.setSelectedColorPosition(selected);
   }
 
   selectMesh(event: Event): void {
