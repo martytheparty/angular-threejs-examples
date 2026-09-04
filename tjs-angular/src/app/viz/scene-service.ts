@@ -36,7 +36,7 @@ export class SceneService {
 
         this.initializeAnimation();
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 3);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 2);
         this.scene.add(ambientLight);
 
         effect(
@@ -84,9 +84,14 @@ export class SceneService {
                 positionY: this.controlsService.yPosition(),
                 positionZ: this.controlsService.zPosition(),
                 isAnimated: this.selectedGroup.group.userData['isAnimated'],
+                color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`
             } 
             this.selectedGroup.group.userData = currentData;
         }
+    }
+
+    toHex(value: number): string {
+        return value.toString(16).padStart(2, '0');
     }
 
     setSelectedGroup(threeGroup: ThreeGroup): void {
@@ -155,7 +160,7 @@ export class SceneService {
     }
 
     initializeAnimation(): void {
-                this.renderer.setAnimationLoop((time: number) => {
+            this.renderer.setAnimationLoop((time: number) => {
             this.allGroups.forEach(
                 (listGroupItem: ThreeGroup) => {
                     const currentGroup: THREE.Group | undefined = listGroupItem.group;

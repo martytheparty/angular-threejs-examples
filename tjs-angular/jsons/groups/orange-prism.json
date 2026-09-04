@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "version": 4.7,
+    "type": "Object",
+    "generator": "Object3D.toJSON"
+  },
+  "geometries": [
+    {
+      "uuid": "9c1a2b3d-1111-4444-8888-000000000001",
+      "type": "CylinderGeometry",
+      "radiusTop": 1.5,
+      "radiusBottom": 1.5,
+      "height": 2,
+      "radialSegments": 3,
+      "heightSegments": 1,
+      "openEnded": false,
+      "thetaStart": 0,
+      "thetaLength": 6.283185307179586
+    }
+  ],
+  "materials": [
+    {
+      "uuid": "9c1a2b3d-1111-4444-8888-000000000002",
+      "type": "MeshToonMaterial",
+      "color": 16753920,
+      "emissive": 0,
+      "side": 2,
+      "blendColor": 0
+    }
+  ],
+  "object": {
+    "uuid": "9c1a2b3d-1111-4444-8888-000000000003",
+    "type": "Group",
+    "name": "orange prism",
+    "userData": {
+      "name": "orange prism",
+      "rotationX": 0,
+      "rotationY": 1,
+      "rotationZ": 1,
+      "positionX": 0,
+      "positionY": 0,
+      "positionZ": -5,
+      "isAnimated": true,
+      "color": "#ffa500"
+    },
+    "layers": 1,
+    "matrix": [
+      0.021827215283913737,
+      -0.9890261799952953,
+      -0.14611908827002495,
+      0,
+      -0.14611908827002495,
+      -0.14774036443678362,
+      0.9781727847160863,
+      0,
+      -0.9890261799952953,
+      0,
+      -0.14774036443678362,
+      0,
+      0,
+      1,
+      -5,
+      1
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "children": [
+      {
+        "uuid": "9c1a2b3d-1111-4444-8888-000000000004",
+        "type": "Mesh",
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "geometry": "9c1a2b3d-1111-4444-8888-000000000001",
+        "material": "9c1a2b3d-1111-4444-8888-000000000002"
+      }
+    ]
+  }
+}
