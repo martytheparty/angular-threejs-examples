@@ -17,6 +17,7 @@ import { ListManagerComponent } from './list-manager-component/list-manager-comp
 import { SceneService } from './scene-service';
 import { CommonModule } from '@angular/common';
 import { ClockComponent } from './clock-component/clock-component';
+import { LightComponent } from './light-component/light-component';
 
 @Component({
   selector: 'app-viz',
@@ -24,7 +25,8 @@ import { ClockComponent } from './clock-component/clock-component';
     ControlsComponent,
     ListManagerComponent,
     CommonModule,
-    ClockComponent
+    ClockComponent,
+    LightComponent
   ],
   templateUrl: './viz.html',
   changeDetection: ChangeDetectionStrategy.Eager,

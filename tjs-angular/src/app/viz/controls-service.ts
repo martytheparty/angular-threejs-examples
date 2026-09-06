@@ -10,6 +10,8 @@ import { GroupData, ThreeGroup } from './interfaces';
   providedIn: 'root',
 })
 export class ControlsService {
+  ambientLightIntensity: WritableSignal<number> = signal<number>(1);
+
   x: WritableSignal<number> = signal<number>(0);
   y: WritableSignal<number> = signal<number>(0);
   z: WritableSignal<number> = signal<number>(0);
@@ -175,5 +177,9 @@ constructor() {
 
   setSelectedColorPosition(selected: 'r'|'g'|'b'): void {
     this.selectedColorPosition.set(selected);
+  }
+
+  setAmbientLightIntensity(intensity: number): void {
+    this.ambientLightIntensity.set(intensity);
   }
 }

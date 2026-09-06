@@ -15,7 +15,6 @@ export class VizAnimation {
 
     constructor(
         private readonly group: THREE.Object3D,
-        private readonly controlsService: ControlsService,
         private readonly clockService: ClockService
     ) {}
 

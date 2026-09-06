@@ -16,3 +16,8 @@ export interface GroupData {
   isAnimated: boolean;
   color?: string;
 }
+
+export interface SceneData {
+  name: string;
+  ambientLightIntensity: number;
+}

@@ -5,6 +5,7 @@ import {
     effect
 } from '@angular/core';
 import { MeshClass } from './mesh/mesh';
+import { LightClass } from './light/light-class';
 import { VizAnimation } from './viz.animation.class';
 import { ControlsService } from './controls-service';
 import { GroupData, ThreeGroup } from './interfaces';
@@ -26,8 +27,10 @@ export class SceneService {
     scene: THREE.Scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(70, this.width / this.height, 0.01, 20);
 
+    lightClass: LightClass = new LightClass();
     meshClass: MeshClass = new MeshClass();
     meshes: THREE.Mesh[] = [];
+    ambientLight: THREE.AmbientLight = this.lightClass.getAmbientLight("#FFFFFF", 1);
 
     constructor() {
         this.camera.position.z = 5;
@@ -36,8 +39,8 @@ export class SceneService {
 
         this.initializeAnimation();
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 2);
-        this.scene.add(ambientLight);
+
+        this.scene.add(this.ambientLight);
 
         effect(
             () => {
@@ -51,6 +54,8 @@ export class SceneService {
                 this.controlsService.zPosition();
                 this.updateSelectedMesh();
                 this.updateSelectedGroup();
+
+                this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
             }
         );
     }
@@ -84,7 +89,7 @@ export class SceneService {
                 positionY: this.controlsService.yPosition(),
                 positionZ: this.controlsService.zPosition(),
                 isAnimated: this.selectedGroup.group.userData['isAnimated'],
-                color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`
+                color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`,
             } 
             this.selectedGroup.group.userData = currentData;
         }
@@ -167,7 +172,10 @@ export class SceneService {
                         if (currentGroup) {
                             currentGroup.userData['isAnimated'] = true;
                             this.animationCount++;
-                            const animation = new VizAnimation(currentGroup, this.controlsService, this.clockService);
+                            const animation = new VizAnimation(
+                                currentGroup,
+                                this.clockService
+                            );
                             animation.setRotationXSpeed(currentGroup.userData['rotationX']);
                             animation.setRotationYSpeed(currentGroup.userData['rotationY']);
                             animation.setRotationZSpeed(currentGroup.userData['rotationZ']);
