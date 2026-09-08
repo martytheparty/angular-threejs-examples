@@ -52,10 +52,15 @@ export class SceneService {
                 this.controlsService.xPosition();
                 this.controlsService.yPosition();
                 this.controlsService.zPosition();
+                this.controlsService.rColor();
+                this.controlsService.gColor();
+                this.controlsService.bColor();
                 this.updateSelectedMesh();
                 this.updateSelectedGroup();
 
                 this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
+                const color: THREE.Color =  new THREE.Color(this.controlsService.ambientLightColor());
+                this.ambientLight.color = color;
             }
         );
     }

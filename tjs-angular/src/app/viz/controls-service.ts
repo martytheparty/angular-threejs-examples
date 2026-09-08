@@ -11,6 +11,7 @@ import { GroupData, ThreeGroup } from './interfaces';
 })
 export class ControlsService {
   ambientLightIntensity: WritableSignal<number> = signal<number>(1);
+  ambientLightColor: WritableSignal<string> = signal<string>("#FFFFFF");
 
   x: WritableSignal<number> = signal<number>(0);
   y: WritableSignal<number> = signal<number>(0);
@@ -181,5 +182,9 @@ constructor() {
 
   setAmbientLightIntensity(intensity: number): void {
     this.ambientLightIntensity.set(intensity);
+  }
+
+  setAmbientLightColor(color: string): void {
+    this.ambientLightColor.set(color);
   }
 }

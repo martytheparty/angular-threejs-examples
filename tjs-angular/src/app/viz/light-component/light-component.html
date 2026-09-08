@@ -8,9 +8,35 @@
         </tr>
         <tr>
             <td>color</td>
-            <td><input value="255" type="number"></td>
-            <td><input value="255" type="number"></td>
-            <td><input value="255" type="number"></td>
+            <td>
+                <input 
+                (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
+                #red 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                ></td>
+            <td>
+                <input 
+                (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
+                #green 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+            <td>
+                <input 
+                (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
+                #blue 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
         </tr>
         <tr>
             <td>intensity</td>

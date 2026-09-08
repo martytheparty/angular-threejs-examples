@@ -1,0 +1,299 @@
+{
+  "metadata": {
+    "version": 4.7,
+    "type": "Object",
+    "generator": "Object3D.toJSON"
+  },
+  "geometries": [
+    {
+      "uuid": "d12e564b-2203-44e8-afa9-c516bd8d3fbc",
+      "type": "ExtrudeGeometry",
+      "shapes": [
+        "c89600da-59ba-4d5e-b706-49eb1ffa6572"
+      ],
+      "options": {
+        "depth": 0.5,
+        "bevelEnabled": true,
+        "bevelThickness": 0.1,
+        "bevelSize": 0.1
+      }
+    }
+  ],
+  "materials": [
+    {
+      "uuid": "a54ce13d-775c-4420-9f21-b411408fe60c",
+      "type": "MeshPhongMaterial",
+      "color": 16777215,
+      "emissive": 65280,
+      "specular": 1118481,
+      "shininess": 30,
+      "envMapRotation": [
+        0,
+        0,
+        0,
+        "XYZ"
+      ],
+      "envMapIntensity": 1,
+      "reflectivity": 1,
+      "refractionRatio": 0.98,
+      "side": 2,
+      "blendColor": 0
+    }
+  ],
+  "shapes": [
+    {
+      "arcLengthDivisions": 200,
+      "type": "Shape",
+      "autoClose": false,
+      "curves": [
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.1021821192326179e-16,
+            -1.8
+          ],
+          "v2": [
+            0.5877852522924731,
+            -0.8090169943749475
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            0.5877852522924731,
+            -0.8090169943749475
+          ],
+          "v2": [
+            1.7119017293312764,
+            -0.5562305898749054
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.7119017293312764,
+            -0.5562305898749054
+          ],
+          "v2": [
+            0.9510565162951535,
+            0.3090169943749474
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            0.9510565162951535,
+            0.3090169943749474
+          ],
+          "v2": [
+            1.0580134541264516,
+            1.4562305898749055
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.0580134541264516,
+            1.4562305898749055
+          ],
+          "v2": [
+            6.123233995736766e-17,
+            1
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            6.123233995736766e-17,
+            1
+          ],
+          "v2": [
+            -1.0580134541264514,
+            1.4562305898749055
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -1.0580134541264514,
+            1.4562305898749055
+          ],
+          "v2": [
+            -0.9510565162951535,
+            0.3090169943749475
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -0.9510565162951535,
+            0.3090169943749475
+          ],
+          "v2": [
+            -1.7119017293312766,
+            -0.5562305898749051
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -1.7119017293312766,
+            -0.5562305898749051
+          ],
+          "v2": [
+            -0.5877852522924732,
+            -0.8090169943749473
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -0.5877852522924732,
+            -0.8090169943749473
+          ],
+          "v2": [
+            1.1021821192326179e-16,
+            -1.8
+          ]
+        }
+      ],
+      "currentPoint": [
+        -0.5877852522924732,
+        -0.8090169943749473
+      ],
+      "uuid": "c89600da-59ba-4d5e-b706-49eb1ffa6572",
+      "holes": []
+    }
+  ],
+  "object": {
+    "uuid": "bf858b80-0517-4184-8cd5-31244e937824",
+    "type": "Group",
+    "userData": {
+      "name": "white-phong-grn-emmissive",
+      "positionX": 0,
+      "positionY": 0,
+      "positionZ": 0,
+      "rotationX": 0,
+      "rotationY": 0,
+      "rotationZ": 0,
+      "isAnimated": true,
+      "color": "#FFFFFF"
+    },
+    "layers": 1,
+    "matrix": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "children": [
+      {
+        "uuid": "02ae23ab-efcd-433e-92fd-0294f0143a5d",
+        "type": "Mesh",
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "geometry": "d12e564b-2203-44e8-afa9-c516bd8d3fbc",
+        "material": "a54ce13d-775c-4420-9f21-b411408fe60c"
+      }
+    ]
+  }
+}

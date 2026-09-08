@@ -1,6 +1,17 @@
 
-3. Clock Service with master clock time.
-4. Update the rotation animation with reliable/consistent rotations like 1 rev/per second or maybe .1 rev per second
+MeshPhongMaterial
+    ├── color
+    ├── emissive
+    ├── emissiveIntensity
+    ├── shininess
+    └── specular
+
+MeshStandardMaterial
+    ├── color
+    ├── emissive
+    ├── emissiveIntensity
+    ├── roughness
+    └── metalness
 
 # Branch main
 

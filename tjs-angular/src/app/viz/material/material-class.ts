@@ -22,7 +22,7 @@ export class MaterialClass {
     // MeshToonMaterial
 
     static getColor(): THREE.ColorRepresentation {
-        return 0xFF0000;
+        return 0xFFFFFF;
     }
 
     static getBasicMaterial(): THREE.MeshBasicMaterial {
@@ -67,7 +67,7 @@ export class MaterialClass {
           return new THREE.MeshPhongMaterial({
             color: this.getColor(),
     
-            emissive: 0x000000, // material self-emission; does not illuminate other objects
+            emissive: 0x00FF00, // material self-emission; does not illuminate other objects
             emissiveIntensity: 1, // controls the strength of emissive color
     
             specular: 0x111111, // requires directional/point/spot light to see the highlight
