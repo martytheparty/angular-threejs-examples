@@ -19,6 +19,11 @@ export class LightComponent {
     this.controlsService.setAmbientLightColor(color);
   }
 
+  updateSceneColor(red: number, green: number, blue: number): void {
+    const color = `#${this.toHex(red)}${this.toHex(green)}${this.toHex(blue)}`;
+    this.controlsService.setSceneColor(color);
+  }
+
   toHex(value: number): string {
       return value.toString(16).padStart(2, '0');
   }

@@ -32,9 +32,9 @@ export class SceneService {
     meshes: THREE.Mesh[] = [];
     ambientLight: THREE.AmbientLight = this.lightClass.getAmbientLight("#FFFFFF", 1);
 
+
     constructor() {
         this.camera.position.z = 5;
-        this.renderer.setClearColor(0xaaaaaa); // white
         this.renderer.setSize(this.width, this.height);
 
         this.initializeAnimation();
@@ -61,6 +61,7 @@ export class SceneService {
                 this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
                 const color: THREE.Color =  new THREE.Color(this.controlsService.ambientLightColor());
                 this.ambientLight.color = color;
+                this.renderer.setClearColor(this.controlsService.sceneColor()); 
             }
         );
     }

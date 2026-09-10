@@ -7,7 +7,39 @@
             <th>b</th>
         </tr>
         <tr>
-            <td>color</td>
+            <td>scene color</td>
+            <td>
+                <input 
+                (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
+                #redScene 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                ></td>
+            <td>
+                <input 
+                (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
+                #greenScene 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+            <td>
+                <input 
+                (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
+                #blueScene 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>ambient color</td>
             <td>
                 <input 
                 (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
