@@ -10,12 +10,14 @@ import { VizAnimation } from './viz.animation.class';
 import { ControlsService } from './controls-service';
 import { GroupData, ThreeGroup } from './interfaces';
 import { ClockService } from './clock-service';
+import { MaterialClass } from './material/material-class';
 
 @Service()
 export class SceneService {
     animationCount = 0;
     selectedGroup: undefined | ThreeGroup;
     currentMesh: string = "";
+    currentMaterial: string = "";
     allGroups: ThreeGroup[] = [];
     controlsService: ControlsService = inject(ControlsService);
     clockService: ClockService = inject(ClockService);
@@ -29,7 +31,9 @@ export class SceneService {
 
     lightClass: LightClass = new LightClass();
     meshClass: MeshClass = new MeshClass();
+    materialClass: MaterialClass = new MaterialClass();
     meshes: THREE.Mesh[] = [];
+    materials: THREE.Material[] = [];
     ambientLight: THREE.AmbientLight = this.lightClass.getAmbientLight("#FFFFFF", 1);
 
 
@@ -55,7 +59,10 @@ export class SceneService {
                 this.controlsService.rColor();
                 this.controlsService.gColor();
                 this.controlsService.bColor();
+                this.controlsService.selectedMaterialSignal();
                 this.updateSelectedMesh();
+                this.updateSelectedMaterial();
+            
                 this.updateSelectedGroup();
 
                 this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
@@ -64,6 +71,20 @@ export class SceneService {
                 this.renderer.setClearColor(this.controlsService.sceneColor()); 
             }
         );
+    }
+
+    updateSelectedMaterial(): void {
+        console.log("Update the current material", this.currentMaterial);
+        if (this.currentMaterial != this.controlsService.selectedMaterialSignal()) {
+            this.currentMaterial = this.controlsService.selectedMaterialSignal();
+            const group = this.selectedGroup?.group;
+            if (group) {
+                const materialFunction = MaterialClass.getMaterialFunction(this.currentMaterial);
+                const material = materialFunction();
+                const mesh: THREE.Mesh = group.children[0] as THREE.Mesh;
+                mesh.material = material;
+            }
+        } 
     }
 
     updateSelectedMesh(): void {
@@ -202,7 +223,11 @@ export class SceneService {
                                 });
                             } else {
                                 const materialItem = material as THREE.MeshBasicMaterial;
-                                if (currentGroup.userData['color']) {
+                                if (
+                                    materialItem.color // throws an error for normal because it does not have a color 
+                                    && 
+                                    currentGroup.userData['color']
+                                ) {
                                     materialItem.color.set(currentGroup.userData['color']);
                                 }
                             }

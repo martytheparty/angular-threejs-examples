@@ -35,6 +35,9 @@ export class ControlsService {
   selectedMeshSignal: WritableSignal<string> = signal<string>("");
   selectedMesh: string = "";
 
+  selectedMaterialSignal: WritableSignal<string> = signal<string>("");
+  selectedMaterial: string = "";
+
   groups: WritableSignal<ThreeGroup[]> = signal<ThreeGroup[]>([]);
 
 constructor() {
@@ -66,6 +69,11 @@ constructor() {
   setSelectedMesh(meshName: string): void {
     this.selectedMeshSignal.set(meshName);
     this.selectedMesh = meshName;
+  }
+
+  setSelectedMaterial(materialName: string): void {
+    this.selectedMaterialSignal.set(materialName);
+    this.selectedMaterial = materialName;
   }
 
   setSelectedAttribute(attribute: 'rotation'|'position'|'color'): void {

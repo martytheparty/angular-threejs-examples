@@ -21,6 +21,38 @@ export class MaterialClass {
     // ✅ MeshPhysicalMaterial
     // MeshToonMaterial
 
+    static getMaterialFunction(materialName: string): () => THREE.Material {
+        if (materialName === 'basic') {
+          return this.getBasicMaterial.bind(this);
+        }
+
+        if (materialName === 'normal') {
+          return this.getNormalMaterial.bind(this);
+        }
+
+        if (materialName === 'lambert') {
+          return this.getLambertMaterial.bind(this);
+        }
+
+        if (materialName === 'phong') {
+          return this.getPhongMaterial.bind(this);
+        }
+
+        if (materialName === 'standard') {
+          return this.getStandardMaterial.bind(this);
+        }
+        
+        if (materialName === 'physical') {
+          return this.getPhysicalMaterial.bind(this);
+        }
+
+        if (materialName === 'toon') {
+          return this.getToonMaterial.bind(this);
+        }
+    
+        return this.getBasicMaterial.bind(this);
+      }
+
     static getColor(): THREE.ColorRepresentation {
         return 0xFFFFFF;
     }
@@ -38,7 +70,7 @@ export class MaterialClass {
     static getNormalMaterial(): THREE.MeshNormalMaterial {
         return new THREE.MeshNormalMaterial({
           side: THREE.DoubleSide,
-          wireframe: true,
+          wireframe: false,
           transparent: false,
           opacity: 1,
         });
