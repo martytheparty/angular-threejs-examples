@@ -6,59 +6,62 @@
             <th>y</th>
             <th>z</th>
         </tr>
-        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='rotation'">
-            <td><div
-                    (click)="setAttribute('rotation')"
-                >rotation</div></td>
+        <tr>
+            <td><div>rotation</div></td>
             <td>
-                <div 
-                    (click)="setControlSelected('x')"
-                    [ngClass]="{'selected': controlsService.selected() === 'x'}"
-                >{{controlsService.x()}}
-                </div>
+                <input 
+                    #xRotation 
+                    type="number" 
+                    (input)="setRotation(xRotation.value, 'x')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlSelected('y')"
-                    [ngClass]="{'selected': controlsService.selected() === 'y'}"
-                >{{controlsService.y()}}
-                </div>
+                <input 
+                    #yRotation 
+                    type="number" 
+                    (input)="setRotation(yRotation.value, 'y')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlSelected('z')"
-                    [ngClass]="{'selected': controlsService.selected() === 'z'}"
-                >{{controlsService.z()}}
-                </div>
+                <input 
+                    #zRotation 
+                    type="number" 
+                    (input)="setRotation(zRotation.value, 'z')"
+                    value="0"
+                >
             </td>
         </tr>
-        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='position'">
+        <tr>
             <td>
-                <div 
-                (click)="setAttribute('position')">
+                <div>
                     position
                 </div>
             </td>
             <td>
-                <div 
-                    (click)="setControlPositionSelected('x')"
-                    [ngClass]="{'selected': controlsService.selectedPosition() === 'x'}"
-                >{{controlsService.xPosition()}}
-                </div>
+                <input 
+                    #xPosition 
+                    type="number" 
+                    (input)="setPosition(xPosition.value, 'x')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlPositionSelected('y')"
-                    [ngClass]="{'selected': controlsService.selectedPosition() === 'y'}"
-                >{{controlsService.yPosition()}}
-                </div>
+                <input 
+                    #yPosition 
+                    type="number" 
+                    (input)="setPosition(yPosition.value, 'y')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlPositionSelected('z')"
-                    [ngClass]="{'selected': controlsService.selectedPosition() === 'z'}"
-                >{{controlsService.zPosition()}}
-                </div>
+                <input 
+                    #zPosition 
+                    type="number" 
+                    (input)="setPosition(zPosition.value, 'z')"
+                    value="0"
+                >
             </td>
         </tr>
         <tr>
@@ -67,33 +70,35 @@
             <th>g</th>
             <th>b</th>
         </tr>
-        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='color'">
+        <tr>
             <td>
-                <div 
-                (click)="setAttribute('color')">
+                <div>
                     color
                 </div>
             </td>
             <td>
-                <div 
-                    (click)="setColorPositionSelected('r')"
-                    [ngClass]="{'selected': controlsService.selectedColorPosition() === 'r'}"
-                >{{controlsService.rColor()}}
-                </div>
+                <input 
+                    #rColor 
+                    type="number" 
+                    (input)="setColor(rColor.value, 'r')"
+                    value="0"
+                >
             </td>
             <td>
-                <div 
-                    (click)="setColorPositionSelected('g')"
-                    [ngClass]="{'selected': controlsService.selectedColorPosition() === 'g'}"
-                >{{controlsService.gColor()}}
-                </div>
+                <input 
+                    #gColor 
+                    type="number" 
+                    (input)="setColor(gColor.value, 'g')"
+                    value="0"
+                >
             </td>
             <td>
-                <div 
-                    (click)="setColorPositionSelected('b')"
-                    [ngClass]="{'selected': controlsService.selectedColorPosition() === 'b'}"
-                >{{controlsService.bColor()}}
-                </div>
+                <input 
+                    #bColor 
+                    type="number" 
+                    (input)="setColor(bColor.value, 'b')"
+                    value="0"
+                >
             </td>
         </tr>
 

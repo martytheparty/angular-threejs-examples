@@ -40,11 +40,6 @@ export class ControlsService {
 
   groups: WritableSignal<ThreeGroup[]> = signal<ThreeGroup[]>([]);
 
-constructor() {
-  fromEvent<KeyboardEvent>(window, 'keydown')
-      .subscribe(this.handleKeyboard.bind(this));
-  }
-
   reset(userData: GroupData): void {
     this.x.set(userData.rotationX);
     this.y.set(userData.rotationY);
@@ -80,91 +75,6 @@ constructor() {
     this.selectedAttribute.set(attribute);
   }
 
-  handleKeyboard(keyboardEvent: KeyboardEvent) {
-    const key: string = keyboardEvent.key;
-    if (key === 'ArrowUp' ) this.increment();
-    if (key === 'ArrowDown' ) this.decrement();
-  }
-
-  increment(): void {
-    if (this.selectedAttribute() === 'rotation') {
-      if(this.selected() === 'x') {
-        this.setX(this.x() + 1); 
-      } else if (this.selected() === 'y') {
-        this.setY(this.y() + 1); 
-      } else if (this.selected() === 'z') {
-        this.setZ(this.z() + 1); 
-      }
-    }
-
-    if (this.selectedAttribute() === 'position') {
-      if(this.selectedPosition() === 'x') {
-        this.xPosition.set(this.xPosition() + 1); 
-      } else if (this.selectedPosition() === 'y') {
-        this.yPosition.set(this.yPosition() + 1); 
-      } else if (this.selectedPosition() === 'z') {
-        this.zPosition.set(this.zPosition() + 1); 
-      }
-    }
-
-    if (this.selectedAttribute() === 'color') {
-      if(this.selectedColorPosition() === 'r') {
-        if (this.rColor() < 255) {
-          this.rColor.set(this.rColor() + 1); 
-        }
-      } else if (this.selectedColorPosition() === 'g') {
-        if (this.gColor() < 255) {
-          this.gColor.set(this.gColor() + 1); 
-        } 
-      } else if (this.selectedColorPosition() === 'b') {
-        if (this.bColor() < 255) {
-          this.bColor.set(this.bColor() + 1); 
-        } 
-      }
-    }
-  }
-
-  decrement(): void {
-    if (this.selectedAttribute() === 'rotation') {
-      if(this.selected() === 'x') {
-        this.setX(this.x() - 1); 
-      } else if (this.selected() === 'y') {
-        this.setY(this.y() - 1); 
-      } else if (this.selected() === 'z') {
-        this.setZ(this.z() - 1); 
-      }
-    }
-
-    if (this.selectedAttribute() === 'position') {
-      if(this.selectedPosition() === 'x') {
-        this.xPosition.set(this.xPosition() - 1); 
-      } else if (this.selectedPosition() === 'y') {
-        this.yPosition.set(this.yPosition() - 1); 
-      } else if (this.selectedPosition() === 'z') {
-        this.zPosition.set(this.zPosition() - 1); 
-      }
-    }
-
-    if (this.selectedAttribute() === 'color') {
-      if(this.selectedColorPosition() === 'r') {
-        if (this.rColor() > 0) {
-          this.rColor.set(this.rColor() - 1); 
-        }
-      } else if (this.selectedColorPosition() === 'g') {
-        if (this.gColor() > 0) {
-          this.gColor.set(this.gColor() - 1); 
-        } 
-      } else if (this.selectedColorPosition() === 'b') {
-        if (this.bColor() > 0) {
-          this.bColor.set(this.bColor() - 1); 
-        } 
-      }
-    }
-
-  }
-
-
-
   setX(newX: number): void {
     this.x.set(newX);
   }
@@ -175,6 +85,18 @@ constructor() {
 
   setZ(z: number): void {
     this.z.set(z);
+  }
+
+  setXPosition(newX: number): void {
+    this.xPosition.set(newX);
+  }
+
+  setYPosition(y: number): void {
+    this.yPosition.set(y);
+  }
+
+  setZPosition(z: number): void {
+    this.zPosition.set(z);
   }
 
   setSelected(selected: 'x'|'y'|'z'): void {
@@ -199,5 +121,17 @@ constructor() {
 
   setSceneColor(color: string): void {
     this.sceneColor.set(color);
+  }
+
+  setRColor(color: number): void {
+    this.rColor.set(color);
+  }
+
+  setGColor(color: number): void {
+    this.gColor.set(color);
+  }
+
+  setBColor(color: number): void {
+    this.bColor.set(color);
   }
 }

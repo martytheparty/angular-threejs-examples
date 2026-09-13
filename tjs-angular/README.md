@@ -1,17 +1,8 @@
-
-MeshPhongMaterial
-    ├── color
-    ├── emissive
-    ├── emissiveIntensity
-    ├── shininess
-    └── specular
-
-MeshStandardMaterial
-    ├── color
-    ├── emissive
-    ├── emissiveIntensity
-    ├── roughness
-    └── metalness
+☑️ Set scene bg color
+☑️ Set material
+✅ Set Emmissive Color
+✅ Set Emmissive Intensity
+✅ Change up down arrow controls to inputs
 
 # Branch main
 

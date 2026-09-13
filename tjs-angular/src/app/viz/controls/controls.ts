@@ -45,4 +45,35 @@ export class ControlsComponent {
     const material = (event.target as HTMLSelectElement).value;
     this.controlsService.setSelectedMaterial(material);
   }
+
+  setRotation(value: string, type: 'x'|'y'|'z'): void {
+    if(type === 'x') {
+      this.controlsService.setX(parseFloat(value));
+    } else if(type === 'y') {
+      this.controlsService.setY(parseFloat(value));
+    } else if(type === 'z') {
+      this.controlsService.setZ(parseFloat(value));
+    }
+  }
+
+  setPosition(value: string, type: 'x'|'y'|'z'): void {
+    if(type === 'x') {
+      this.controlsService.setXPosition(parseFloat(value));
+    } else if(type === 'y') {
+      this.controlsService.setYPosition(parseFloat(value));
+    } else if(type === 'z') {
+      this.controlsService.setZPosition(parseFloat(value));
+    }
+  }
+
+  setColor(value: string, type: 'r'|'g'|'b'): void {
+    if(type === 'r') {
+      this.controlsService.setRColor(parseFloat(value));
+    } else if(type === 'g') {
+      this.controlsService.setGColor(parseFloat(value));
+    } else if(type === 'b') {
+      this.controlsService.setBColor(parseFloat(value));
+    }
+  }
+
 }
