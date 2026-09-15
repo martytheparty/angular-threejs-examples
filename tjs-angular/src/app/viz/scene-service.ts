@@ -5,16 +5,19 @@ import {
     effect
 } from '@angular/core';
 import { MeshClass } from './mesh/mesh';
+import { LightClass } from './light/light-class';
 import { VizAnimation } from './viz.animation.class';
 import { ControlsService } from './controls-service';
 import { GroupData, ThreeGroup } from './interfaces';
 import { ClockService } from './clock-service';
+import { MaterialClass } from './material/material-class';
 
 @Service()
 export class SceneService {
     animationCount = 0;
     selectedGroup: undefined | ThreeGroup;
     currentMesh: string = "";
+    currentMaterial: string = "";
     allGroups: ThreeGroup[] = [];
     controlsService: ControlsService = inject(ControlsService);
     clockService: ClockService = inject(ClockService);
@@ -26,18 +29,22 @@ export class SceneService {
     scene: THREE.Scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(70, this.width / this.height, 0.01, 20);
 
+    lightClass: LightClass = new LightClass();
     meshClass: MeshClass = new MeshClass();
+    materialClass: MaterialClass = new MaterialClass();
     meshes: THREE.Mesh[] = [];
+    materials: THREE.Material[] = [];
+    ambientLight: THREE.AmbientLight = this.lightClass.getAmbientLight("#FFFFFF", 1);
+
 
     constructor() {
         this.camera.position.z = 5;
-        this.renderer.setClearColor(0xaaaaaa); // white
         this.renderer.setSize(this.width, this.height);
 
         this.initializeAnimation();
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1);
-        this.scene.add(ambientLight);
+
+        this.scene.add(this.ambientLight);
 
         effect(
             () => {
@@ -49,10 +56,39 @@ export class SceneService {
                 this.controlsService.xPosition();
                 this.controlsService.yPosition();
                 this.controlsService.zPosition();
+                this.controlsService.rColor();
+                this.controlsService.gColor();
+                this.controlsService.bColor();
+                this.controlsService.erColor();
+                this.controlsService.egColor();
+                this.controlsService.ebColor();
+                this.controlsService.eIntensity();
+                this.controlsService.selectedMaterialSignal();
                 this.updateSelectedMesh();
+                this.updateSelectedMaterial();
+            
                 this.updateSelectedGroup();
+
+                this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
+                const color: THREE.Color =  new THREE.Color(this.controlsService.ambientLightColor());
+                this.ambientLight.color = color;
+                this.renderer.setClearColor(this.controlsService.sceneColor()); 
             }
         );
+    }
+
+    updateSelectedMaterial(): void {
+        console.log("Update the current material", this.currentMaterial);
+        if (this.currentMaterial != this.controlsService.selectedMaterialSignal()) {
+            this.currentMaterial = this.controlsService.selectedMaterialSignal();
+            const group = this.selectedGroup?.group;
+            if (group) {
+                const materialFunction = MaterialClass.getMaterialFunction(this.currentMaterial);
+                const material = materialFunction();
+                const mesh: THREE.Mesh = group.children[0] as THREE.Mesh;
+                mesh.material = material;
+            }
+        } 
     }
 
     updateSelectedMesh(): void {
@@ -74,7 +110,6 @@ export class SceneService {
     updateSelectedGroup(): void {
         if(this.selectedGroup && this.selectedGroup.group) {
             let name = this.selectedGroup.group.userData['name'] ;
-            console.log("Updating data for ", name);
             const currentData: GroupData = {
                 name,
                 rotationX: this.controlsService.x(),
@@ -84,9 +119,16 @@ export class SceneService {
                 positionY: this.controlsService.yPosition(),
                 positionZ: this.controlsService.zPosition(),
                 isAnimated: this.selectedGroup.group.userData['isAnimated'],
+                color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`,
+                eColor: `#${this.toHex(this.controlsService.erColor())}${this.toHex(this.controlsService.egColor())}${this.toHex(this.controlsService.ebColor())}`,
+                eIntensity: this.controlsService.eIntensity()
             } 
             this.selectedGroup.group.userData = currentData;
         }
+    }
+
+    toHex(value: number): string {
+        return value.toString(16).padStart(2, '0');
     }
 
     setSelectedGroup(threeGroup: ThreeGroup): void {
@@ -94,7 +136,6 @@ export class SceneService {
         const group = threeGroup.group;
         if (group) {
             const data: GroupData = group.userData as GroupData;
-            console.log("RESET", data);
             //this.reset = true;
             this.controlsService.reset(data);
         }
@@ -132,6 +173,9 @@ export class SceneService {
             rotationY: 0,
             rotationZ: 0,
             isAnimated: false,
+            eIntensity: 1,
+            color: "#FF0000",
+            eColor: "#FF0000"
         };
 
         group.userData = groupData;
@@ -155,14 +199,17 @@ export class SceneService {
     }
 
     initializeAnimation(): void {
-                this.renderer.setAnimationLoop((time: number) => {
+            this.renderer.setAnimationLoop((time: number) => {
             this.allGroups.forEach(
                 (listGroupItem: ThreeGroup) => {
                     const currentGroup: THREE.Group | undefined = listGroupItem.group;
                         if (currentGroup) {
                             currentGroup.userData['isAnimated'] = true;
                             this.animationCount++;
-                            const animation = new VizAnimation(currentGroup, this.controlsService, this.clockService);
+                            const animation = new VizAnimation(
+                                currentGroup,
+                                this.clockService
+                            );
                             animation.setRotationXSpeed(currentGroup.userData['rotationX']);
                             animation.setRotationYSpeed(currentGroup.userData['rotationY']);
                             animation.setRotationZSpeed(currentGroup.userData['rotationZ']);
@@ -170,6 +217,39 @@ export class SceneService {
                             animation.setXPosition(currentGroup.userData['positionX']);
                             animation.setYPosition(currentGroup.userData['positionY']);
                             animation.setZPosition(currentGroup.userData['positionZ']);
+
+                            const mesh = currentGroup.children[0] as THREE.Mesh;
+                            const material: THREE.Material | THREE.Material[] = mesh.material;
+
+                            if (Array.isArray(material)) {
+                                material.forEach(m => { 
+                                    const materialItem = m as any;
+                                    if (currentGroup.userData['color']) {
+                                        materialItem.color.set(currentGroup.userData['color']);
+                                    }
+                                    if (currentGroup.userData['eColor']) {
+                                        materialItem.emissive.set(currentGroup.userData['eColor']);
+                                    }
+                                });
+                            } else {
+                                const materialItem = material as any;
+                                if (
+                                    materialItem.color // throws an error for normal because it does not have a color 
+                                    && 
+                                    currentGroup.userData['color']
+                                ) {
+                                    materialItem.color.set(currentGroup.userData['color']);
+                                }
+
+                                if (currentGroup.userData['eColor'] && materialItem.emissive !== undefined) {
+                                    materialItem.emissive.set(currentGroup.userData['eColor']);
+                                }
+
+                                if (currentGroup.userData['eIntensity'] && materialItem.emissiveIntensity !== undefined) {
+                                    materialItem.emissiveIntensity = currentGroup.userData['eIntensity'];
+                                }
+                            }
+
 
                             animation.animate(time);
                         } 

@@ -20,7 +20,9 @@
     "interfaces": "ng g i viz/interfaces",
     "scene-service": "ng g s viz/scene-service",
     "time-service": "ng g s viz/clock-service",
-    "clock-component": "ng g c viz/clock-component"
+    "clock-component": "ng g c viz/clock-component",
+    "light-class": "ng g class viz/light/light-class",
+    "light-component": "ng g c viz/light-component"
   },
   "private": true,
   "packageManager": "npm@10.8.2",

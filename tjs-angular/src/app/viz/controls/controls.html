@@ -6,64 +6,105 @@
             <th>y</th>
             <th>z</th>
         </tr>
-        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='rotation'">
-            <td><div
-                    (click)="setAttribute('rotation')"
-                >rotation</div></td>
+        <tr>
+            <td><div>rotation</div></td>
             <td>
-                <div 
-                    (click)="setControlSelected('x')"
-                    [ngClass]="{'selected': controlsService.selected() === 'x'}"
-                >{{controlsService.x()}}
-                </div>
+                <input 
+                    #xRotation 
+                    type="number" 
+                    (input)="setRotation(xRotation.value, 'x')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlSelected('y')"
-                    [ngClass]="{'selected': controlsService.selected() === 'y'}"
-                >{{controlsService.y()}}
-                </div>
+                <input 
+                    #yRotation 
+                    type="number" 
+                    (input)="setRotation(yRotation.value, 'y')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlSelected('z')"
-                    [ngClass]="{'selected': controlsService.selected() === 'z'}"
-                >{{controlsService.z()}}
-                </div>
+                <input 
+                    #zRotation 
+                    type="number" 
+                    (input)="setRotation(zRotation.value, 'z')"
+                    value="0"
+                >
             </td>
         </tr>
-        <tr [class.selected-attribute]="controlsService.selectedAttribute()=='position'">
+        <tr>
             <td>
-                <div 
-                (click)="setAttribute('position')">
+                <div>
                     position
                 </div>
             </td>
             <td>
-                <div 
-                    (click)="setControlPositionSelected('x')"
-                    [ngClass]="{'selected': controlsService.selectedPosition() === 'x'}"
-                >{{controlsService.xPosition()}}
-                </div>
+                <input 
+                    #xPosition 
+                    type="number" 
+                    (input)="setPosition(xPosition.value, 'x')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlPositionSelected('y')"
-                    [ngClass]="{'selected': controlsService.selectedPosition() === 'y'}"
-                >{{controlsService.yPosition()}}
-                </div>
+                <input 
+                    #yPosition 
+                    type="number" 
+                    (input)="setPosition(yPosition.value, 'y')"
+                    value="0"
+                >
             </td>
             <td>
-                <div
-                    (click)="setControlPositionSelected('z')"
-                    [ngClass]="{'selected': controlsService.selectedPosition() === 'z'}"
-                >{{controlsService.zPosition()}}
-                </div>
+                <input 
+                    #zPosition 
+                    type="number" 
+                    (input)="setPosition(zPosition.value, 'z')"
+                    value="0"
+                >
             </td>
         </tr>
         <tr>
+            <th>&nbsp;</th>
+            <th>r</th>
+            <th>g</th>
+            <th>b</th>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    color
+                </div>
+            </td>
+            <td>
+                <input 
+                    #rColor 
+                    type="number" 
+                    (input)="setColor(rColor.value, 'r')"
+                    [value]="controlsService.rColor()"
+                > 
+            </td>
+            <td>
+                <input 
+                    #gColor 
+                    type="number" 
+                    (input)="setColor(gColor.value, 'g')"
+                    [value]="controlsService.gColor()"
+                >
+            </td>
+            <td>
+                <input 
+                    #bColor 
+                    type="number" 
+                    (input)="setColor(bColor.value, 'b')"
+                    [value]="controlsService.bColor()"
+                >
+            </td>
+        </tr>
+
+        <tr>
             <td colspan="4">
-                <label for="cars">Choose a mesh: </label>
+                <label>Choose a mesh: </label>
                 <select (change)="selectMesh($event)">
                     <option></option>
                     @for(meshOption of MeshClass.getList(); track meshOption) {
@@ -72,6 +113,69 @@
                 </select>
             </td>
         </tr>
+
+        <tr>
+            <td colspan="4">
+                <label>Choose a material: </label>
+                <select (change)="selectMaterial($event)">
+                    <option></option>
+                    @for(materialOption of MaterialClass.getList(); track materialOption) {
+                        <option value="{{materialOption}}">{{materialOption}}</option>
+                    }
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <div>
+                    e-color
+                </div>
+            </td>
+            <td>
+                <input 
+                    #erColor 
+                    type="number" 
+                    (input)="setEColor(erColor.value, 'r')"
+                    [value]="controlsService.erColor()"
+                >
+            </td>
+            <td>
+                <input 
+                    #egColor 
+                    type="number" 
+                    (input)="setEColor(egColor.value, 'g')"
+                    [value]="controlsService.egColor()"
+                >
+            </td>
+            <td>
+                <input 
+                    #ebColor 
+                    type="number" 
+                    (input)="setEColor(ebColor.value, 'b')"
+                    [value]="controlsService.ebColor()"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    e-intensity
+                </div>
+            </td>
+            <td colspan="3">
+                <input 
+                    #eIntensity 
+                    class="colspan3"
+                    type="number" 
+                    (input)="setEIntensity(eIntensity.value)"
+                    value="1"
+                    step=".1"
+                >
+            </td>
+        </tr>
+
+
     </table>
 
 

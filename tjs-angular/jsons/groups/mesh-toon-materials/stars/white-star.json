@@ -1,0 +1,351 @@
+{
+  "metadata": {
+    "version": 4.7,
+    "type": "Object",
+    "generator": "Object3D.toJSON"
+  },
+  "geometries": [
+    {
+      "uuid": "0d8f1bbe-3483-45d4-8d4b-7b9f02d7cb6d",
+      "type": "ExtrudeGeometry",
+      "shapes": [
+        "c9869b04-925d-460a-81cc-72a800add967"
+      ],
+      "options": {
+        "depth": 0.5,
+        "bevelEnabled": true,
+        "bevelThickness": 0.1,
+        "bevelSize": 0.1
+      }
+    }
+  ],
+  "materials": [
+    {
+      "uuid": "cdb43851-4c46-49f2-a3e1-8f78d693656c",
+      "type": "MeshToonMaterial",
+      "color": 16711680,
+      "emissive": 0,
+      "gradientMap": "d6b296c5-f8b6-4841-bb5f-48070477384a",
+      "side": 2,
+      "blendColor": 0
+    }
+  ],
+  "textures": [
+    {
+      "uuid": "d6b296c5-f8b6-4841-bb5f-48070477384a",
+      "name": "",
+      "image": "e2ac7966-360a-4a9e-a85e-c02ba32474b0",
+      "mapping": 300,
+      "channel": 0,
+      "repeat": [
+        1,
+        1
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "center": [
+        0,
+        0
+      ],
+      "rotation": 0,
+      "wrap": [
+        1001,
+        1001
+      ],
+      "format": 1023,
+      "internalFormat": null,
+      "type": 1009,
+      "normalized": false,
+      "colorSpace": "",
+      "minFilter": 1003,
+      "magFilter": 1003,
+      "anisotropy": 1,
+      "flipY": false,
+      "generateMipmaps": false,
+      "premultiplyAlpha": false,
+      "unpackAlignment": 1
+    }
+  ],
+  "images": [
+    {
+      "uuid": "e2ac7966-360a-4a9e-a85e-c02ba32474b0",
+      "url": {
+        "data": [
+          0,
+          0,
+          0,
+          255,
+          128,
+          128,
+          128,
+          255,
+          255,
+          255,
+          255,
+          255
+        ],
+        "width": 3,
+        "height": 1,
+        "type": "Uint8Array"
+      }
+    }
+  ],
+  "shapes": [
+    {
+      "arcLengthDivisions": 200,
+      "type": "Shape",
+      "autoClose": false,
+      "curves": [
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.1021821192326179e-16,
+            -1.8
+          ],
+          "v2": [
+            0.5877852522924731,
+            -0.8090169943749475
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            0.5877852522924731,
+            -0.8090169943749475
+          ],
+          "v2": [
+            1.7119017293312764,
+            -0.5562305898749054
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.7119017293312764,
+            -0.5562305898749054
+          ],
+          "v2": [
+            0.9510565162951535,
+            0.3090169943749474
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            0.9510565162951535,
+            0.3090169943749474
+          ],
+          "v2": [
+            1.0580134541264516,
+            1.4562305898749055
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.0580134541264516,
+            1.4562305898749055
+          ],
+          "v2": [
+            6.123233995736766e-17,
+            1
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            6.123233995736766e-17,
+            1
+          ],
+          "v2": [
+            -1.0580134541264514,
+            1.4562305898749055
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -1.0580134541264514,
+            1.4562305898749055
+          ],
+          "v2": [
+            -0.9510565162951535,
+            0.3090169943749475
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -0.9510565162951535,
+            0.3090169943749475
+          ],
+          "v2": [
+            -1.7119017293312766,
+            -0.5562305898749051
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -1.7119017293312766,
+            -0.5562305898749051
+          ],
+          "v2": [
+            -0.5877852522924732,
+            -0.8090169943749473
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -0.5877852522924732,
+            -0.8090169943749473
+          ],
+          "v2": [
+            1.1021821192326179e-16,
+            -1.8
+          ]
+        }
+      ],
+      "currentPoint": [
+        -0.5877852522924732,
+        -0.8090169943749473
+      ],
+      "uuid": "c9869b04-925d-460a-81cc-72a800add967",
+      "holes": []
+    }
+  ],
+  "object": {
+    "uuid": "3f3f5b8b-3fa3-4d63-b01a-34761c951473",
+    "type": "Group",
+    "userData": {
+      "name": "white star",
+      "positionX": 0,
+      "positionY": 0,
+      "positionZ": -5,
+      "rotationX": 0,
+      "rotationY": 0,
+      "rotationZ": 1,
+      "isAnimated": true,
+      "color": "#FFFFFF"
+    },
+    "layers": 1,
+    "matrix": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "children": [
+      {
+        "uuid": "94b36426-e026-437d-badf-638f437c5c80",
+        "type": "Mesh",
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "geometry": "0d8f1bbe-3483-45d4-8d4b-7b9f02d7cb6d",
+        "material": "cdb43851-4c46-49f2-a3e1-8f78d693656c"
+      }
+    ]
+  }
+}

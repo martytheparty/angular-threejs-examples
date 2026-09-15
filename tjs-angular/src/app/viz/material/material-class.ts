@@ -21,8 +21,40 @@ export class MaterialClass {
     // ✅ MeshPhysicalMaterial
     // MeshToonMaterial
 
+    static getMaterialFunction(materialName: string): () => THREE.Material {
+        if (materialName === 'basic') {
+          return this.getBasicMaterial.bind(this);
+        }
+
+        if (materialName === 'normal') {
+          return this.getNormalMaterial.bind(this);
+        }
+
+        if (materialName === 'lambert') {
+          return this.getLambertMaterial.bind(this);
+        }
+
+        if (materialName === 'phong') {
+          return this.getPhongMaterial.bind(this);
+        }
+
+        if (materialName === 'standard') {
+          return this.getStandardMaterial.bind(this);
+        }
+        
+        if (materialName === 'physical') {
+          return this.getPhysicalMaterial.bind(this);
+        }
+
+        if (materialName === 'toon') {
+          return this.getToonMaterial.bind(this);
+        }
+    
+        return this.getBasicMaterial.bind(this);
+      }
+
     static getColor(): THREE.ColorRepresentation {
-        return 0xFF0000;
+        return 0xFFFFFF;
     }
 
     static getBasicMaterial(): THREE.MeshBasicMaterial {
@@ -38,7 +70,7 @@ export class MaterialClass {
     static getNormalMaterial(): THREE.MeshNormalMaterial {
         return new THREE.MeshNormalMaterial({
           side: THREE.DoubleSide,
-          wireframe: true,
+          wireframe: false,
           transparent: false,
           opacity: 1,
         });
@@ -48,7 +80,7 @@ export class MaterialClass {
         return new THREE.MeshLambertMaterial({
           color: MaterialClass.getColor(),
           emissive: 0x000000, // can't be demonstrated without other object
-          emissiveIntensity: 1, // can't be demonstrated without other object
+          emissiveIntensity: 0, // can't be demonstrated without other object
           flatShading: false, // can't be demonstrated without other objects and directional light (need shadows)
           fog: true, // can only be tested with scene
           wireframe: false,
@@ -68,7 +100,7 @@ export class MaterialClass {
             color: this.getColor(),
     
             emissive: 0x000000, // material self-emission; does not illuminate other objects
-            emissiveIntensity: 1, // controls the strength of emissive color
+            emissiveIntensity: 0, // controls the strength of emissive color
     
             specular: 0x111111, // requires directional/point/spot light to see the highlight
             shininess: 30, // controls the size/sharpness of the specular highlight
@@ -100,7 +132,7 @@ export class MaterialClass {
           metalness: 0, // 0 = non-metal, 1 = metallic
     
           emissive: 0x000000, // material self-emission; does not illuminate other objects
-          emissiveIntensity: 1, // controls emissive strength
+          emissiveIntensity: 0, // controls emissive strength
     
           flatShading: false, // more apparent with directional/point/spot lighting
           fog: true, // can only be tested with scene.fog
@@ -133,7 +165,7 @@ export class MaterialClass {
     
           // Material appears to emit light but does not illuminate other objects.
           emissive: 0x000000,
-          emissiveIntensity: 1,
+          emissiveIntensity: 0,
     
           // Adds a glossy clear-coat layer over the base material.
           // Great for car paint, varnished surfaces, etc.
@@ -224,7 +256,7 @@ export class MaterialClass {
     
         // Material self-emission; does not illuminate other objects.
         emissive: 0x000000,
-        emissiveIntensity: 1,
+        emissiveIntensity: 0,
     
         // Requires scene.fog.
         fog: true,

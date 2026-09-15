@@ -1,0 +1,87 @@
+<div>
+    <table>
+        <tr>
+            <th>&nbsp;</th>
+            <th>r</th>
+            <th>g</th>
+            <th>b</th>
+        </tr>
+        <tr>
+            <td>scene color</td>
+            <td>
+                <input 
+                (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
+                #redScene 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                ></td>
+            <td>
+                <input 
+                (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
+                #greenScene 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+            <td>
+                <input 
+                (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
+                #blueScene 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>ambient color</td>
+            <td>
+                <input 
+                (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
+                #red 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                ></td>
+            <td>
+                <input 
+                (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
+                #green 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+            <td>
+                <input 
+                (input)="updateAmbientColor(+red.value, +green.value, +blue.value)" 
+                #blue 
+                value="255" 
+                type="number"
+                min="0"
+                max="255"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>intensity</td>
+            <td colspan="3">
+                <input 
+                    (input)="updateAmbientIntensity(+$any($event.target).value)"
+                    class="intensity" 
+                    value="1" 
+                    type="number"
+                    step=".1"
+                    min="0"
+                >
+            </td>
+        </tr>
+    </table>
+</div>

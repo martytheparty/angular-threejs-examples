@@ -8,7 +8,8 @@ app-controls {
     position: absolute;
     background-color: antiquewhite;
     z-index: 1;
-    top: 50px;
+    top: 102px;
+    width: 260px;
 }
 
 app-list-manager-component {
@@ -21,4 +22,11 @@ app-list-manager-component {
 app-clock-component {
     position: absolute;
     bottom: 0;
+}
+
+app-light-component {
+    width: 260px;
+    position: absolute;
+    background-color: antiquewhite;
+    z-index: 1;
 }

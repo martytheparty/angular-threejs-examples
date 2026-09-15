@@ -70,7 +70,7 @@ export class MeshClass {
   }
 
   getMaterial(): THREE.Material {
-    return MaterialClass.getToonMaterial();
+    return MaterialClass.getPhongMaterial();
   }
 
 // ✅ MeshBasicMaterial

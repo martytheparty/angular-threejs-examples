@@ -1,14 +1,8 @@
 import * as THREE from 'three';
 import { ControlsService } from './controls-service';
-import { MeshClass } from './mesh/mesh';
 import { ClockService } from './clock-service';
 
 export class VizAnimation {
-    private startTime = 0;
-    private previousTime = 0;
-    private currentTime = 0;
-    private elapsedSeconds = 0;
-    private previousSeconds = 0;
 
     private rotationXSpeed = 0;
     private rotationYSpeed = 0;
@@ -18,42 +12,13 @@ export class VizAnimation {
     private positionY = 0;
     private positionZ = 0;
 
-    private previousMesh = "";
-
-    private meshClass: MeshClass = new MeshClass();
 
     constructor(
         private readonly group: THREE.Object3D,
-        private readonly controlsService: ControlsService,
         private readonly clockService: ClockService
     ) {}
 
     animate(time: number) {
-       // console.log("animate function", this.animationCount);
-        let updateMesh = false;
-        let meshFunction;
-        if (this.controlsService.selectedMesh != this.previousMesh) {
-            // updateMesh = true;
-            // this.previousMesh = this.controlsService.selectedMesh;
-            // meshFunction = this.meshClass.getMeshFunction(this.previousMesh);
-            // const mesh = meshFunction();
-            // this.group.remove(this.group.children[0]);
-            // this.group.add(mesh);
-        }
-
-        if (this.startTime === 0) {
-            this.startTime = Math.floor(time / 1000);
-        }
-
-        this.currentTime = Math.floor(time / 1000);
-        this.elapsedSeconds = this.currentTime - this.startTime;
-
-
-        // milliseconds -> seconds
-        const deltaSeconds = (time - this.previousTime) / 1000;
-
-        this.previousTime = time;
-
         const currentTime = this.clockService.getElapsedMilliseconds()/1000;
         const currentPeriod = this.clockService.getPeriod();
 

@@ -1,6 +1,8 @@
-
-3. Clock Service with master clock time.
-4. Update the rotation animation with reliable/consistent rotations like 1 rev/per second or maybe .1 rev per second
+☑️ Set scene bg color
+☑️ Set material
+✅ Set Emmissive Color
+✅ Set Emmissive Intensity
+✅ Change up down arrow controls to inputs
 
 # Branch main
 
