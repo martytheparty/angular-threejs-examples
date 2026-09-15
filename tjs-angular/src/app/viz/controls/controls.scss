@@ -16,6 +16,10 @@
     }
 
     input {
-    width: 40px;
+        width: 40px;
+    }
+
+    input.colspan3 {
+        width: 145px;
     }
 }

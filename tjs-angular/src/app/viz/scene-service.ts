@@ -59,6 +59,10 @@ export class SceneService {
                 this.controlsService.rColor();
                 this.controlsService.gColor();
                 this.controlsService.bColor();
+                this.controlsService.erColor();
+                this.controlsService.egColor();
+                this.controlsService.ebColor();
+                this.controlsService.eIntensity();
                 this.controlsService.selectedMaterialSignal();
                 this.updateSelectedMesh();
                 this.updateSelectedMaterial();
@@ -106,7 +110,6 @@ export class SceneService {
     updateSelectedGroup(): void {
         if(this.selectedGroup && this.selectedGroup.group) {
             let name = this.selectedGroup.group.userData['name'] ;
-            console.log("Updating data for ", name);
             const currentData: GroupData = {
                 name,
                 rotationX: this.controlsService.x(),
@@ -117,6 +120,8 @@ export class SceneService {
                 positionZ: this.controlsService.zPosition(),
                 isAnimated: this.selectedGroup.group.userData['isAnimated'],
                 color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`,
+                eColor: `#${this.toHex(this.controlsService.erColor())}${this.toHex(this.controlsService.egColor())}${this.toHex(this.controlsService.ebColor())}`,
+                eIntensity: this.controlsService.eIntensity()
             } 
             this.selectedGroup.group.userData = currentData;
         }
@@ -131,7 +136,6 @@ export class SceneService {
         const group = threeGroup.group;
         if (group) {
             const data: GroupData = group.userData as GroupData;
-            console.log("RESET", data);
             //this.reset = true;
             this.controlsService.reset(data);
         }
@@ -169,6 +173,9 @@ export class SceneService {
             rotationY: 0,
             rotationZ: 0,
             isAnimated: false,
+            eIntensity: 1,
+            color: "#FF0000",
+            eColor: "#FF0000"
         };
 
         group.userData = groupData;
@@ -216,19 +223,30 @@ export class SceneService {
 
                             if (Array.isArray(material)) {
                                 material.forEach(m => { 
-                                    const materialItem = m as THREE.MeshBasicMaterial;
+                                    const materialItem = m as any;
                                     if (currentGroup.userData['color']) {
                                         materialItem.color.set(currentGroup.userData['color']);
                                     }
+                                    if (currentGroup.userData['eColor']) {
+                                        materialItem.emissive.set(currentGroup.userData['eColor']);
+                                    }
                                 });
                             } else {
-                                const materialItem = material as THREE.MeshBasicMaterial;
+                                const materialItem = material as any;
                                 if (
                                     materialItem.color // throws an error for normal because it does not have a color 
                                     && 
                                     currentGroup.userData['color']
                                 ) {
                                     materialItem.color.set(currentGroup.userData['color']);
+                                }
+
+                                if (currentGroup.userData['eColor'] && materialItem.emissive !== undefined) {
+                                    materialItem.emissive.set(currentGroup.userData['eColor']);
+                                }
+
+                                if (currentGroup.userData['eIntensity'] && materialItem.emissiveIntensity !== undefined) {
+                                    materialItem.emissiveIntensity = currentGroup.userData['eIntensity'];
                                 }
                             }
 

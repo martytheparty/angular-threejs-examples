@@ -15,6 +15,8 @@ export interface GroupData {
   positionZ: number;
   isAnimated: boolean;
   color?: string;
+  eColor?: string;
+  eIntensity: number;
 }
 
 export interface SceneData {

@@ -2,7 +2,6 @@ import { inject, Component, ChangeDetectionStrategy } from '@angular/core';
 import { ControlsService } from '../controls-service';
 import { CommonModule } from '@angular/common';
 import { MeshClass } from '../mesh/mesh';
-import { VizAnimation } from '../viz.animation.class';
 import { MaterialClass } from '../material/material-class';
 
 @Component({
@@ -74,6 +73,20 @@ export class ControlsComponent {
     } else if(type === 'b') {
       this.controlsService.setBColor(parseFloat(value));
     }
+  }
+
+  setEColor(value: string, type: 'r'|'g'|'b'): void {
+    if(type === 'r') {
+      this.controlsService.setERColor(parseFloat(value));
+    } else if(type === 'g') {
+      this.controlsService.setEGColor(parseFloat(value));
+    } else if(type === 'b') {
+      this.controlsService.setEBColor(parseFloat(value));
+    }
+  }
+
+  setEIntensity(intensity: string): void {
+    this.controlsService.setEIntensity(parseFloat(intensity));
   }
 
 }

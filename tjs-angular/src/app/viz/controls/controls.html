@@ -81,15 +81,15 @@
                     #rColor 
                     type="number" 
                     (input)="setColor(rColor.value, 'r')"
-                    value="0"
-                >
+                    [value]="controlsService.rColor()"
+                > 
             </td>
             <td>
                 <input 
                     #gColor 
                     type="number" 
                     (input)="setColor(gColor.value, 'g')"
-                    value="0"
+                    [value]="controlsService.gColor()"
                 >
             </td>
             <td>
@@ -97,7 +97,7 @@
                     #bColor 
                     type="number" 
                     (input)="setColor(bColor.value, 'b')"
-                    value="0"
+                    [value]="controlsService.bColor()"
                 >
             </td>
         </tr>
@@ -125,6 +125,56 @@
                 </select>
             </td>
         </tr>
+
+        <tr>
+            <td>
+                <div>
+                    e-color
+                </div>
+            </td>
+            <td>
+                <input 
+                    #erColor 
+                    type="number" 
+                    (input)="setEColor(erColor.value, 'r')"
+                    [value]="controlsService.erColor()"
+                >
+            </td>
+            <td>
+                <input 
+                    #egColor 
+                    type="number" 
+                    (input)="setEColor(egColor.value, 'g')"
+                    [value]="controlsService.egColor()"
+                >
+            </td>
+            <td>
+                <input 
+                    #ebColor 
+                    type="number" 
+                    (input)="setEColor(ebColor.value, 'b')"
+                    [value]="controlsService.ebColor()"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    e-intensity
+                </div>
+            </td>
+            <td colspan="3">
+                <input 
+                    #eIntensity 
+                    class="colspan3"
+                    type="number" 
+                    (input)="setEIntensity(eIntensity.value)"
+                    value="1"
+                    step=".1"
+                >
+            </td>
+        </tr>
+
 
     </table>
 

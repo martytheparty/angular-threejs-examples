@@ -26,6 +26,11 @@ export class ControlsService {
   gColor: WritableSignal<number> = signal<number>(0);
   bColor: WritableSignal<number> = signal<number>(0);
 
+  erColor: WritableSignal<number> = signal<number>(0);
+  egColor: WritableSignal<number> = signal<number>(0);
+  ebColor: WritableSignal<number> = signal<number>(0);
+  eIntensity: WritableSignal<number> = signal<number>(0);
+
   selected: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
   selectedPosition: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
   selectedColorPosition: WritableSignal<'r'|'g'|'b'> = signal<'r'|'g'|'b'>('r');
@@ -58,6 +63,20 @@ export class ControlsService {
       this.gColor.set(parseInt(color.substring(3,5),16));
       this.bColor.set(parseInt(color.substring(5,7),16));
     }
+
+    if (userData.eColor) {
+      let eColor = userData.eColor as string;
+
+      if (eColor.length !== 7) {
+        eColor = "#FFFFFF";
+      }
+      
+      this.erColor.set(parseInt(eColor.substring(1,3),16));
+      this.egColor.set(parseInt(eColor.substring(3,5),16));
+      this.ebColor.set(parseInt(eColor.substring(5,7),16));
+    }
+
+    this.eIntensity.set(userData.eIntensity);
 
   }
 
@@ -133,5 +152,21 @@ export class ControlsService {
 
   setBColor(color: number): void {
     this.bColor.set(color);
+  }
+
+  setERColor(color: number): void {
+    this.erColor.set(color);
+  }
+
+  setEGColor(color: number): void {
+    this.egColor.set(color);
+  }
+
+  setEBColor(color: number): void {
+    this.ebColor.set(color);
+  }
+
+  setEIntensity(intensity: number): void {
+    this.eIntensity.set(intensity);
   }
 }
