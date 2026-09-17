@@ -4,15 +4,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ControlsService } from '../controls-service';
-import { ThreeGroup } from '../interfaces';
-import { SceneService } from '../scene-service';
+
+import { ThreeGroup } from '../../interfaces';
+import { SceneService } from '../../services/scene-service';
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import * as THREE from 'three';
 import { CommonModule } from '@angular/common';
-import { ImportService } from '../import-service';
+import { ImportService } from '../../services/import-service';
+import { ControlsService } from '../../services/controls-service';
 
 @Component({
   selector: 'app-list-manager-component',

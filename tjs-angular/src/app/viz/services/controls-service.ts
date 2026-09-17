@@ -4,7 +4,7 @@ import {
   WritableSignal
 } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { GroupData, ThreeGroup } from './interfaces';
+import { GroupData, ThreeGroup } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',

@@ -4,13 +4,13 @@ import {
     inject,
     effect
 } from '@angular/core';
-import { MeshClass } from './mesh/mesh';
-import { LightClass } from './light/light-class';
-import { VizAnimation } from './viz.animation.class';
+import { MeshClass } from '../classes/mesh/mesh';
+import { LightClass } from '../classes/light/light-class';
+import { VizAnimation } from '../classes/viz.animation.class';
 import { ControlsService } from './controls-service';
-import { GroupData, SceneData, ThreeGroup } from './interfaces';
+import { GroupData, SceneData, ThreeGroup } from '../interfaces';
 import { ClockService } from './clock-service';
-import { MaterialClass } from './material/material-class';
+import { MaterialClass } from '../classes/material/material-class';
 import { ImportService } from './import-service';
 
 @Service()

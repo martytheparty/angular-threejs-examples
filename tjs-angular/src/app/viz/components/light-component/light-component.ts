@@ -5,12 +5,12 @@ import {
   TemplateRef,
   viewChild
 } from '@angular/core';
-import { ControlsService } from '../controls-service';
+import { ControlsService } from '../../services/controls-service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { SceneService } from '../scene-service';
+import { SceneService } from '../../services/scene-service';
 
 import * as THREE from 'three';
 import { MatFormFieldModule } from '@angular/material/form-field';

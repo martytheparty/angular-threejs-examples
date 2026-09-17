@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { ControlsService } from './controls-service';
-import { ClockService } from './clock-service';
+import { ControlsService } from '../services/controls-service';
+import { ClockService } from '../services/clock-service';
 
 export class VizAnimation {
 

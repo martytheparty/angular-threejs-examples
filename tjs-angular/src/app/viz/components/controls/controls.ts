@@ -1,8 +1,8 @@
 import { inject, Component, ChangeDetectionStrategy } from '@angular/core';
-import { ControlsService } from '../controls-service';
+import { ControlsService } from '../../services/controls-service';
 import { CommonModule } from '@angular/common';
-import { MeshClass } from '../mesh/mesh';
-import { MaterialClass } from '../material/material-class';
+import { MeshClass } from '../../classes/mesh/mesh';
+import { MaterialClass } from '../../classes/material/material-class';
 
 @Component({
   selector: 'app-controls',
