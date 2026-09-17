@@ -8,9 +8,10 @@ import { MeshClass } from './mesh/mesh';
 import { LightClass } from './light/light-class';
 import { VizAnimation } from './viz.animation.class';
 import { ControlsService } from './controls-service';
-import { GroupData, ThreeGroup } from './interfaces';
+import { GroupData, SceneData, ThreeGroup } from './interfaces';
 import { ClockService } from './clock-service';
 import { MaterialClass } from './material/material-class';
+import { ImportService } from './import-service';
 
 @Service()
 export class SceneService {
@@ -21,6 +22,7 @@ export class SceneService {
     allGroups: ThreeGroup[] = [];
     controlsService: ControlsService = inject(ControlsService);
     clockService: ClockService = inject(ClockService);
+    importService: ImportService = inject(ImportService);
 
     width = window.innerWidth;
     height = window.innerHeight;
@@ -48,6 +50,12 @@ export class SceneService {
 
         effect(
             () => {
+                this.signalHandler();
+            }
+        );
+    }
+
+    signalHandler() {
                 this.controlsService.selectedMeshSignal();
 
                 this.controlsService.x();
@@ -72,9 +80,20 @@ export class SceneService {
                 this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
                 const color: THREE.Color =  new THREE.Color(this.controlsService.ambientLightColor());
                 this.ambientLight.color = color;
-                this.renderer.setClearColor(this.controlsService.sceneColor()); 
-            }
-        );
+
+                // this was changed from renderer to scene so the color would persist after scene exports
+                //this.renderer.setClearColor(this.controlsService.sceneColor()); 
+                this.scene.background = new THREE.Color(this.controlsService.sceneColor());
+                this.setSceneData();
+    }
+
+    setSceneData(): void {
+        const sceneData: SceneData = {
+            name: "Simple ThreeJS Scene",
+            backgroundColor: this.controlsService.sceneColor()
+        }
+
+        this.scene.userData = sceneData;
     }
 
     updateSelectedMaterial(): void {
@@ -260,4 +279,14 @@ export class SceneService {
     });
 
     }
+
+    importScene(scene: THREE.Scene): void {
+        this.scene = scene;
+        this.controlsService.setSceneColor(scene.userData['backgroundColor']);
+        // The form needs to be set to the correct background color.
+        const groups: THREE.Group[] 
+        = this.scene.children.filter( (child: THREE.Object3D) => child.type === 'Group' ) as THREE.Group[];
+        this.importService.setGroupImport(groups);
+    }
+
 }

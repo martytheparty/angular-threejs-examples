@@ -22,7 +22,8 @@
     "time-service": "ng g s viz/clock-service",
     "clock-component": "ng g c viz/clock-component",
     "light-class": "ng g class viz/light/light-class",
-    "light-component": "ng g c viz/light-component"
+    "light-component": "ng g c viz/light-component",
+    "import-service": "ng g s viz/import-service"
   },
   "private": true,
   "packageManager": "npm@10.8.2",

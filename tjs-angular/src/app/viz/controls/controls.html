@@ -1,5 +1,6 @@
 <div class="parent">
     <table>
+        <tr><th colspan="4">{{controlsService.groupName()}} </th></tr>
         <tr>
             <th>&nbsp;</th>
             <th>x</th>
@@ -13,7 +14,7 @@
                     #xRotation 
                     type="number" 
                     (input)="setRotation(xRotation.value, 'x')"
-                    value="0"
+                    [value]="controlsService.x()"
                 >
             </td>
             <td>
@@ -21,7 +22,7 @@
                     #yRotation 
                     type="number" 
                     (input)="setRotation(yRotation.value, 'y')"
-                    value="0"
+                    [value]="controlsService.y()"
                 >
             </td>
             <td>
@@ -29,7 +30,7 @@
                     #zRotation 
                     type="number" 
                     (input)="setRotation(zRotation.value, 'z')"
-                    value="0"
+                    [value]="controlsService.z()"
                 >
             </td>
         </tr>
@@ -44,7 +45,7 @@
                     #xPosition 
                     type="number" 
                     (input)="setPosition(xPosition.value, 'x')"
-                    value="0"
+                    [value]="controlsService.xPosition()"
                 >
             </td>
             <td>
@@ -52,7 +53,7 @@
                     #yPosition 
                     type="number" 
                     (input)="setPosition(yPosition.value, 'y')"
-                    value="0"
+                    [value]="controlsService.yPosition()"
                 >
             </td>
             <td>
@@ -60,7 +61,7 @@
                     #zPosition 
                     type="number" 
                     (input)="setPosition(zPosition.value, 'z')"
-                    value="0"
+                    [value]="controlsService.zPosition()"
                 >
             </td>
         </tr>

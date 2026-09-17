@@ -10,6 +10,8 @@ import { GroupData, ThreeGroup } from './interfaces';
   providedIn: 'root',
 })
 export class ControlsService {
+  groupName: WritableSignal<string> = signal<string>("");
+
   ambientLightIntensity: WritableSignal<number> = signal<number>(1);
   ambientLightColor: WritableSignal<string> = signal<string>("#FFFFFF");
   sceneColor: WritableSignal<string> = signal<string>("#FFFFFF");
@@ -46,6 +48,7 @@ export class ControlsService {
   groups: WritableSignal<ThreeGroup[]> = signal<ThreeGroup[]>([]);
 
   reset(userData: GroupData): void {
+    this.groupName.set(userData.name);
     this.x.set(userData.rotationX);
     this.y.set(userData.rotationY);
     this.z.set(userData.rotationZ);

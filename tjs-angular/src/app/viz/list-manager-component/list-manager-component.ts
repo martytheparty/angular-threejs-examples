@@ -1,4 +1,4 @@
-import { Component, inject, TemplateRef, viewChild } from '@angular/core';
+import { Component, effect, inject, TemplateRef, viewChild } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,11 +10,9 @@ import { SceneService } from '../scene-service';
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-
 import * as THREE from 'three';
 import { CommonModule } from '@angular/common';
-
-
+import { ImportService } from '../import-service';
 
 @Component({
   selector: 'app-list-manager-component',
@@ -36,13 +34,33 @@ export class ListManagerComponent {
 
   controlsService: ControlsService = inject(ControlsService);
   sceneService: SceneService = inject(SceneService);
+  importService: ImportService = inject(ImportService);
+
   displayedColumns: string[] = ['name', 'delete'];
   private dialog = inject(MatDialog);
+
+  constructor() {
+    effect( () => {
+      this.importGroupsFromScene(this.importService.groupImport());
+    } );
+  }
+
+  importGroupsFromScene(groups: THREE.Group[]): void {
+    const threeGroups: ThreeGroup[] = []; 
+    groups.forEach(
+      (group: THREE.Group) => {
+        const newThreeGroup: ThreeGroup = { name: group.userData['name'], group };
+        threeGroups.push(newThreeGroup);
+      }
+    );
+
+    this.controlsService.groups.set(threeGroups);
+  }
+
 
   addGroup(groupElement: HTMLInputElement): void {
     const groupName = groupElement.value.trim();
     const group = this.sceneService.addDefaultGroup(groupName);
-    //group.userData['groupData'] = {rotationX: 0};
     const newThreeGroup: ThreeGroup ={name: groupName, group}; 
     this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
     this.sceneService.addGroup(newThreeGroup);
@@ -83,7 +101,6 @@ export class ListManagerComponent {
    }
 
    addGroupFromJson(groupElement: HTMLTextAreaElement): void {
-    console.log("groupElement", groupElement);
     const json = groupElement.value;
 
     const loader = new THREE.ObjectLoader();

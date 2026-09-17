@@ -5,3 +5,20 @@ input {
 input.intensity {
     width: 145px;
 }
+
+.header-button {
+    position: absolute;
+    top: -2px;
+}
+
+.import-export {
+    margin: 6px 0px 0px 0px;
+}
+
+.import-text {
+  width: 100%;
+  min-width: 500px;
+  min-height: 400px;
+  box-sizing: border-box;
+  font-family: monospace;
+}

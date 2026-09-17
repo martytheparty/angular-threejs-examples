@@ -21,5 +21,5 @@ export interface GroupData {
 
 export interface SceneData {
   name: string;
-  ambientLightIntensity: number;
+  backgroundColor: string;
 }
