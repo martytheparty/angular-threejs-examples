@@ -287,6 +287,10 @@ export class SceneService {
         const groups: THREE.Group[] 
         = this.scene.children.filter( (child: THREE.Object3D) => child.type === 'Group' ) as THREE.Group[];
         this.importService.setGroupImport(groups);
+
+        const threeGroups: ThreeGroup[] = groups.map( (group: THREE.Group) => {return {name: group.userData['name'], group}; })
+
+        this.allGroups = threeGroups;
     }
 
 }
