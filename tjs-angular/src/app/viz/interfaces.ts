@@ -7,6 +7,9 @@ export interface ThreeGroup {
 
 export interface GroupData {
   name: string;
+  rotateX: number;
+  rotateY: number;
+  rotateZ: number;
   rotationX: number;
   rotationY: number;
   rotationZ: number;
@@ -21,5 +24,5 @@ export interface GroupData {
 
 export interface SceneData {
   name: string;
-  ambientLightIntensity: number;
+  backgroundColor: string;
 }

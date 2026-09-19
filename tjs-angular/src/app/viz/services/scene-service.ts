@@ -4,13 +4,14 @@ import {
     inject,
     effect
 } from '@angular/core';
-import { MeshClass } from './mesh/mesh';
-import { LightClass } from './light/light-class';
-import { VizAnimation } from './viz.animation.class';
+import { MeshClass } from '../classes/mesh/mesh';
+import { LightClass } from '../classes/light/light-class';
+import { VizAnimation } from '../classes/viz.animation.class';
 import { ControlsService } from './controls-service';
-import { GroupData, ThreeGroup } from './interfaces';
+import { GroupData, SceneData, ThreeGroup } from '../interfaces';
 import { ClockService } from './clock-service';
-import { MaterialClass } from './material/material-class';
+import { MaterialClass } from '../classes/material/material-class';
+import { ImportService } from './import-service';
 
 @Service()
 export class SceneService {
@@ -21,6 +22,7 @@ export class SceneService {
     allGroups: ThreeGroup[] = [];
     controlsService: ControlsService = inject(ControlsService);
     clockService: ClockService = inject(ClockService);
+    importService: ImportService = inject(ImportService);
 
     width = window.innerWidth;
     height = window.innerHeight;
@@ -48,11 +50,20 @@ export class SceneService {
 
         effect(
             () => {
+                this.signalHandler();
+            }
+        );
+    }
+
+    signalHandler() {
                 this.controlsService.selectedMeshSignal();
 
                 this.controlsService.x();
                 this.controlsService.y();                
                 this.controlsService.z();
+                this.controlsService.animationRotationX();
+                this.controlsService.animationRotationY();                
+                this.controlsService.animationRotationZ();
                 this.controlsService.xPosition();
                 this.controlsService.yPosition();
                 this.controlsService.zPosition();
@@ -72,9 +83,20 @@ export class SceneService {
                 this.ambientLight.intensity = this.controlsService.ambientLightIntensity();
                 const color: THREE.Color =  new THREE.Color(this.controlsService.ambientLightColor());
                 this.ambientLight.color = color;
-                this.renderer.setClearColor(this.controlsService.sceneColor()); 
-            }
-        );
+
+                // this was changed from renderer to scene so the color would persist after scene exports
+                //this.renderer.setClearColor(this.controlsService.sceneColor()); 
+                this.scene.background = new THREE.Color(this.controlsService.sceneColor());
+                this.setSceneData();
+    }
+
+    setSceneData(): void {
+        const sceneData: SceneData = {
+            name: "Simple ThreeJS Scene",
+            backgroundColor: this.controlsService.sceneColor()
+        }
+
+        this.scene.userData = sceneData;
     }
 
     updateSelectedMaterial(): void {
@@ -112,9 +134,12 @@ export class SceneService {
             let name = this.selectedGroup.group.userData['name'] ;
             const currentData: GroupData = {
                 name,
-                rotationX: this.controlsService.x(),
-                rotationY: this.controlsService.y(),
-                rotationZ: this.controlsService.z(),
+                rotateX: this.controlsService.x(),
+                rotateY: this.controlsService.y(),
+                rotateZ: this.controlsService.z(),
+                rotationX: this.controlsService.animationRotationX(),
+                rotationY: this.controlsService.animationRotationY(),
+                rotationZ: this.controlsService.animationRotationZ(),
                 positionX: this.controlsService.xPosition(),
                 positionY: this.controlsService.yPosition(),
                 positionZ: this.controlsService.zPosition(),
@@ -166,6 +191,9 @@ export class SceneService {
         const star = this.meshClass.getStarMesh();
         const groupData: GroupData = {
             name,
+            rotateX: 0,
+            rotateY: 0,
+            rotateZ: 0,
             positionX: 0,
             positionY: 0,
             positionZ: 0,
@@ -260,4 +288,18 @@ export class SceneService {
     });
 
     }
+
+    importScene(scene: THREE.Scene): void {
+        this.scene = scene;
+        this.controlsService.setSceneColor(scene.userData['backgroundColor']);
+        // The form needs to be set to the correct background color.
+        const groups: THREE.Group[] 
+        = this.scene.children.filter( (child: THREE.Object3D) => child.type === 'Group' ) as THREE.Group[];
+        this.importService.setGroupImport(groups);
+
+        const threeGroups: ThreeGroup[] = groups.map( (group: THREE.Group) => {return {name: group.userData['name'], group}; })
+
+        this.allGroups = threeGroups;
+    }
+
 }

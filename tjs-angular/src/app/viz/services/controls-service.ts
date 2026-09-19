@@ -4,12 +4,14 @@ import {
   WritableSignal
 } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { GroupData, ThreeGroup } from './interfaces';
+import { GroupData, ThreeGroup } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ControlsService {
+  groupName: WritableSignal<string> = signal<string>("");
+
   ambientLightIntensity: WritableSignal<number> = signal<number>(1);
   ambientLightColor: WritableSignal<string> = signal<string>("#FFFFFF");
   sceneColor: WritableSignal<string> = signal<string>("#FFFFFF");
@@ -17,6 +19,10 @@ export class ControlsService {
   x: WritableSignal<number> = signal<number>(0);
   y: WritableSignal<number> = signal<number>(0);
   z: WritableSignal<number> = signal<number>(0);
+
+  animationRotationX: WritableSignal<number> = signal<number>(0);
+  animationRotationY: WritableSignal<number> = signal<number>(0);
+  animationRotationZ: WritableSignal<number> = signal<number>(0);
 
   xPosition: WritableSignal<number> = signal<number>(0);
   yPosition: WritableSignal<number> = signal<number>(0);
@@ -46,6 +52,7 @@ export class ControlsService {
   groups: WritableSignal<ThreeGroup[]> = signal<ThreeGroup[]>([]);
 
   reset(userData: GroupData): void {
+    this.groupName.set(userData.name);
     this.x.set(userData.rotationX);
     this.y.set(userData.rotationY);
     this.z.set(userData.rotationZ);
@@ -104,6 +111,18 @@ export class ControlsService {
 
   setZ(z: number): void {
     this.z.set(z);
+  }
+
+  setAnimationX(newX: number): void {
+    this.animationRotationX.set(newX);
+  }
+
+  setAnimationY(y: number): void {
+    this.animationRotationY.set(y);
+  }
+
+  setAnimationZ(z: number): void {
+    this.animationRotationZ.set(z);
   }
 
   setXPosition(newX: number): void {

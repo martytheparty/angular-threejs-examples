@@ -1,0 +1,16 @@
+.parent {
+    display: flex;
+
+    div {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    input {
+        width: 40px;
+    }
+
+    input.colspan3 {
+        width: 145px;
+    }
+}

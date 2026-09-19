@@ -8,16 +8,17 @@ import {
 } from '@angular/core';
 
 import * as THREE from 'three';
-import { ControlsComponent } from './controls/controls';
-import { ControlsService } from './controls-service';
-import { VizAnimation } from './viz.animation.class';
-import { StlService } from './stl-service';
-import { MeshClass } from './mesh/mesh';
-import { ListManagerComponent } from './list-manager-component/list-manager-component';
-import { SceneService } from './scene-service';
+import { ControlsComponent } from './components/controls/controls';
+import { ControlsService } from './services/controls-service';
+import { VizAnimation } from './classes/viz.animation.class';
+import { StlService } from './services/stl-service';
+import { MeshClass } from './classes/mesh/mesh';
+import { ListManagerComponent } from './components/list-manager-component/list-manager-component';
+import { SceneService } from './services/scene-service';
 import { CommonModule } from '@angular/common';
-import { ClockComponent } from './clock-component/clock-component';
-import { LightComponent } from './light-component/light-component';
+import { ClockComponent } from './components/clock-component/clock-component';
+import { LightComponent } from './components/light-component/light-component';
+import { AnimationComponent } from './components/animation-component/animation-component';
 
 @Component({
   selector: 'app-viz',
@@ -26,7 +27,8 @@ import { LightComponent } from './light-component/light-component';
     ListManagerComponent,
     CommonModule,
     ClockComponent,
-    LightComponent
+    LightComponent,
+    AnimationComponent
   ],
   templateUrl: './viz.html',
   changeDetection: ChangeDetectionStrategy.Eager,

@@ -11,7 +11,7 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 
-import { ClockService } from '../clock-service';
+import { ClockService } from '../../services/clock-service';
 
 @Component({
   selector: 'app-clock-component',

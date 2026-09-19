@@ -1,6 +1,24 @@
 <div>
     <table>
         <tr>
+            <th colspan="2">
+                <div class="import-export">
+                    scene import
+                    <button class="header-button" mat-icon-button (click)="importScene()">
+                        <mat-icon>file_upload</mat-icon>
+                    </button>
+                </div>
+            </th>
+            <th colspan="2">
+                <div class="import-export">
+                    export
+                    <button class="header-button" mat-icon-button (click)="$event.stopPropagation();exportScene()">
+                        <mat-icon>file_download</mat-icon>
+                    </button>
+                </div>
+            </th>
+        </tr>
+        <tr>
             <th>&nbsp;</th>
             <th>r</th>
             <th>g</th>
@@ -12,7 +30,7 @@
                 <input 
                 (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
                 #redScene 
-                value="255" 
+                [value]="getColor('red', controlsService.sceneColor())" 
                 type="number"
                 min="0"
                 max="255"
@@ -21,7 +39,7 @@
                 <input 
                 (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
                 #greenScene 
-                value="255" 
+                [value]="getColor('green', controlsService.sceneColor())" 
                 type="number"
                 min="0"
                 max="255"
@@ -31,7 +49,7 @@
                 <input 
                 (input)="updateSceneColor(+redScene.value, +greenScene.value, +blueScene.value)" 
                 #blueScene 
-                value="255" 
+                [value]="getColor('blue', controlsService.sceneColor())" 
                 type="number"
                 min="0"
                 max="255"
@@ -85,3 +103,36 @@
         </tr>
     </table>
 </div>
+
+<ng-template #toJson let-data>
+  <mat-dialog-content class="json-content">
+    <pre>{{data.json | json}}</pre>
+  </mat-dialog-content>
+</ng-template>
+
+<ng-template #fromJson>
+  <h2 mat-dialog-title>Import Scene</h2>
+
+  <mat-dialog-content>
+    <textarea
+      class="import-text"
+      #jsonData
+      placeholder="Paste Three.js JSON here">
+    </textarea>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-icon-button
+      (click)="addSceneFromJson(jsonData)"
+      aria-label="Import scene">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button
+      mat-button
+      mat-dialog-close>
+      Cancel
+    </button>
+  </mat-dialog-actions>
+</ng-template>

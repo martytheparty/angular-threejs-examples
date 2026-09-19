@@ -8,7 +8,7 @@ app-controls {
     position: absolute;
     background-color: antiquewhite;
     z-index: 1;
-    top: 102px;
+    top: 132px;
     width: 260px;
 }
 
@@ -29,4 +29,12 @@ app-light-component {
     position: absolute;
     background-color: antiquewhite;
     z-index: 1;
+}
+
+app-animation-component {
+     position: absolute;
+     top: 450px;
+     width: 260px;
+     z-index: 1;
+    background-color: antiquewhite;
 }
