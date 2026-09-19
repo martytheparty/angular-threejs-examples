@@ -22,6 +22,29 @@ export class VizAnimation {
         const currentTime = this.clockService.getElapsedMilliseconds()/1000;
         const currentPeriod = this.clockService.getPeriod();
 
+        // I rotate the mesh based the rotate value
+
+
+
+        if (this.group.children[0]){
+            const mesh: THREE.Object3D = this.group.children[0];
+
+            if (mesh.type === "Mesh") {
+                // if (
+                //     this.group.userData['rotateX'] > 0 ||
+                //     this.group.userData['rotateY'] > 0 || 
+                //     this.group.userData['rotateZ'] > 0 
+                // ) {
+                    mesh.rotation.x = this.degreesToRadians(this.group.userData['rotateX']);
+                    mesh.rotation.y = this.degreesToRadians(this.group.userData['rotateY']);
+                    mesh.rotation.z = this.degreesToRadians(this.group.userData['rotateZ']);
+                //}
+            }
+
+
+        }
+
+        // I animate the group rotation
         this.group.rotation.x = this.getRotationRadians(currentTime, currentPeriod, this.rotationXSpeed);
         this.group.rotation.y = this.getRotationRadians(currentTime, currentPeriod, this.rotationYSpeed);
         this.group.rotation.z = this.getRotationRadians(currentTime, currentPeriod, this.rotationZSpeed);
@@ -65,6 +88,10 @@ export class VizAnimation {
            radians =  (time / period) * rotationCount * Math.PI * 2;
         }
         return radians;
+    }
+
+    degreesToRadians(degrees: number): number {
+        return degrees * Math.PI / 180;
     }
 
 

@@ -1,11 +1,11 @@
 <div class="parent">
     <table>
-        <tr><th colspan="4">{{controlsService.groupName()}} </th></tr>
+        <tr><th colspan="4">group: {{controlsService.groupName()}} </th></tr>
         <tr>
             <th>&nbsp;</th>
-            <th>x</th>
-            <th>y</th>
-            <th>z</th>
+            <th>x/r</th>
+            <th>y/g</th>
+            <th>z/b</th>
         </tr>
         <tr>
             <td><div>rotation</div></td>
@@ -64,12 +64,6 @@
                     [value]="controlsService.zPosition()"
                 >
             </td>
-        </tr>
-        <tr>
-            <th>&nbsp;</th>
-            <th>r</th>
-            <th>g</th>
-            <th>b</th>
         </tr>
         <tr>
             <td>

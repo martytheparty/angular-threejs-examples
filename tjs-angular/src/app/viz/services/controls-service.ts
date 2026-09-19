@@ -20,6 +20,10 @@ export class ControlsService {
   y: WritableSignal<number> = signal<number>(0);
   z: WritableSignal<number> = signal<number>(0);
 
+  animationRotationX: WritableSignal<number> = signal<number>(0);
+  animationRotationY: WritableSignal<number> = signal<number>(0);
+  animationRotationZ: WritableSignal<number> = signal<number>(0);
+
   xPosition: WritableSignal<number> = signal<number>(0);
   yPosition: WritableSignal<number> = signal<number>(0);
   zPosition: WritableSignal<number> = signal<number>(0);
@@ -107,6 +111,18 @@ export class ControlsService {
 
   setZ(z: number): void {
     this.z.set(z);
+  }
+
+  setAnimationX(newX: number): void {
+    this.animationRotationX.set(newX);
+  }
+
+  setAnimationY(y: number): void {
+    this.animationRotationY.set(y);
+  }
+
+  setAnimationZ(z: number): void {
+    this.animationRotationZ.set(z);
   }
 
   setXPosition(newX: number): void {

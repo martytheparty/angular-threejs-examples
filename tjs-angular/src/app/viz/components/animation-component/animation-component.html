@@ -1,0 +1,39 @@
+<div class="parent">
+    <table>
+        <tr><th colspan="4">animation group: {{controlsService.groupName()}} </th></tr>
+        <tr>
+            <th>&nbsp;</th>
+            <th>x/r</th>
+            <th>y/g</th>
+            <th>z/b</th>
+        </tr>
+        <tr>
+            <td><div>rotation</div></td>
+            <td>
+                <input 
+                    #xRotation 
+                    type="number" 
+                    (input)="setRotation(xRotation.value, 'x')"
+                    [value]="controlsService.animationRotationX()"
+                >
+            </td>
+            <td>
+                <input 
+                    #yRotation 
+                    type="number" 
+                    (input)="setRotation(yRotation.value, 'y')"
+                    [value]="controlsService.animationRotationY()"
+                >
+            </td>
+            <td>
+                <input 
+                    #zRotation 
+                    type="number" 
+                    (input)="setRotation(zRotation.value, 'z')"
+                    [value]="controlsService.animationRotationZ()"
+                >
+            </td>
+        </tr>
+
+    </table>
+</div>

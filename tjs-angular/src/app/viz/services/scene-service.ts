@@ -61,6 +61,9 @@ export class SceneService {
                 this.controlsService.x();
                 this.controlsService.y();                
                 this.controlsService.z();
+                this.controlsService.animationRotationX();
+                this.controlsService.animationRotationY();                
+                this.controlsService.animationRotationZ();
                 this.controlsService.xPosition();
                 this.controlsService.yPosition();
                 this.controlsService.zPosition();
@@ -131,9 +134,12 @@ export class SceneService {
             let name = this.selectedGroup.group.userData['name'] ;
             const currentData: GroupData = {
                 name,
-                rotationX: this.controlsService.x(),
-                rotationY: this.controlsService.y(),
-                rotationZ: this.controlsService.z(),
+                rotateX: this.controlsService.x(),
+                rotateY: this.controlsService.y(),
+                rotateZ: this.controlsService.z(),
+                rotationX: this.controlsService.animationRotationX(),
+                rotationY: this.controlsService.animationRotationY(),
+                rotationZ: this.controlsService.animationRotationZ(),
                 positionX: this.controlsService.xPosition(),
                 positionY: this.controlsService.yPosition(),
                 positionZ: this.controlsService.zPosition(),
@@ -185,6 +191,9 @@ export class SceneService {
         const star = this.meshClass.getStarMesh();
         const groupData: GroupData = {
             name,
+            rotateX: 0,
+            rotateY: 0,
+            rotateZ: 0,
             positionX: 0,
             positionY: 0,
             positionZ: 0,
