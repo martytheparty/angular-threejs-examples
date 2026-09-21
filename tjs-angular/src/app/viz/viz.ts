@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { ClockComponent } from './components/clock-component/clock-component';
 import { LightComponent } from './components/light-component/light-component';
 import { AnimationComponent } from './components/animation-component/animation-component';
+import { CdkDrag } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-viz',
@@ -28,7 +29,8 @@ import { AnimationComponent } from './components/animation-component/animation-c
     CommonModule,
     ClockComponent,
     LightComponent,
-    AnimationComponent
+    AnimationComponent,
+    CdkDrag
   ],
   templateUrl: './viz.html',
   changeDetection: ChangeDetectionStrategy.Eager,

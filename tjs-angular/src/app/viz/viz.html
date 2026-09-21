@@ -1,9 +1,9 @@
-<app-light-component></app-light-component>
+<app-light-component cdkDrag class="moveable"></app-light-component>
 @if(sceneService.selectedGroup !== undefined) {
-<app-controls></app-controls>
-<app-animation-component></app-animation-component>
+    <app-controls cdkDrag class="moveable"></app-controls>
+    <app-animation-component cdkDrag class="moveable"></app-animation-component>
 }
 
-<app-list-manager-component></app-list-manager-component>
+<app-list-manager-component cdkDrag class="moveable"></app-list-manager-component>
 <div #visualization class="visualization"></div>
-<app-clock-component></app-clock-component>
+<app-clock-component cdkDrag class="moveable"></app-clock-component>
