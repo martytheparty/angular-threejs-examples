@@ -149,7 +149,10 @@ export class SceneService {
                 color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`,
                 eColor: `#${this.toHex(this.controlsService.erColor())}${this.toHex(this.controlsService.egColor())}${this.toHex(this.controlsService.ebColor())}`,
                 eIntensity: this.controlsService.eIntensity(),
-                wireframe: this.controlsService.selectWireframe()
+                wireframe: this.controlsService.selectWireframe(),
+                animationRotationX: this.controlsService.animationRotationX(),
+                animationRotationY: this.controlsService.animationRotationY(),
+                animationRotationZ: this.controlsService.animationRotationZ()
             } 
             this.selectedGroup.group.userData = currentData;
         }
@@ -164,7 +167,6 @@ export class SceneService {
         const group = threeGroup.group;
         if (group) {
             const data: GroupData = group.userData as GroupData;
-            //this.reset = true;
             this.controlsService.reset(data);
         }
 
@@ -205,9 +207,12 @@ export class SceneService {
             rotationZ: 0,
             isAnimated: false,
             eIntensity: 1,
-            color: "#FF0000",
-            eColor: "#FF0000",
-            wireframe: false
+            color: "#00FF00",
+            eColor: "#00FF00",
+            wireframe: false,
+            animationRotationX: 0,
+            animationRotationY: 0,
+            animationRotationZ: 0
         };
 
         group.userData = groupData;
@@ -240,7 +245,10 @@ export class SceneService {
             eIntensity: 1,
             color: "#FF0000",
             eColor: "#FF0000",
-            wireframe: false
+            wireframe: false,
+            animationRotationX: 0,
+            animationRotationY: 0,
+            animationRotationZ: 0
         };
 
         group.userData = groupData;

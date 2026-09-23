@@ -86,7 +86,10 @@ export class ControlsService {
     }
 
     this.eIntensity.set(userData.eIntensity);
-
+    this.animationRotationX.set(userData.animationRotationX);
+    this.animationRotationY.set(userData.animationRotationY);
+    this.animationRotationZ.set(userData.animationRotationZ);
+    this.selectWireframe.set(userData.wireframe);
   }
 
   setSelectedMesh(meshName: string): void {

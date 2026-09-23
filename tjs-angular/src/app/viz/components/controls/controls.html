@@ -176,7 +176,7 @@
                 </div>
             </td>
             <td colspan="3">
-                <mat-checkbox (change)="updateWireframe($event)"></mat-checkbox>
+                <mat-checkbox [checked]="controlsService.selectWireframe()" (change)="updateWireframe($event)"></mat-checkbox>
             </td>
         </tr>
 
