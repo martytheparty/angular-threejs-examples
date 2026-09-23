@@ -41,10 +41,6 @@ importStl(file: File): Promise<THREE.Mesh> {
 
         const mesh = new THREE.Mesh(geometry);
 
-const box = new THREE.Box3().setFromObject(mesh);
-const size = new THREE.Vector3();
-
-
         resolve(mesh);
       },
       undefined,
