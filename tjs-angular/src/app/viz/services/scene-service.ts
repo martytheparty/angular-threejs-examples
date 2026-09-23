@@ -227,7 +227,7 @@ export class SceneService {
 
         // fits the mesh into a 3x3 box
         GeometryClass.scaleToFit(mesh,3);
-
+        GeometryClass.center(mesh);
 
         const group = new THREE.Group();
         const groupData: GroupData = {

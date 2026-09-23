@@ -128,4 +128,11 @@ export class GeometryClass {
 
         object.scale.multiplyScalar(scale);
     }
+
+    static center(object: THREE.Object3D): void {
+        const box = new THREE.Box3().setFromObject(object);
+        const center = box.getCenter(new THREE.Vector3());
+
+        object.position.sub(center);
+    }
 }
