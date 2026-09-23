@@ -39,6 +39,13 @@ export class VizAnimation {
                     mesh.rotation.y = this.degreesToRadians(this.group.userData['rotateY']);
                     mesh.rotation.z = this.degreesToRadians(this.group.userData['rotateZ']);
                 //}
+                const meshItem = mesh as THREE.Mesh;
+                const material = meshItem.material as THREE.Material;
+
+                if ('wireframe' in material) {
+                    material.wireframe = this.group.userData['wireframe'];
+                }
+
             }
 
 

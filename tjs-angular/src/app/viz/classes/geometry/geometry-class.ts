@@ -106,5 +106,26 @@ export class GeometryClass {
         }
 
         return geometry;
-    } ;
+    };
+
+    static scaleToFit(object: THREE.Object3D, size = 3): void {
+        const box = new THREE.Box3().setFromObject(object);
+        const dimensions = new THREE.Vector3();
+
+        box.getSize(dimensions);
+
+        const largestDimension = Math.max(
+            dimensions.x,
+            dimensions.y,
+            dimensions.z
+        );
+
+        if (largestDimension === 0) {
+            return;
+        }
+
+        const scale = size / largestDimension;
+
+        object.scale.multiplyScalar(scale);
+    }
 }

@@ -20,6 +20,7 @@ export interface GroupData {
   color?: string;
   eColor?: string;
   eIntensity: number;
+  wireframe: boolean;
 }
 
 export interface SceneData {

@@ -12,6 +12,8 @@ import { GroupData, ThreeGroup } from '../interfaces';
 export class ControlsService {
   groupName: WritableSignal<string> = signal<string>("");
 
+  selectWireframe: WritableSignal<boolean> = signal<boolean>(false);
+
   ambientLightIntensity: WritableSignal<number> = signal<number>(1);
   ambientLightColor: WritableSignal<string> = signal<string>("#FFFFFF");
   sceneColor: WritableSignal<string> = signal<string>("#FFFFFF");
