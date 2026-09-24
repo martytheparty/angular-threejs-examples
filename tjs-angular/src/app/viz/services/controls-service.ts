@@ -12,6 +12,8 @@ import { GroupData, ThreeGroup } from '../interfaces';
 export class ControlsService {
   groupName: WritableSignal<string> = signal<string>("");
 
+  selectWireframe: WritableSignal<boolean> = signal<boolean>(false);
+
   ambientLightIntensity: WritableSignal<number> = signal<number>(1);
   ambientLightColor: WritableSignal<string> = signal<string>("#FFFFFF");
   sceneColor: WritableSignal<string> = signal<string>("#FFFFFF");
@@ -84,7 +86,10 @@ export class ControlsService {
     }
 
     this.eIntensity.set(userData.eIntensity);
-
+    this.animationRotationX.set(userData.animationRotationX);
+    this.animationRotationY.set(userData.animationRotationY);
+    this.animationRotationZ.set(userData.animationRotationZ);
+    this.selectWireframe.set(userData.wireframe);
   }
 
   setSelectedMesh(meshName: string): void {

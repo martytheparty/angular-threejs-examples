@@ -8,9 +8,26 @@
       {{group.name}} </td>
     <td mat-footer-cell *matFooterCellDef>
       <div class="ff-wrapper">
-      <button mat-icon-button (click)="importGroup()">
-        <mat-icon>file_upload</mat-icon>
-      </button>
+
+        <input
+          #fileInput
+          type="file"
+          accept=".stl"
+          hidden
+          (change)="onFileSelected($event)"
+        >
+
+        <button
+          mat-icon-button
+          matTooltip="Import STL"
+          (click)="fileInput.click()">
+          <mat-icon>view_in_ar</mat-icon>
+        </button>
+
+
+        <button mat-icon-button (click)="importGroup()">
+          <mat-icon>file_upload</mat-icon>
+        </button>
         <mat-form-field class="small-field" appearance="outline">
              <input placeholder="add viz" matInput #groupName>
         </mat-form-field>
@@ -31,9 +48,21 @@
     <button mat-icon-button (click)="$event.stopPropagation();deleteGroup(group)">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-icon-button (click)="$event.stopPropagation();exportGroup(group)">
+    <button 
+      mat-icon-button 
+      (click)="$event.stopPropagation();exportGroup(group)"
+      matTooltip="Export JSON"
+    >
       <mat-icon>file_download</mat-icon>
     </button>
+    <button
+      mat-icon-button 
+      (click)="$event.stopPropagation();exportStl(group)"
+      matTooltip="Export STL"
+    >
+      <mat-icon>view_in_ar</mat-icon>
+    </button>
+
   </td>
 
   <td mat-footer-cell *matFooterCellDef></td>

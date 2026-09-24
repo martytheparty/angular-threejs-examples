@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ThreeGroup } from '../../interfaces';
 import { SceneService } from '../../services/scene-service';
@@ -14,6 +15,7 @@ import * as THREE from 'three';
 import { CommonModule } from '@angular/common';
 import { ImportService } from '../../services/import-service';
 import { ControlsService } from '../../services/controls-service';
+import { StlService } from '../../services/stl-service';
 
 @Component({
   selector: 'app-list-manager-component',
@@ -24,7 +26,8 @@ import { ControlsService } from '../../services/controls-service';
     MatInputModule,
     MatButtonModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   templateUrl: './list-manager-component.html',
   styleUrl: './list-manager-component.scss',
@@ -36,6 +39,7 @@ export class ListManagerComponent {
   controlsService: ControlsService = inject(ControlsService);
   sceneService: SceneService = inject(SceneService);
   importService: ImportService = inject(ImportService);
+  stlService: StlService = inject(StlService);
 
   displayedColumns: string[] = ['name', 'delete'];
   private dialog = inject(MatDialog);
@@ -115,4 +119,33 @@ export class ListManagerComponent {
     this.sceneService.addGroup(newThreeGroup);
 
    }
+
+   exportStl(exportGroup: ThreeGroup) {
+    const group: THREE.Group = exportGroup.group as THREE.Group;
+
+    const mesh = group.children.find(
+      (child): child is THREE.Mesh => child instanceof THREE.Mesh
+    );
+
+    if (mesh) {
+      this.stlService.exportMesh(mesh, exportGroup.name + '.stl');
+    }
+
+   }
+
+   onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    this.stlService.importStl(file).then(mesh => {
+      const group = this.sceneService.addGroupForMesh(file.name, mesh);
+      const newThreeGroup: ThreeGroup ={name: file.name, group}; 
+      this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
+      this.sceneService.addGroup(newThreeGroup);
+    });
+  }
 }

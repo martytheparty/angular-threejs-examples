@@ -15,7 +15,7 @@ app-controls {
 app-list-manager-component {
     position: absolute;
     background-color: antiquewhite;
-    right: 0;
+    right: 50px;
     z-index: 1;
 }
 
@@ -33,8 +33,53 @@ app-light-component {
 
 app-animation-component {
      position: absolute;
-     top: 450px;
+     top: 495px;
      width: 260px;
      z-index: 1;
     background-color: antiquewhite;
+}
+
+.moveable {
+    cursor: move;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ddd;
+  color: white;
+  padding: 4px;
+  border-radius: 0 0 0 6px;
+  border: 1px solid black;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.light {
+    app-light-component {
+        display: none;
+    }
+}
+
+.controls {
+    app-controls {
+        display: none;
+    }
+}
+
+.animations {
+    app-animation-component {
+        display: none;
+    }
+}
+.group-list {
+    app-list-manager-component {
+        display: none;
+    }
+}
+.clock {
+    app-clock-component {
+        display: none;
+    }
 }

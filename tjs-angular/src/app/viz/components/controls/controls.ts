@@ -3,10 +3,14 @@ import { ControlsService } from '../../services/controls-service';
 import { CommonModule } from '@angular/common';
 import { MeshClass } from '../../classes/mesh/mesh';
 import { MaterialClass } from '../../classes/material/material-class';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-controls',
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatCheckboxModule
+  ],
   templateUrl: './controls.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './controls.scss',
@@ -87,6 +91,11 @@ export class ControlsComponent {
 
   setEIntensity(intensity: string): void {
     this.controlsService.setEIntensity(parseFloat(intensity));
+  }
+
+  updateWireframe(parameter: MatCheckboxChange): void {
+    this.controlsService.selectWireframe.set(parameter.checked);
+    console.log("update wire frame", parameter);
   }
 
 }

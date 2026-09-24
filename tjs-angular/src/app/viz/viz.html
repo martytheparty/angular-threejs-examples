@@ -1,9 +1,23 @@
-<app-light-component></app-light-component>
-@if(sceneService.selectedGroup !== undefined) {
-<app-controls></app-controls>
-<app-animation-component></app-animation-component>
-}
+<div [class]="hiddenPanels">
+    <app-light-component cdkDrag class="moveable"></app-light-component>
+    @if(sceneService.selectedGroup !== undefined) {
+        <app-controls cdkDrag class="moveable"></app-controls>
+        <app-animation-component cdkDrag class="moveable"></app-animation-component>
+    }
 
-<app-list-manager-component></app-list-manager-component>
-<div #visualization class="visualization"></div>
-<app-clock-component></app-clock-component>
+    <app-list-manager-component cdkDrag class="moveable"></app-list-manager-component>
+    <div #visualization class="visualization"></div>
+    <app-clock-component cdkDrag class="moveable"></app-clock-component>
+    <div class="menu">
+        <button mat-icon-button [matMenuTriggerFor]="panelMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #panelMenu="matMenu">
+            @for(panel of panels; track panel) {
+                <button mat-menu-item (click)="$event.stopPropagation();setPanelView(panel)">
+                    <mat-checkbox checked>{{panel}}</mat-checkbox>
+                </button>
+            }
+        </mat-menu>
+    </div>
+</div>

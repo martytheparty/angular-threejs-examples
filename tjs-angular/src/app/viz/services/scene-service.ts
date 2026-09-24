@@ -12,6 +12,7 @@ import { GroupData, SceneData, ThreeGroup } from '../interfaces';
 import { ClockService } from './clock-service';
 import { MaterialClass } from '../classes/material/material-class';
 import { ImportService } from './import-service';
+import { GeometryClass } from '../classes/geometry/geometry-class';
 
 @Service()
 export class SceneService {
@@ -58,6 +59,7 @@ export class SceneService {
     signalHandler() {
                 this.controlsService.selectedMeshSignal();
 
+                this.controlsService.selectWireframe();
                 this.controlsService.x();
                 this.controlsService.y();                
                 this.controlsService.z();
@@ -110,7 +112,7 @@ export class SceneService {
                 const mesh: THREE.Mesh = group.children[0] as THREE.Mesh;
                 mesh.material = material;
             }
-        } 
+        }
     }
 
     updateSelectedMesh(): void {
@@ -146,7 +148,11 @@ export class SceneService {
                 isAnimated: this.selectedGroup.group.userData['isAnimated'],
                 color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`,
                 eColor: `#${this.toHex(this.controlsService.erColor())}${this.toHex(this.controlsService.egColor())}${this.toHex(this.controlsService.ebColor())}`,
-                eIntensity: this.controlsService.eIntensity()
+                eIntensity: this.controlsService.eIntensity(),
+                wireframe: this.controlsService.selectWireframe(),
+                animationRotationX: this.controlsService.animationRotationX(),
+                animationRotationY: this.controlsService.animationRotationY(),
+                animationRotationZ: this.controlsService.animationRotationZ()
             } 
             this.selectedGroup.group.userData = currentData;
         }
@@ -161,7 +167,6 @@ export class SceneService {
         const group = threeGroup.group;
         if (group) {
             const data: GroupData = group.userData as GroupData;
-            //this.reset = true;
             this.controlsService.reset(data);
         }
 
@@ -202,14 +207,55 @@ export class SceneService {
             rotationZ: 0,
             isAnimated: false,
             eIntensity: 1,
-            color: "#FF0000",
-            eColor: "#FF0000"
+            color: "#00FF00",
+            eColor: "#00FF00",
+            wireframe: false,
+            animationRotationX: 0,
+            animationRotationY: 0,
+            animationRotationZ: 0
         };
 
         group.userData = groupData;
         group.add(star);
         this.scene.add(group);
         this.meshes.push(star);
+
+        return group;
+    }
+
+    addGroupForMesh(name: string = "", mesh: THREE.Mesh): THREE.Group {
+
+        // fits the mesh into a 3x3 box
+        GeometryClass.scaleToFit(mesh,3);
+        GeometryClass.center(mesh);
+
+        const group = new THREE.Group();
+        const groupData: GroupData = {
+            name,
+            rotateX: 0,
+            rotateY: 0,
+            rotateZ: 0,
+            positionX: 0,
+            positionY: 0,
+            positionZ: 0,
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            isAnimated: false,
+            eIntensity: 1,
+            color: "#FF0000",
+            eColor: "#FF0000",
+            wireframe: false,
+            animationRotationX: 0,
+            animationRotationY: 0,
+            animationRotationZ: 0
+        };
+
+        group.userData = groupData;
+        group.add(mesh);
+        this.scene.add(group);
+
+        this.meshes.push(mesh);
 
         return group;
     }

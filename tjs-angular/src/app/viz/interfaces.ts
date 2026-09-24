@@ -20,6 +20,10 @@ export interface GroupData {
   color?: string;
   eColor?: string;
   eIntensity: number;
+  wireframe: boolean;
+  animationRotationX: number;
+  animationRotationY: number;
+  animationRotationZ: number;
 }
 
 export interface SceneData {
