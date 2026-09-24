@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { ThreeGroup } from '../../interfaces';
 import { SceneService } from '../../services/scene-service';
@@ -27,7 +28,8 @@ import { StlService } from '../../services/stl-service';
     MatButtonModule,
     CommonModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonToggleModule
   ],
   templateUrl: './list-manager-component.html',
   styleUrl: './list-manager-component.scss',
@@ -48,6 +50,19 @@ export class ListManagerComponent {
     effect( () => {
       this.importGroupsFromScene(this.importService.groupImport());
     } );
+  }
+
+  downloadJson(data: unknown, name: string): void {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = name + '.json';
+    anchor.click();
+
+    URL.revokeObjectURL(url);
   }
 
   importGroupsFromScene(groups: THREE.Group[]): void {
@@ -100,6 +115,7 @@ export class ListManagerComponent {
 
     this.dialog.open(this.toJson(), {
       data: {
+        name: exportGroup.name,
         json: group.toJSON()
       }
     });

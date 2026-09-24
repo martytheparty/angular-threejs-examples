@@ -74,7 +74,19 @@
 
 <ng-template #toJson let-data>
   <mat-dialog-content class="json-content">
-    <pre>{{data.json | json}}</pre>
+  <mat-button-toggle-group 
+    name="data-view"
+    #viewToggle="matButtonToggleGroup"
+  >
+    <mat-button-toggle
+      value="download"
+      (click)="downloadJson(data.json, data.name)"
+    >Download</mat-button-toggle>
+    <mat-button-toggle value="view">View</mat-button-toggle>
+  </mat-button-toggle-group>
+    @if (viewToggle.value === 'view') {
+      <pre>{{ data.json | json }}</pre>
+    }
   </mat-dialog-content>
 </ng-template>
 
