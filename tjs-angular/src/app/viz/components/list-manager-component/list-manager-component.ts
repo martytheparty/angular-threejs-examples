@@ -164,4 +164,32 @@ export class ListManagerComponent {
       this.sceneService.addGroup(newThreeGroup);
     });
   }
+
+  importJson(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+
+    const file = input.files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const json = JSON.parse(reader.result as string);
+      const loader = new THREE.ObjectLoader();
+      const group = loader.parse(json) as THREE.Group;
+      this.dialog.closeAll();
+
+      const groupName = group.userData['name'];
+      this.sceneService.addImportedGroup(group);
+      const newThreeGroup: ThreeGroup ={name: groupName, group}; 
+      this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
+      this.sceneService.addGroup(newThreeGroup);
+
+    };
+
+    reader.readAsText(file);
+  }
 }

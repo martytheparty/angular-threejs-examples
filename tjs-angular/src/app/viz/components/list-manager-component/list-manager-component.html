@@ -109,6 +109,21 @@
       <mat-icon>add</mat-icon>
     </button>
 
+    <input
+      #jsonFileInput
+      type="file"
+      accept=".json,application/json"
+      hidden
+      (change)="importJson($event)"
+    />
+
+    <button
+      mat-button
+      type="button"
+      (click)="jsonFileInput.click()">
+      Import JSON
+    </button>
+
     <button
       mat-button
       mat-dialog-close>
