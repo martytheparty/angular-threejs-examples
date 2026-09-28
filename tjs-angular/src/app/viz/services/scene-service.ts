@@ -36,6 +36,7 @@ export class SceneService {
     meshClass: MeshClass = new MeshClass();
     materialClass: MaterialClass = new MaterialClass();
     meshes: THREE.Mesh[] = [];
+    lights: THREE.Light[] = [];
     materials: THREE.Material[] = [];
     ambientLight: THREE.AmbientLight = this.lightClass.getAmbientLight("#FFFFFF", 1);
 
@@ -223,6 +224,39 @@ export class SceneService {
         return group;
     }
 
+    addDefaultLightGroup(name: string = ""): THREE.Group {
+        const group = new THREE.Group();
+        const light = LightClass.getPointLight();
+        //const star = this.meshClass.getStarMesh();
+        const groupData: GroupData = {
+            name,
+            rotateX: 0,
+            rotateY: 0,
+            rotateZ: 0,
+            positionX: 0,
+            positionY: 0,
+            positionZ: 0,
+            rotationX: 0,
+            rotationY: 0,
+            rotationZ: 0,
+            isAnimated: false,
+            eIntensity: 1,
+            color: "#00FF00",
+            eColor: "#00FF00",
+            wireframe: false,
+            animationRotationX: 0,
+            animationRotationY: 0,
+            animationRotationZ: 0
+        };
+
+        group.userData = groupData;
+        group.add(light);
+        this.scene.add(group);
+        this.lights.push(light);
+
+        return group;
+    }
+
     addGroupForMesh(name: string = "", mesh: THREE.Mesh): THREE.Group {
 
         // fits the mesh into a 3x3 box
@@ -291,8 +325,27 @@ export class SceneService {
                             animation.setXPosition(currentGroup.userData['positionX']);
                             animation.setYPosition(currentGroup.userData['positionY']);
                             animation.setZPosition(currentGroup.userData['positionZ']);
-
                             const mesh = currentGroup.children[0] as THREE.Mesh;
+
+                            if (mesh.type === 'Mesh') {
+                                this.handleMesh(mesh, currentGroup);
+                            }
+
+
+
+
+
+                            animation.animate(time);
+                        } 
+                }
+            );
+
+      this.renderer.render(this.scene, this.camera);
+    });
+
+    }
+
+    handleMesh(mesh: THREE.Mesh, currentGroup: THREE.Group): void {
                             const material: THREE.Material | THREE.Material[] = mesh.material;
 
                             if (Array.isArray(material)) {
@@ -323,16 +376,6 @@ export class SceneService {
                                     materialItem.emissiveIntensity = currentGroup.userData['eIntensity'];
                                 }
                             }
-
-
-                            animation.animate(time);
-                        } 
-                }
-            );
-
-      this.renderer.render(this.scene, this.camera);
-    });
-
     }
 
     importScene(scene: THREE.Scene): void {

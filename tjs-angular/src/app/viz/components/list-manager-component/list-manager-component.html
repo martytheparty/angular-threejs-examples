@@ -32,9 +32,14 @@
              <input placeholder="add viz" matInput #groupName>
         </mat-form-field>
         @if(groupName.value.length > 0) {
-        <button mat-button (click)="addGroup(groupName)">
+        <button mat-button (click)="addGroupMesh(groupName)">
           <mat-icon>add</mat-icon>
-          Add Group
+          Add Mesh Group
+        </button>
+
+        <button mat-button (click)="addGroupLight(groupName)">
+          <mat-icon>add</mat-icon>
+          Add Light Group
         </button>
         }
       </div>

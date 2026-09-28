@@ -78,9 +78,18 @@ export class ListManagerComponent {
   }
 
 
-  addGroup(groupElement: HTMLInputElement): void {
+  addGroupMesh(groupElement: HTMLInputElement): void {
     const groupName = groupElement.value.trim();
     const group = this.sceneService.addDefaultGroup(groupName);
+    const newThreeGroup: ThreeGroup ={name: groupName, group}; 
+    this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
+    this.sceneService.addGroup(newThreeGroup);
+    groupElement.value = '';
+  }
+
+  addGroupLight(groupElement: HTMLInputElement): void {
+    const groupName = groupElement.value.trim();
+    const group = this.sceneService.addDefaultLightGroup(groupName);
     const newThreeGroup: ThreeGroup ={name: groupName, group}; 
     this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
     this.sceneService.addGroup(newThreeGroup);

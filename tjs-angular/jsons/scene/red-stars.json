@@ -6,10 +6,10 @@
   },
   "geometries": [
     {
-      "uuid": "0f823d0f-5a73-46f5-bef1-03ee2b645b67",
+      "uuid": "b52cc023-6b5e-4de4-a715-971dea35a67f",
       "type": "ExtrudeGeometry",
       "shapes": [
-        "88e873e0-e18b-41cf-9f1d-4d895c30b1c8"
+        "929fbd43-fb3a-4eea-a7c4-c7ff6e727897"
       ],
       "options": {
         "depth": 0.5,
@@ -19,10 +19,10 @@
       }
     },
     {
-      "uuid": "75f47baa-0bdf-4796-a8b7-882914af931c",
+      "uuid": "0a614aa1-2493-4037-956b-7a1f1c496c94",
       "type": "ExtrudeGeometry",
       "shapes": [
-        "b7223790-64e0-4b36-9ce5-95429486755e"
+        "f2e9b049-24e4-4e5d-ad80-a61c6ed339b1"
       ],
       "options": {
         "depth": 0.5,
@@ -34,10 +34,12 @@
   ],
   "materials": [
     {
-      "uuid": "01adad2b-1e11-4ba7-ad10-b8fc9d4f1ae6",
-      "type": "MeshLambertMaterial",
+      "uuid": "5a9b658d-0f3b-40fb-9936-65c77dee3a34",
+      "type": "MeshPhongMaterial",
       "color": 16711680,
       "emissive": 16711680,
+      "specular": 1118481,
+      "shininess": 30,
       "envMapRotation": [
         0,
         0,
@@ -51,10 +53,10 @@
       "blendColor": 0
     },
     {
-      "uuid": "829e9a88-24d1-48f3-9265-0d2cffe1e33d",
+      "uuid": "c3b5211f-c938-49fb-9ba1-33023392a59d",
       "type": "MeshPhongMaterial",
-      "color": 65280,
-      "emissive": 65280,
+      "color": 16711680,
+      "emissive": 16711680,
       "specular": 1118481,
       "shininess": 30,
       "envMapRotation": [
@@ -251,7 +253,7 @@
         -0.5877852522924732,
         -0.8090169943749473
       ],
-      "uuid": "88e873e0-e18b-41cf-9f1d-4d895c30b1c8",
+      "uuid": "929fbd43-fb3a-4eea-a7c4-c7ff6e727897",
       "holes": []
     },
     {
@@ -434,16 +436,16 @@
         -0.5877852522924732,
         -0.8090169943749473
       ],
-      "uuid": "b7223790-64e0-4b36-9ce5-95429486755e",
+      "uuid": "f2e9b049-24e4-4e5d-ad80-a61c6ed339b1",
       "holes": []
     }
   ],
   "object": {
-    "uuid": "bc5813c9-1343-4ca5-8b37-663d08868205",
+    "uuid": "3628d9b4-05c7-4c6e-9f12-4d950106a8ab",
     "type": "Scene",
     "userData": {
       "name": "Simple ThreeJS Scene",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#FFFFFF"
     },
     "layers": 1,
     "matrix": [
@@ -469,10 +471,10 @@
       1,
       0
     ],
-    "background": 0,
+    "background": 16777215,
     "children": [
       {
-        "uuid": "5fd35d6f-e1b6-4f1b-87b6-0a7d132ec1f2",
+        "uuid": "9328dc14-7663-4c01-ae4d-a19e5f49f763",
         "type": "AmbientLight",
         "layers": 1,
         "matrix": [
@@ -502,45 +504,42 @@
         "intensity": 1
       },
       {
-        "uuid": "e736664b-5eb6-4b0b-bfc6-a0428ae86386",
+        "uuid": "5c29b7dd-1395-43c9-80da-8f9c904bd300",
         "type": "Group",
         "userData": {
-          "name": "red star",
+          "name": "a",
           "rotateX": 0,
           "rotateY": 0,
           "rotateZ": 0,
           "rotationX": 0,
           "rotationY": 0,
-          "rotationZ": -1,
-          "positionX": -3,
+          "rotationZ": 2,
+          "positionX": 0,
           "positionY": 0,
-          "positionZ": -3,
+          "positionZ": 0,
           "isAnimated": true,
           "color": "#ff0000",
           "eColor": "#ff0000",
           "eIntensity": 1,
-          "wireframe": false,
-          "animationRotationX": 0,
-          "animationRotationY": 0,
-          "animationRotationZ": -1
+          "wireframe": false
         },
         "layers": 1,
         "matrix": [
-          0.7128588763516251,
-          0.7013075091617785,
+          -0.9902874913193498,
+          -0.1390348320976738,
           0,
           0,
-          -0.7013075091617785,
-          0.7128588763516251,
+          0.1390348320976738,
+          -0.9902874913193498,
           0,
           0,
           0,
           0,
           1,
           0,
-          -3,
           0,
-          -3,
+          0,
+          0,
           1
         ],
         "up": [
@@ -550,7 +549,7 @@
         ],
         "children": [
           {
-            "uuid": "36798eaf-ea85-462d-8e10-099a1d75046b",
+            "uuid": "8c5bdfb7-0eb8-42c6-a52c-c1db4bf7bffd",
             "type": "Mesh",
             "layers": 1,
             "matrix": [
@@ -576,49 +575,46 @@
               1,
               0
             ],
-            "geometry": "0f823d0f-5a73-46f5-bef1-03ee2b645b67",
-            "material": "01adad2b-1e11-4ba7-ad10-b8fc9d4f1ae6"
+            "geometry": "b52cc023-6b5e-4de4-a715-971dea35a67f",
+            "material": "5a9b658d-0f3b-40fb-9936-65c77dee3a34"
           }
         ]
       },
       {
-        "uuid": "018c6f97-6290-4dbe-80a7-7f2885963517",
+        "uuid": "2fc02a9e-9ba8-4090-875c-97da46594248",
         "type": "Group",
         "userData": {
-          "name": "green star",
+          "name": "b",
           "rotateX": 0,
           "rotateY": 0,
-          "rotateZ": 0,
+          "rotateZ": 1,
           "rotationX": 0,
           "rotationY": 0,
-          "rotationZ": 1,
-          "positionX": 1,
+          "rotationZ": 2,
+          "positionX": 0,
           "positionY": 0,
           "positionZ": 0,
           "isAnimated": true,
-          "color": "#00ff00",
-          "eColor": "#00ff00",
+          "color": "#ff0000",
+          "eColor": "#ff0000",
           "eIntensity": 1,
-          "wireframe": false,
-          "animationRotationX": 0,
-          "animationRotationY": 0,
-          "animationRotationZ": 1
+          "wireframe": false
         },
         "layers": 1,
         "matrix": [
-          0.7128588763516251,
-          -0.7013075091617785,
+          -0.9902874913193498,
+          -0.1390348320976738,
           0,
           0,
-          0.7013075091617785,
-          0.7128588763516251,
+          0.1390348320976738,
+          -0.9902874913193498,
           0,
           0,
           0,
           0,
           1,
           0,
-          1,
+          0,
           0,
           0,
           1
@@ -630,16 +626,16 @@
         ],
         "children": [
           {
-            "uuid": "0d8f263d-85c1-48fd-b029-a53ecf623d00",
+            "uuid": "d5c371cd-d3e0-434e-986f-e66ec24113ba",
             "type": "Mesh",
             "layers": 1,
             "matrix": [
-              1,
+              0.9998476951563913,
+              0.01745240643728351,
               0,
               0,
-              0,
-              0,
-              1,
+              -0.01745240643728351,
+              0.9998476951563913,
               0,
               0,
               0,
@@ -656,8 +652,8 @@
               1,
               0
             ],
-            "geometry": "75f47baa-0bdf-4796-a8b7-882914af931c",
-            "material": "829e9a88-24d1-48f3-9265-0d2cffe1e33d"
+            "geometry": "0a614aa1-2493-4037-956b-7a1f1c496c94",
+            "material": "c3b5211f-c938-49fb-9ba1-33023392a59d"
           }
         ]
       }
