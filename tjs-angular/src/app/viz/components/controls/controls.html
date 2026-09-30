@@ -8,33 +8,6 @@
             <th>z/b</th>
         </tr>
         <tr>
-            <td><div>rotation</div></td>
-            <td>
-                <input 
-                    #xRotation 
-                    type="number" 
-                    (input)="setRotation(xRotation.value, 'x')"
-                    [value]="controlsService.x()"
-                >
-            </td>
-            <td>
-                <input 
-                    #yRotation 
-                    type="number" 
-                    (input)="setRotation(yRotation.value, 'y')"
-                    [value]="controlsService.y()"
-                >
-            </td>
-            <td>
-                <input 
-                    #zRotation 
-                    type="number" 
-                    (input)="setRotation(zRotation.value, 'z')"
-                    [value]="controlsService.z()"
-                >
-            </td>
-        </tr>
-        <tr>
             <td>
                 <div>
                     position
@@ -94,18 +67,6 @@
                     (input)="setColor(bColor.value, 'b')"
                     [value]="controlsService.bColor()"
                 >
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan="4">
-                <label>Choose a mesh: </label>
-                <select (change)="selectMesh($event)">
-                    <option></option>
-                    @for(meshOption of MeshClass.getList(); track meshOption) {
-                        <option value="{{meshOption}}">{{meshOption}}</option>
-                    }
-                </select>
             </td>
         </tr>
 

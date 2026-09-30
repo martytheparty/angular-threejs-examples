@@ -322,9 +322,9 @@ export class SceneService {
                             animation.setRotationYSpeed(currentGroup.userData['rotationY']);
                             animation.setRotationZSpeed(currentGroup.userData['rotationZ']);
 
-                            animation.setXPosition(currentGroup.userData['positionX']);
-                            animation.setYPosition(currentGroup.userData['positionY']);
-                            animation.setZPosition(currentGroup.userData['positionZ']);
+                            // animation.setXPosition(currentGroup.userData['positionX']);
+                            // animation.setYPosition(currentGroup.userData['positionY']);
+                            // animation.setZPosition(currentGroup.userData['positionZ']);
                             const mesh = currentGroup.children[0] as THREE.Mesh;
 
                             if (mesh.type === 'Mesh') {

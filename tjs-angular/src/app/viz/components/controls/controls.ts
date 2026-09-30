@@ -39,11 +39,6 @@ export class ControlsComponent {
     this.controlsService.setSelectedColorPosition(selected);
   }
 
-  selectMesh(event: Event): void {
-    const mesh = (event.target as HTMLSelectElement).value;
-    this.controlsService.setSelectedMesh(mesh);
-  }
-
   selectMaterial(event: Event): void {
     const material = (event.target as HTMLSelectElement).value;
     this.controlsService.setSelectedMaterial(material);

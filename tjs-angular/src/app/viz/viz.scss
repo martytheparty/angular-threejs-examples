@@ -38,6 +38,14 @@ app-animation-component {
      z-index: 1;
     background-color: antiquewhite;
 }
+app-mesh-panel-component {
+     position: absolute;
+     top: 0px;
+     left: 260px;
+     width: 260px;
+     z-index: 1;
+    background-color: antiquewhite;
+}
 
 .moveable {
     cursor: move;

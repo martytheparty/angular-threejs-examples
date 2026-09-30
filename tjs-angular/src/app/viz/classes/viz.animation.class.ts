@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { ControlsService } from '../services/controls-service';
 import { ClockService } from '../services/clock-service';
 
 export class VizAnimation {
@@ -30,15 +29,10 @@ export class VizAnimation {
             const mesh: THREE.Object3D = this.group.children[0];
 
             if (mesh.type === "Mesh") {
-                // if (
-                //     this.group.userData['rotateX'] > 0 ||
-                //     this.group.userData['rotateY'] > 0 || 
-                //     this.group.userData['rotateZ'] > 0 
-                // ) {
-                    mesh.rotation.x = this.degreesToRadians(this.group.userData['rotateX']);
-                    mesh.rotation.y = this.degreesToRadians(this.group.userData['rotateY']);
-                    mesh.rotation.z = this.degreesToRadians(this.group.userData['rotateZ']);
-                //}
+                mesh.rotation.x = this.degreesToRadians(this.group.userData['rotateX']);
+                mesh.rotation.y = this.degreesToRadians(this.group.userData['rotateY']);
+                mesh.rotation.z = this.degreesToRadians(this.group.userData['rotateZ']);
+
                 const meshItem = mesh as THREE.Mesh;
                 const material = meshItem.material as THREE.Material;
 
@@ -73,17 +67,17 @@ export class VizAnimation {
         this.rotationZSpeed = rotationZSpeed;
     }
 
-    setXPosition(positionX: number): void {
-        this.positionX = positionX;
-    }
+    // setXPosition(positionX: number): void {
+    //     this.positionX = positionX;
+    // }
 
-    setYPosition(positionY: number): void {
-        this.positionY = positionY;
-    }
+    // setYPosition(positionY: number): void {
+    //     this.positionY = positionY;
+    // }
 
-    setZPosition(positionZ: number): void {
-        this.positionZ = positionZ;
-    }
+    // setZPosition(positionZ: number): void {
+    //     this.positionZ = positionZ;
+    // }
 
     getRotationRadians(
         time: number,
