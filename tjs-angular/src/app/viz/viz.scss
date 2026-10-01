@@ -47,6 +47,15 @@ app-mesh-panel-component {
     background-color: antiquewhite;
 }
 
+app-material-panel-component {
+     position: absolute;
+     top: 225px;
+     left: 0;
+     width: 260px;
+     z-index: 1;
+    background-color: antiquewhite;
+}
+
 .moveable {
     cursor: move;
 }

@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MeshPanelComponent } from './components/mesh-panel-component/mesh-panel-component';
+import { MaterialPanelComponent } from './components/material-panel-component/material-panel-component';
 
 @Component({
   selector: 'app-viz',
@@ -36,7 +37,8 @@ import { MeshPanelComponent } from './components/mesh-panel-component/mesh-panel
     MatButtonModule,
     MatMenuModule,
     MatCheckboxModule,
-    MeshPanelComponent
+    MeshPanelComponent,
+    MaterialPanelComponent
   ],
   templateUrl: './viz.html',
   changeDetection: ChangeDetectionStrategy.Eager,

@@ -25,7 +25,8 @@
     "light-component": "ng g c viz/light-component",
     "import-service": "ng g s viz/import-service",
     "animation-component": "ng g c viz/components/animation-component",
-    "mesh-panel-component": "ng g c viz/mesh-panel-component"
+    "mesh-panel-component": "ng g c viz/mesh-panel-component",
+    "material-panel-component": "ng g c viz/components/material-panel-component"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
