@@ -22,6 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MeshPanelComponent } from './components/mesh-panel-component/mesh-panel-component';
 import { MaterialPanelComponent } from './components/material-panel-component/material-panel-component';
+import { LightPanelComponent } from './components/light-panel-component/light-panel-component';
 
 @Component({
   selector: 'app-viz',
@@ -38,7 +39,8 @@ import { MaterialPanelComponent } from './components/material-panel-component/ma
     MatMenuModule,
     MatCheckboxModule,
     MeshPanelComponent,
-    MaterialPanelComponent
+    MaterialPanelComponent,
+    LightPanelComponent
   ],
   templateUrl: './viz.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -54,7 +56,10 @@ export class VizComponent implements AfterViewInit {
     'controls',
     'animations',
     'group-list',
-    'clock'
+    'clock',
+    'light',
+    'mesh',
+    'material'
   ];
   hiddenPanels: string[] = [];
 
