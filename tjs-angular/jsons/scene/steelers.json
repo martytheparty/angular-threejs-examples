@@ -17,6 +17,19 @@
         "bevelThickness": 0.1,
         "bevelSize": 0.1
       }
+    },
+    {
+      "uuid": "c4637243-81de-4645-bd31-c7a7b1a11ca1",
+      "type": "ExtrudeGeometry",
+      "shapes": [
+        "5c99c000-5359-4bc3-979e-74aded6da504"
+      ],
+      "options": {
+        "depth": 0.5,
+        "bevelEnabled": true,
+        "bevelThickness": 0.1,
+        "bevelSize": 0.1
+      }
     }
   ],
   "materials": [
@@ -51,10 +64,29 @@
         "XYZ"
       ],
       "envMapIntensity": 1,
-      "reflectivity": 0.5,
+      "reflectivity": 0.49999999999999983,
       "transmission": 0,
       "thickness": 0,
       "attenuationColor": 16777215,
+      "side": 2,
+      "blendColor": 0
+    },
+    {
+      "uuid": "d1a92434-d6fb-4413-b2c8-680670eb7616",
+      "type": "MeshPhongMaterial",
+      "color": 16711680,
+      "emissive": 16711680,
+      "specular": 1118481,
+      "shininess": 30,
+      "envMapRotation": [
+        0,
+        0,
+        0,
+        "XYZ"
+      ],
+      "envMapIntensity": 1,
+      "reflectivity": 1,
+      "refractionRatio": 0.98,
       "side": 2,
       "blendColor": 0
     }
@@ -242,6 +274,189 @@
       ],
       "uuid": "9a88d749-b174-4dc8-a981-6dcc26ded49a",
       "holes": []
+    },
+    {
+      "arcLengthDivisions": 200,
+      "type": "Shape",
+      "autoClose": false,
+      "curves": [
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.1021821192326179e-16,
+            -1.8
+          ],
+          "v2": [
+            0.5877852522924731,
+            -0.8090169943749475
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            0.5877852522924731,
+            -0.8090169943749475
+          ],
+          "v2": [
+            1.7119017293312764,
+            -0.5562305898749054
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.7119017293312764,
+            -0.5562305898749054
+          ],
+          "v2": [
+            0.9510565162951535,
+            0.3090169943749474
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            0.9510565162951535,
+            0.3090169943749474
+          ],
+          "v2": [
+            1.0580134541264516,
+            1.4562305898749055
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            1.0580134541264516,
+            1.4562305898749055
+          ],
+          "v2": [
+            6.123233995736766e-17,
+            1
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            6.123233995736766e-17,
+            1
+          ],
+          "v2": [
+            -1.0580134541264514,
+            1.4562305898749055
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -1.0580134541264514,
+            1.4562305898749055
+          ],
+          "v2": [
+            -0.9510565162951535,
+            0.3090169943749475
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -0.9510565162951535,
+            0.3090169943749475
+          ],
+          "v2": [
+            -1.7119017293312766,
+            -0.5562305898749051
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -1.7119017293312766,
+            -0.5562305898749051
+          ],
+          "v2": [
+            -0.5877852522924732,
+            -0.8090169943749473
+          ]
+        },
+        {
+          "metadata": {
+            "version": 4.7,
+            "type": "Curve",
+            "generator": "Curve.toJSON"
+          },
+          "arcLengthDivisions": 200,
+          "type": "LineCurve",
+          "v1": [
+            -0.5877852522924732,
+            -0.8090169943749473
+          ],
+          "v2": [
+            1.1021821192326179e-16,
+            -1.8
+          ]
+        }
+      ],
+      "currentPoint": [
+        -0.5877852522924732,
+        -0.8090169943749473
+      ],
+      "uuid": "5c99c000-5359-4bc3-979e-74aded6da504",
+      "holes": []
     }
   ],
   "object": {
@@ -312,8 +527,8 @@
         "type": "Group",
         "userData": {
           "name": "a",
-          "rotateX": 0,
-          "rotateY": 1,
+          "rotateX": 3,
+          "rotateY": 3,
           "rotateZ": 3,
           "rotationX": 3,
           "rotationY": 3,
@@ -332,17 +547,17 @@
         },
         "layers": 1,
         "matrix": [
-          0.9804959165988371,
-          0.1189754309213632,
-          0.15643722181783432,
+          0.4019926982085541,
+          -0.11114655191632924,
+          0.9088720012103555,
           0,
-          -0.13828837308987124,
-          0.9832197987760583,
-          0.1189754309213632,
+          0.4903004882677157,
+          0.864437317103762,
+          -0.11114655191632926,
           0,
-          -0.13965702059389257,
-          -0.13828837308987124,
-          0.9804959165988371,
+          -0.7733093183141179,
+          0.4903004882677157,
+          0.40199269820855416,
           0,
           0,
           0,
@@ -360,17 +575,17 @@
             "type": "Mesh",
             "layers": 1,
             "matrix": [
-              0.99847743863946,
-              0.05233595624294383,
-              -0.017428488520812163,
+              0.9972609476841366,
+              0.05499953017368575,
+              -0.04945355300493033,
               0,
-              -0.05232798522331313,
-              0.9986295347545738,
-              0.000913388379635741,
+              -0.052264231633826715,
+              0.9971175967619864,
+              0.05499953017368575,
               0,
-              0.01745240643728351,
-              0,
-              0.9998476951563913,
+              0.05233595624294382,
+              -0.05226423163382673,
+              0.9972609476841366,
               0,
               0,
               0,
@@ -571,6 +786,188 @@
             "shadow": {
               "camera": {
                 "uuid": "e731ebcc-8f2f-4983-9c9f-3eaaffb18ede",
+                "type": "PerspectiveCamera",
+                "layers": 1,
+                "up": [
+                  0,
+                  1,
+                  0
+                ],
+                "fov": 90,
+                "zoom": 1,
+                "near": 0.5,
+                "far": 500,
+                "focus": 10,
+                "aspect": 1,
+                "filmGauge": 35,
+                "filmOffset": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "51aa6fd7-df61-4021-a4b0-c69ba517596a",
+        "type": "Group",
+        "userData": {
+          "name": "d",
+          "rotateX": 3,
+          "rotateY": 3,
+          "rotateZ": 3,
+          "rotationX": 3,
+          "rotationY": 3,
+          "rotationZ": 3,
+          "positionX": -2,
+          "positionY": 3,
+          "positionZ": -4,
+          "isAnimated": true,
+          "color": "#ff0000",
+          "eColor": "#ff0000",
+          "eIntensity": 1,
+          "wireframe": false,
+          "animationRotationX": 3,
+          "animationRotationY": 3,
+          "animationRotationZ": 3
+        },
+        "layers": 1,
+        "matrix": [
+          0.40199269820855416,
+          -0.11114655191632926,
+          0.9088720012103556,
+          0,
+          0.4903004882677157,
+          0.864437317103762,
+          -0.11114655191632926,
+          0,
+          -0.7733093183141179,
+          0.4903004882677157,
+          0.40199269820855416,
+          0,
+          -2,
+          3,
+          -4,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "children": [
+          {
+            "uuid": "90d585be-7913-4bc8-84ed-f362d9c413d3",
+            "type": "Mesh",
+            "layers": 1,
+            "matrix": [
+              0.9972609476841365,
+              0.054999530173685744,
+              -0.049453553004930324,
+              0,
+              -0.05226423163382672,
+              0.9971175967619865,
+              0.05499953017368576,
+              0,
+              0.052335956242943814,
+              -0.05226423163382672,
+              0.9972609476841365,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "geometry": "c4637243-81de-4645-bd31-c7a7b1a11ca1",
+            "material": "d1a92434-d6fb-4413-b2c8-680670eb7616"
+          }
+        ]
+      },
+      {
+        "uuid": "4f87ec1a-64cb-4cb5-8baf-9c0053a1239e",
+        "type": "Group",
+        "userData": {
+          "name": "light",
+          "rotateX": 0,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "rotationX": 0,
+          "rotationY": 0,
+          "rotationZ": 0,
+          "positionX": -2,
+          "positionY": 3,
+          "positionZ": -2,
+          "isAnimated": true,
+          "color": "#00ff00",
+          "eColor": "#00ff00",
+          "eIntensity": 1,
+          "wireframe": false,
+          "animationRotationX": 0,
+          "animationRotationY": 0,
+          "animationRotationZ": 0
+        },
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -2,
+          3,
+          -2,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "children": [
+          {
+            "uuid": "f3e0dbe3-8c81-491f-bca6-65c62c8cc04c",
+            "type": "PointLight",
+            "layers": 1,
+            "matrix": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "color": 16777215,
+            "intensity": 10,
+            "distance": 10,
+            "decay": 2,
+            "shadow": {
+              "camera": {
+                "uuid": "540d4205-5bd9-48ce-8f3a-9ce2e0cb212b",
                 "type": "PerspectiveCamera",
                 "layers": 1,
                 "up": [
