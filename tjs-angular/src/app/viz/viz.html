@@ -1,8 +1,11 @@
 <div [class]="hiddenPanels">
-    <app-light-component cdkDrag class="moveable"></app-light-component>
+    <app-scene-component cdkDrag class="moveable"></app-scene-component>
     @if(sceneService.selectedGroup !== undefined) {
         <app-controls cdkDrag class="moveable"></app-controls>
         <app-animation-component cdkDrag class="moveable"></app-animation-component>
+        <app-mesh-panel-component cdkDrag class="moveable"></app-mesh-panel-component>
+        <app-material-panel-component cdkDrag class="moveable"></app-material-panel-component>
+        <app-light-panel-component cdkDrag class="moveable"></app-light-panel-component>
     }
 
     <app-list-manager-component cdkDrag class="moveable"></app-list-manager-component>

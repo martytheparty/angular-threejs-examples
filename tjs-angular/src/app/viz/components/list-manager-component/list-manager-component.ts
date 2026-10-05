@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { ThreeGroup } from '../../interfaces';
 import { SceneService } from '../../services/scene-service';
@@ -27,7 +28,8 @@ import { StlService } from '../../services/stl-service';
     MatButtonModule,
     CommonModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonToggleModule
   ],
   templateUrl: './list-manager-component.html',
   styleUrl: './list-manager-component.scss',
@@ -50,6 +52,19 @@ export class ListManagerComponent {
     } );
   }
 
+  downloadJson(data: unknown, name: string): void {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = name + '.json';
+    anchor.click();
+
+    URL.revokeObjectURL(url);
+  }
+
   importGroupsFromScene(groups: THREE.Group[]): void {
     const threeGroups: ThreeGroup[] = []; 
     groups.forEach(
@@ -63,9 +78,18 @@ export class ListManagerComponent {
   }
 
 
-  addGroup(groupElement: HTMLInputElement): void {
+  addGroupMesh(groupElement: HTMLInputElement): void {
     const groupName = groupElement.value.trim();
     const group = this.sceneService.addDefaultGroup(groupName);
+    const newThreeGroup: ThreeGroup ={name: groupName, group}; 
+    this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
+    this.sceneService.addGroup(newThreeGroup);
+    groupElement.value = '';
+  }
+
+  addGroupLight(groupElement: HTMLInputElement): void {
+    const groupName = groupElement.value.trim();
+    const group = this.sceneService.addDefaultLightGroup(groupName);
     const newThreeGroup: ThreeGroup ={name: groupName, group}; 
     this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
     this.sceneService.addGroup(newThreeGroup);
@@ -100,6 +124,7 @@ export class ListManagerComponent {
 
     this.dialog.open(this.toJson(), {
       data: {
+        name: exportGroup.name,
         json: group.toJSON()
       }
     });
@@ -147,5 +172,33 @@ export class ListManagerComponent {
       this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
       this.sceneService.addGroup(newThreeGroup);
     });
+  }
+
+  importJson(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+
+    const file = input.files[0];
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const json = JSON.parse(reader.result as string);
+      const loader = new THREE.ObjectLoader();
+      const group = loader.parse(json) as THREE.Group;
+      this.dialog.closeAll();
+
+      const groupName = group.userData['name'];
+      this.sceneService.addImportedGroup(group);
+      const newThreeGroup: ThreeGroup ={name: groupName, group}; 
+      this.controlsService.groups.set([ ...this.controlsService.groups(), newThreeGroup]);
+      this.sceneService.addGroup(newThreeGroup);
+
+    };
+
+    reader.readAsText(file);
   }
 }

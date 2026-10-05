@@ -17,7 +17,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-light-component',
+  selector: 'app-scene-component',
   imports: [
     MatIconModule,
     MatButtonModule,
@@ -26,10 +26,10 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     CommonModule,
   ],
-  templateUrl: './light-component.html',
-  styleUrl: './light-component.scss',
+  templateUrl: './scene-component.html',
+  styleUrl: './scene-component.scss',
 })
-export class LightComponent {
+export class SceneComponent {
   controlsService: ControlsService = inject(ControlsService);
   sceneService: SceneService = inject(SceneService);
   private dialog = inject(MatDialog);
@@ -111,6 +111,4 @@ export class LightComponent {
   importScene(): void {
     this.dialog.open(this.fromJson());
   }
-
-
 }

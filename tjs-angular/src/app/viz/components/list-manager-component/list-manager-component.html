@@ -32,9 +32,14 @@
              <input placeholder="add viz" matInput #groupName>
         </mat-form-field>
         @if(groupName.value.length > 0) {
-        <button mat-button (click)="addGroup(groupName)">
+        <button mat-button (click)="addGroupMesh(groupName)">
           <mat-icon>add</mat-icon>
-          Add Group
+          Add Mesh Group
+        </button>
+
+        <button mat-button (click)="addGroupLight(groupName)">
+          <mat-icon>add</mat-icon>
+          Add Light Group
         </button>
         }
       </div>
@@ -74,7 +79,19 @@
 
 <ng-template #toJson let-data>
   <mat-dialog-content class="json-content">
-    <pre>{{data.json | json}}</pre>
+  <mat-button-toggle-group 
+    name="data-view"
+    #viewToggle="matButtonToggleGroup"
+  >
+    <mat-button-toggle
+      value="download"
+      (click)="downloadJson(data.json, data.name)"
+    >Download</mat-button-toggle>
+    <mat-button-toggle value="view">View</mat-button-toggle>
+  </mat-button-toggle-group>
+    @if (viewToggle.value === 'view') {
+      <pre>{{ data.json | json }}</pre>
+    }
   </mat-dialog-content>
 </ng-template>
 
@@ -95,6 +112,21 @@
       (click)="addGroupFromJson(jsonData)"
       aria-label="Import group">
       <mat-icon>add</mat-icon>
+    </button>
+
+    <input
+      #jsonFileInput
+      type="file"
+      accept=".json,application/json"
+      hidden
+      (change)="importJson($event)"
+    />
+
+    <button
+      mat-button
+      type="button"
+      (click)="jsonFileInput.click()">
+      Import JSON
     </button>
 
     <button

@@ -24,7 +24,7 @@ app-clock-component {
     bottom: 0;
 }
 
-app-light-component {
+app-scene-component {
     width: 260px;
     position: absolute;
     background-color: antiquewhite;
@@ -33,7 +33,34 @@ app-light-component {
 
 app-animation-component {
      position: absolute;
-     top: 495px;
+     top: 190px;
+     left: 260px;
+     width: 260px;
+     z-index: 1;
+    background-color: antiquewhite;
+}
+app-mesh-panel-component {
+     position: absolute;
+     top: 0px;
+     left: 260px;
+     width: 260px;
+     z-index: 1;
+    background-color: antiquewhite;
+}
+
+app-light-panel-component {
+     position: absolute;
+     top: 140px;
+     left: 260px;
+     width: 260px;
+     z-index: 1;
+    background-color: antiquewhite;
+}
+
+app-material-panel-component {
+     position: absolute;
+     top: 225px;
+     left: 0;
      width: 260px;
      z-index: 1;
     background-color: antiquewhite;
@@ -56,8 +83,8 @@ app-animation-component {
   cursor: pointer;
 }
 
-.light {
-    app-light-component {
+.scene {
+    app-scene-component {
         display: none;
     }
 }
@@ -80,6 +107,21 @@ app-animation-component {
 }
 .clock {
     app-clock-component {
+        display: none;
+    }
+}
+.light {
+    app-light-panel-component {
+        display: none;
+    }
+}
+.mesh {
+    app-mesh-panel-component {
+        display: none;
+    }
+}
+.material {
+    app-material-panel-component {
         display: none;
     }
 }

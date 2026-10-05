@@ -13,13 +13,16 @@ import { ListManagerComponent } from './components/list-manager-component/list-m
 import { SceneService } from './services/scene-service';
 import { CommonModule } from '@angular/common';
 import { ClockComponent } from './components/clock-component/clock-component';
-import { LightComponent } from './components/light-component/light-component';
+import { SceneComponent } from './components/scene-component/scene-component';
 import { AnimationComponent } from './components/animation-component/animation-component';
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MeshPanelComponent } from './components/mesh-panel-component/mesh-panel-component';
+import { MaterialPanelComponent } from './components/material-panel-component/material-panel-component';
+import { LightPanelComponent } from './components/light-panel-component/light-panel-component';
 
 @Component({
   selector: 'app-viz',
@@ -28,13 +31,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ListManagerComponent,
     CommonModule,
     ClockComponent,
-    LightComponent,
+    SceneComponent,
     AnimationComponent,
     CdkDrag,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MeshPanelComponent,
+    MaterialPanelComponent,
+    LightPanelComponent
   ],
   templateUrl: './viz.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -46,11 +52,14 @@ export class VizComponent implements AfterViewInit {
   stlService: StlService = inject(StlService);
   sceneService: SceneService = inject(SceneService);
   panels: string[] = [
-    'light',
+    'scene',
     'controls',
     'animations',
     'group-list',
-    'clock'
+    'clock',
+    'light',
+    'mesh',
+    'material'
   ];
   hiddenPanels: string[] = [];
 

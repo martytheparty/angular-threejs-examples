@@ -1,11 +1,11 @@
-<div class="parent">
+<div>
     <table>
-        <tr><th colspan="4">group: animation: {{controlsService.groupName()}} </th></tr>
+        <tr><th colspan="4">group/mesh: {{controlsService.groupName()}} </th></tr>
         <tr>
             <th>&nbsp;</th>
-            <th>x/r</th>
-            <th>y/g</th>
-            <th>z/b</th>
+            <th>r/x</th>
+            <th>g/y</th>
+            <th>b/z</th>
         </tr>
         <tr>
             <td><div>rotation</div></td>
@@ -14,7 +14,7 @@
                     #xRotation 
                     type="number" 
                     (input)="setRotation(xRotation.value, 'x')"
-                    [value]="controlsService.animationRotationX()"
+                    [value]="controlsService.x()"
                 >
             </td>
             <td>
@@ -22,7 +22,7 @@
                     #yRotation 
                     type="number" 
                     (input)="setRotation(yRotation.value, 'y')"
-                    [value]="controlsService.animationRotationY()"
+                    [value]="controlsService.y()"
                 >
             </td>
             <td>
@@ -30,10 +30,20 @@
                     #zRotation 
                     type="number" 
                     (input)="setRotation(zRotation.value, 'z')"
-                    [value]="controlsService.animationRotationZ()"
+                    [value]="controlsService.z()"
                 >
             </td>
         </tr>
-
+        <tr>
+            <td colspan="4">
+                <label>Choose a mesh: </label>
+                <select (change)="selectMesh($event)">
+                    <option></option>
+                    @for(meshOption of MeshClass.getList(); track meshOption) {
+                        <option value="{{meshOption}}">{{meshOption}}</option>
+                    }
+                </select>
+            </td>
+        </tr>
     </table>
 </div>
