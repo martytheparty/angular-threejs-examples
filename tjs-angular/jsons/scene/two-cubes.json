@@ -28,13 +28,29 @@
   ],
   "materials": [
     {
-      "uuid": "ab010908-2a58-4303-af22-a8350a98ea46",
-      "type": "MeshStandardMaterial",
+      "uuid": "65177508-90a3-4ebb-9dda-9187e5ad56f2",
+      "type": "MeshPhysicalMaterial",
       "color": 16711680,
-      "roughness": 1,
+      "roughness": 0.1,
       "metalness": 0,
+      "sheen": 0,
+      "sheenColor": 0,
+      "sheenRoughness": 1,
       "emissive": 65280,
       "emissiveIntensity": 0,
+      "specularIntensity": 1,
+      "specularColor": 16777215,
+      "clearcoat": 0,
+      "clearcoatRoughness": 0,
+      "dispersion": 0,
+      "iridescence": 0,
+      "iridescenceIOR": 1.3,
+      "iridescenceThicknessRange": [
+        100,
+        400
+      ],
+      "anisotropy": 0,
+      "anisotropyRotation": 0,
       "envMapRotation": [
         0,
         0,
@@ -42,17 +58,37 @@
         "XYZ"
       ],
       "envMapIntensity": 1,
+      "reflectivity": 0.49999999999999983,
+      "transmission": 0,
+      "thickness": 0,
+      "attenuationColor": 16777215,
       "side": 2,
       "blendColor": 0
     },
     {
-      "uuid": "b4b8924e-ec96-4058-808c-65602301f590",
-      "type": "MeshStandardMaterial",
+      "uuid": "882e8526-91ad-4329-9a1f-824779240ec3",
+      "type": "MeshPhysicalMaterial",
       "color": 16711680,
-      "roughness": 1,
-      "metalness": 0,
+      "roughness": 0.5,
+      "metalness": 0.5,
+      "sheen": 0,
+      "sheenColor": 0,
+      "sheenRoughness": 1,
       "emissive": 65280,
-      "emissiveIntensity": -0.1,
+      "emissiveIntensity": 0,
+      "specularIntensity": 1,
+      "specularColor": 16777215,
+      "clearcoat": 0,
+      "clearcoatRoughness": 0,
+      "dispersion": 0,
+      "iridescence": 0,
+      "iridescenceIOR": 1.3,
+      "iridescenceThicknessRange": [
+        100,
+        400
+      ],
+      "anisotropy": 0,
+      "anisotropyRotation": 0,
       "envMapRotation": [
         0,
         0,
@@ -60,6 +96,10 @@
         "XYZ"
       ],
       "envMapIntensity": 1,
+      "reflectivity": 0.5,
+      "transmission": 0,
+      "thickness": 0,
+      "attenuationColor": 16777215,
       "side": 2,
       "blendColor": 0
     }
@@ -128,110 +168,6 @@
         "intensity": 0.2
       },
       {
-        "uuid": "0398dfa6-f5ad-4838-a11c-348f506ef45b",
-        "type": "Group",
-        "userData": {
-          "name": "point light",
-          "rotateX": 0,
-          "rotateY": 0,
-          "rotateZ": 0,
-          "rotationX": 0,
-          "rotationY": 0,
-          "rotationZ": 0,
-          "positionX": 2,
-          "positionY": 2,
-          "positionZ": 5,
-          "isAnimated": true,
-          "color": "#00ff00",
-          "eColor": "#00ff00",
-          "eIntensity": 1,
-          "roughness": 0,
-          "metalness": 0,
-          "wireframe": false,
-          "animationRotationX": 0,
-          "animationRotationY": 0,
-          "animationRotationZ": 0
-        },
-        "layers": 1,
-        "matrix": [
-          1,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          0,
-          0,
-          0,
-          1,
-          0,
-          2,
-          2,
-          5,
-          1
-        ],
-        "up": [
-          0,
-          1,
-          0
-        ],
-        "children": [
-          {
-            "uuid": "011ca5c3-1a93-41b7-8fd6-2083a0d3f53e",
-            "type": "PointLight",
-            "layers": 1,
-            "matrix": [
-              1,
-              0,
-              0,
-              0,
-              0,
-              1,
-              0,
-              0,
-              0,
-              0,
-              1,
-              0,
-              0,
-              0,
-              0,
-              1
-            ],
-            "up": [
-              0,
-              1,
-              0
-            ],
-            "color": 16777215,
-            "intensity": 10,
-            "distance": 10,
-            "decay": 2,
-            "shadow": {
-              "camera": {
-                "uuid": "7f8bce63-a297-46d5-8611-7331a9a10b70",
-                "type": "PerspectiveCamera",
-                "layers": 1,
-                "up": [
-                  0,
-                  1,
-                  0
-                ],
-                "fov": 90,
-                "zoom": 1,
-                "near": 0.5,
-                "far": 500,
-                "focus": 10,
-                "aspect": 1,
-                "filmGauge": 35,
-                "filmOffset": 0
-              }
-            }
-          }
-        ]
-      },
-      {
         "uuid": "9f45167b-3fe4-4240-a8ca-0e751d2df214",
         "type": "Group",
         "userData": {
@@ -244,13 +180,13 @@
           "rotationZ": 0,
           "positionX": -1,
           "positionY": 0,
-          "positionZ": 0,
+          "positionZ": 3,
           "isAnimated": true,
           "color": "#ff0000",
           "eColor": "#00ff00",
           "eIntensity": 0,
-          "roughness": 1,
-          "metalness": 1,
+          "roughness": 0.1,
+          "metalness": 0,
           "wireframe": false,
           "animationRotationX": 0,
           "animationRotationY": 0,
@@ -272,7 +208,7 @@
           0,
           -1,
           0,
-          0,
+          3,
           1
         ],
         "up": [
@@ -309,7 +245,7 @@
               0
             ],
             "geometry": "0ae24fb9-954b-44e7-9d07-c4246fe1ad7a",
-            "material": "ab010908-2a58-4303-af22-a8350a98ea46"
+            "material": "65177508-90a3-4ebb-9dda-9187e5ad56f2"
           }
         ]
       },
@@ -326,13 +262,13 @@
           "rotationZ": 0,
           "positionX": 1,
           "positionY": 0,
-          "positionZ": 0,
+          "positionZ": 3,
           "isAnimated": true,
           "color": "#ff0000",
           "eColor": "#00ff00",
           "eIntensity": 0,
-          "roughness": 1,
-          "metalness": 0,
+          "roughness": 0.5,
+          "metalness": 0.5,
           "wireframe": false,
           "animationRotationX": 0,
           "animationRotationY": 0,
@@ -354,7 +290,7 @@
           0,
           1,
           0,
-          0,
+          3,
           1
         ],
         "up": [
@@ -391,7 +327,7 @@
               0
             ],
             "geometry": "9c10fe57-2916-406b-856b-bd846bd14eff",
-            "material": "b4b8924e-ec96-4058-808c-65602301f590"
+            "material": "882e8526-91ad-4329-9a1f-824779240ec3"
           }
         ]
       },
@@ -414,7 +350,7 @@
           "eColor": "#00ff00",
           "eIntensity": 1,
           "roughness": 0,
-          "metalness": 0,
+          "metalness": 1,
           "wireframe": false,
           "animationRotationX": 0,
           "animationRotationY": 0,
