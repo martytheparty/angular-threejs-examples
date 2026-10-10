@@ -77,6 +77,8 @@ export class SceneService {
                 this.controlsService.egColor();
                 this.controlsService.ebColor();
                 this.controlsService.eIntensity();
+                this.controlsService.roughness();
+                this.controlsService.metalness();
                 this.controlsService.selectedMaterialSignal();
                 this.updateSelectedMesh();
                 this.updateSelectedMaterial();
@@ -103,7 +105,7 @@ export class SceneService {
     }
 
     updateSelectedMaterial(): void {
-        console.log("Update the current material", this.currentMaterial);
+        console.log("Update the current material", this.currentMaterial, this.controlsService.selectedMaterialSignal());
         if (this.currentMaterial != this.controlsService.selectedMaterialSignal()) {
             this.currentMaterial = this.controlsService.selectedMaterialSignal();
             const group = this.selectedGroup?.group;
@@ -150,6 +152,8 @@ export class SceneService {
                 color: `#${this.toHex(this.controlsService.rColor())}${this.toHex(this.controlsService.gColor())}${this.toHex(this.controlsService.bColor())}`,
                 eColor: `#${this.toHex(this.controlsService.erColor())}${this.toHex(this.controlsService.egColor())}${this.toHex(this.controlsService.ebColor())}`,
                 eIntensity: this.controlsService.eIntensity(),
+                roughness: this.controlsService.roughness(),
+                metalness: this.controlsService.metalness(),
                 wireframe: this.controlsService.selectWireframe(),
                 animationRotationX: this.controlsService.animationRotationX(),
                 animationRotationY: this.controlsService.animationRotationY(),
@@ -208,6 +212,8 @@ export class SceneService {
             rotationZ: 0,
             isAnimated: false,
             eIntensity: 1,
+            roughness: 0,
+            metalness: 0,
             color: "#00FF00",
             eColor: "#00FF00",
             wireframe: false,
@@ -241,6 +247,8 @@ export class SceneService {
             rotationZ: 0,
             isAnimated: false,
             eIntensity: 1,
+            roughness: 0,
+            metalness: 0,
             color: "#00FF00",
             eColor: "#00FF00",
             wireframe: false,
@@ -277,6 +285,8 @@ export class SceneService {
             rotationZ: 0,
             isAnimated: false,
             eIntensity: 1,
+            roughness: 0,
+            metalness: 0,
             color: "#FF0000",
             eColor: "#FF0000",
             wireframe: false,
@@ -374,6 +384,14 @@ export class SceneService {
 
                                 if (currentGroup.userData['eIntensity'] && materialItem.emissiveIntensity !== undefined) {
                                     materialItem.emissiveIntensity = currentGroup.userData['eIntensity'];
+                                }
+
+                                if (currentGroup.userData['roughness'] && materialItem.roughness !== undefined) {
+                                    materialItem.roughness = currentGroup.userData['roughness'];
+                                }
+
+                                if (currentGroup.userData['metalness'] && materialItem.metalness !== undefined) {
+                                    materialItem.metalness = currentGroup.userData['metalness'];
                                 }
                             }
     }

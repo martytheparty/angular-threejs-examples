@@ -38,6 +38,8 @@ export class ControlsService {
   egColor: WritableSignal<number> = signal<number>(0);
   ebColor: WritableSignal<number> = signal<number>(0);
   eIntensity: WritableSignal<number> = signal<number>(0);
+  roughness: WritableSignal<number> = signal<number>(0);
+  metalness: WritableSignal<number> = signal<number>(0);
 
   selected: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
   selectedPosition: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
@@ -86,6 +88,8 @@ export class ControlsService {
     }
 
     this.eIntensity.set(userData.eIntensity);
+    this.roughness.set(userData.roughness);
+    this.metalness.set(userData.metalness);
     this.animationRotationX.set(userData.animationRotationX);
     this.animationRotationY.set(userData.animationRotationY);
     this.animationRotationZ.set(userData.animationRotationZ);
@@ -193,4 +197,13 @@ export class ControlsService {
   setEIntensity(intensity: number): void {
     this.eIntensity.set(intensity);
   }
-}
+
+  setRoughness(roughness: number): void {
+    console.log("SETTING ROUGHNESS", roughness);
+    this.roughness.set(roughness);
+  }
+
+  setMetalness(metalness: number): void {
+    console.log("SETTING METALNESS", metalness);
+    this.metalness.set(metalness);
+  }}

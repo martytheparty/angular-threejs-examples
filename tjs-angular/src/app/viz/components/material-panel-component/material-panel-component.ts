@@ -49,4 +49,13 @@ export class MaterialPanelComponent {
     this.controlsService.setEIntensity(parseFloat(intensity));
   }
 
+  setRoughness(roughness: string): void {
+    this.controlsService.setRoughness(parseFloat(roughness));
+  }
+
+  setMetalness(metalness: string): void {
+    console.log("metalness", metalness);
+    this.controlsService.setMetalness(parseFloat(metalness));
+  }
+
 }

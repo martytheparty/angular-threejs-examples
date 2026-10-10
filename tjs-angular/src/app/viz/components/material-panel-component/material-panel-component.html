@@ -60,7 +60,7 @@
         <tr>
             <td>
                 <div>
-                    e-color
+                    ecolor
                 </div>
             </td>
             <td>
@@ -91,7 +91,7 @@
         <tr>
             <td>
                 <div>
-                    e-intensity
+                    eintensity
                 </div>
             </td>
             <td colspan="3">
@@ -100,7 +100,41 @@
                     class="colspan3"
                     type="number" 
                     (input)="setEIntensity(eIntensity.value)"
-                    value="1"
+                    [value]="controlsService.eIntensity()"
+                    step=".1"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    roughness
+                </div>
+            </td>
+            <td colspan="3">
+                <input 
+                    #roughness 
+                    class="colspan3"
+                    type="number" 
+                    (input)="setRoughness(roughness.value)"
+                    [value]="controlsService.roughness()"
+                    step=".1"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    metalness
+                </div>
+            </td>
+            <td colspan="3">
+                <input 
+                    #metalness 
+                    class="colspan3"
+                    type="number" 
+                    (input)="setMetalness(metalness.value)"
+                    [value]="controlsService.metalness()"
                     step=".1"
                 >
             </td>

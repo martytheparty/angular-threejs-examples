@@ -1,0 +1,452 @@
+{
+  "metadata": {
+    "version": 4.7,
+    "type": "Object",
+    "generator": "Object3D.toJSON"
+  },
+  "geometries": [
+    {
+      "uuid": "0ae24fb9-954b-44e7-9d07-c4246fe1ad7a",
+      "type": "BoxGeometry",
+      "width": 1,
+      "height": 1,
+      "depth": 1,
+      "widthSegments": 32,
+      "heightSegments": 32,
+      "depthSegments": 1
+    },
+    {
+      "uuid": "9c10fe57-2916-406b-856b-bd846bd14eff",
+      "type": "BoxGeometry",
+      "width": 1,
+      "height": 1,
+      "depth": 1,
+      "widthSegments": 32,
+      "heightSegments": 32,
+      "depthSegments": 1
+    }
+  ],
+  "materials": [
+    {
+      "uuid": "65177508-90a3-4ebb-9dda-9187e5ad56f2",
+      "type": "MeshPhysicalMaterial",
+      "color": 16711680,
+      "roughness": 0.1,
+      "metalness": 0,
+      "sheen": 0,
+      "sheenColor": 0,
+      "sheenRoughness": 1,
+      "emissive": 65280,
+      "emissiveIntensity": 0,
+      "specularIntensity": 1,
+      "specularColor": 16777215,
+      "clearcoat": 0,
+      "clearcoatRoughness": 0,
+      "dispersion": 0,
+      "iridescence": 0,
+      "iridescenceIOR": 1.3,
+      "iridescenceThicknessRange": [
+        100,
+        400
+      ],
+      "anisotropy": 0,
+      "anisotropyRotation": 0,
+      "envMapRotation": [
+        0,
+        0,
+        0,
+        "XYZ"
+      ],
+      "envMapIntensity": 1,
+      "reflectivity": 0.49999999999999983,
+      "transmission": 0,
+      "thickness": 0,
+      "attenuationColor": 16777215,
+      "side": 2,
+      "blendColor": 0
+    },
+    {
+      "uuid": "882e8526-91ad-4329-9a1f-824779240ec3",
+      "type": "MeshPhysicalMaterial",
+      "color": 16711680,
+      "roughness": 0.5,
+      "metalness": 0.5,
+      "sheen": 0,
+      "sheenColor": 0,
+      "sheenRoughness": 1,
+      "emissive": 65280,
+      "emissiveIntensity": 0,
+      "specularIntensity": 1,
+      "specularColor": 16777215,
+      "clearcoat": 0,
+      "clearcoatRoughness": 0,
+      "dispersion": 0,
+      "iridescence": 0,
+      "iridescenceIOR": 1.3,
+      "iridescenceThicknessRange": [
+        100,
+        400
+      ],
+      "anisotropy": 0,
+      "anisotropyRotation": 0,
+      "envMapRotation": [
+        0,
+        0,
+        0,
+        "XYZ"
+      ],
+      "envMapIntensity": 1,
+      "reflectivity": 0.5,
+      "transmission": 0,
+      "thickness": 0,
+      "attenuationColor": 16777215,
+      "side": 2,
+      "blendColor": 0
+    }
+  ],
+  "object": {
+    "uuid": "bc48e251-c454-4bb5-a3c6-137dfdd6d165",
+    "type": "Scene",
+    "userData": {
+      "name": "Simple ThreeJS Scene",
+      "backgroundColor": "#FFFFFF"
+    },
+    "layers": 1,
+    "matrix": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "background": 16777215,
+    "children": [
+      {
+        "uuid": "37b6f1f4-6b2e-483b-81c0-c662ff8a9eee",
+        "type": "AmbientLight",
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "color": 16777215,
+        "intensity": 0.2
+      },
+      {
+        "uuid": "9f45167b-3fe4-4240-a8ca-0e751d2df214",
+        "type": "Group",
+        "userData": {
+          "name": "red cube",
+          "rotateX": 0,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "rotationX": 0,
+          "rotationY": 0,
+          "rotationZ": 0,
+          "positionX": -1,
+          "positionY": 0,
+          "positionZ": 3,
+          "isAnimated": true,
+          "color": "#ff0000",
+          "eColor": "#00ff00",
+          "eIntensity": 0,
+          "roughness": 0.1,
+          "metalness": 0,
+          "wireframe": false,
+          "animationRotationX": 0,
+          "animationRotationY": 0,
+          "animationRotationZ": 0
+        },
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          -1,
+          0,
+          3,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "children": [
+          {
+            "uuid": "08671eaa-17af-438c-90b0-af645fff4354",
+            "type": "Mesh",
+            "layers": 1,
+            "matrix": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "geometry": "0ae24fb9-954b-44e7-9d07-c4246fe1ad7a",
+            "material": "65177508-90a3-4ebb-9dda-9187e5ad56f2"
+          }
+        ]
+      },
+      {
+        "uuid": "6f767349-033a-4206-9180-f990f381848b",
+        "type": "Group",
+        "userData": {
+          "name": "red cube right",
+          "rotateX": 0,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "rotationX": 0,
+          "rotationY": 0,
+          "rotationZ": 0,
+          "positionX": 1,
+          "positionY": 0,
+          "positionZ": 3,
+          "isAnimated": true,
+          "color": "#ff0000",
+          "eColor": "#00ff00",
+          "eIntensity": 0,
+          "roughness": 0.5,
+          "metalness": 0.5,
+          "wireframe": false,
+          "animationRotationX": 0,
+          "animationRotationY": 0,
+          "animationRotationZ": 0
+        },
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          3,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "children": [
+          {
+            "uuid": "70f6bef2-cc95-4e1d-9ef9-77f3dd1aacf8",
+            "type": "Mesh",
+            "layers": 1,
+            "matrix": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "geometry": "9c10fe57-2916-406b-856b-bd846bd14eff",
+            "material": "882e8526-91ad-4329-9a1f-824779240ec3"
+          }
+        ]
+      },
+      {
+        "uuid": "17e4d711-5fdc-4a13-9986-2f1d417b5dfa",
+        "type": "Group",
+        "userData": {
+          "name": "left light",
+          "rotateX": 0,
+          "rotateY": 0,
+          "rotateZ": 0,
+          "rotationX": 0,
+          "rotationY": 0,
+          "rotationZ": 0,
+          "positionX": 0,
+          "positionY": 0,
+          "positionZ": 0,
+          "isAnimated": true,
+          "color": "#00ff00",
+          "eColor": "#00ff00",
+          "eIntensity": 1,
+          "roughness": 0,
+          "metalness": 1,
+          "wireframe": false,
+          "animationRotationX": 0,
+          "animationRotationY": 0,
+          "animationRotationZ": 0
+        },
+        "layers": 1,
+        "matrix": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ],
+        "children": [
+          {
+            "uuid": "177039ac-bcab-4458-9aae-13b18e55081a",
+            "type": "PointLight",
+            "layers": 1,
+            "matrix": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "up": [
+              0,
+              1,
+              0
+            ],
+            "color": 16777215,
+            "intensity": 10,
+            "distance": 10,
+            "decay": 2,
+            "shadow": {
+              "camera": {
+                "uuid": "e66a3527-221d-4456-a325-97d2d219f30d",
+                "type": "PerspectiveCamera",
+                "layers": 1,
+                "up": [
+                  0,
+                  1,
+                  0
+                ],
+                "fov": 90,
+                "zoom": 1,
+                "near": 0.5,
+                "far": 500,
+                "focus": 10,
+                "aspect": 1,
+                "filmGauge": 35,
+                "filmOffset": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "backgroundRotation": [
+      0,
+      0,
+      0,
+      "XYZ"
+    ],
+    "environmentRotation": [
+      0,
+      0,
+      0,
+      "XYZ"
+    ]
+  }
+}
