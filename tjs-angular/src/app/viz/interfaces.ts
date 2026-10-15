@@ -26,6 +26,8 @@ export interface GroupData {
   animationRotationZ: number;
   roughness: number;
   metalness: number;
+  clearcoat: number;
+  clearcoatRoughness: number;
 }
 
 export interface SceneData {

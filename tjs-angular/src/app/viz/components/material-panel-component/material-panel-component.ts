@@ -54,8 +54,15 @@ export class MaterialPanelComponent {
   }
 
   setMetalness(metalness: string): void {
-    console.log("metalness", metalness);
     this.controlsService.setMetalness(parseFloat(metalness));
+  }
+
+  setClearcoat(clearcoat: string): void {
+    this.controlsService.setClearcoat(parseFloat(clearcoat));
+  }
+
+  setClearcoatRoughness(clearcoatRoughness: string): void {
+    this.controlsService.setClearcoatRoughness(parseFloat(clearcoatRoughness));
   }
 
 }

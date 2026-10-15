@@ -1,5 +1,15 @@
+    .panel-body {
+        height: 300px;
+        max-height: 300px;
+        position: relative;
+        display: block;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 250px;
+    }   
+    
     div {
-        padding: 10px;
+        padding: 5px;
         cursor: move;
     }
 
