@@ -1,4 +1,4 @@
-<div>
+<div class="panel-body">
     <table>
         <tr><th colspan="4">group/material: {{controlsService.groupName()}} </th></tr>
         <tr>
@@ -135,6 +135,40 @@
                     type="number" 
                     (input)="setMetalness(metalness.value)"
                     [value]="controlsService.metalness()"
+                    step=".1"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    clearcoat
+                </div>
+            </td>
+            <td colspan="3">
+                <input 
+                    #clearcoat 
+                    class="colspan3"
+                    type="number" 
+                    (input)="setClearcoat(clearcoat.value)"
+                    [value]="controlsService.clearcoat()"
+                    step=".1"
+                >
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    clearcoat roughness
+                </div>
+            </td>
+            <td colspan="3">
+                <input 
+                    #clearcoatRoughness 
+                    class="colspan3"
+                    type="number" 
+                    (input)="setClearcoatRoughness(clearcoatRoughness.value)"
+                    [value]="controlsService.clearcoatRoughness()"
                     step=".1"
                 >
             </td>

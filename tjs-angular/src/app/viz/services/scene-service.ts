@@ -154,6 +154,8 @@ export class SceneService {
                 eIntensity: this.controlsService.eIntensity(),
                 roughness: this.controlsService.roughness(),
                 metalness: this.controlsService.metalness(),
+                clearcoat: this.controlsService.clearcoat(),
+                clearcoatRoughness: this.controlsService.clearcoatRoughness(),
                 wireframe: this.controlsService.selectWireframe(),
                 animationRotationX: this.controlsService.animationRotationX(),
                 animationRotationY: this.controlsService.animationRotationY(),
@@ -214,6 +216,8 @@ export class SceneService {
             eIntensity: 1,
             roughness: 0,
             metalness: 0,
+            clearcoat: 0,
+            clearcoatRoughness: 0,
             color: "#00FF00",
             eColor: "#00FF00",
             wireframe: false,
@@ -249,6 +253,8 @@ export class SceneService {
             eIntensity: 1,
             roughness: 0,
             metalness: 0,
+            clearcoat: 0,
+            clearcoatRoughness: 0,
             color: "#00FF00",
             eColor: "#00FF00",
             wireframe: false,
@@ -287,6 +293,8 @@ export class SceneService {
             eIntensity: 1,
             roughness: 0,
             metalness: 0,
+            clearcoat: 0,
+            clearcoatRoughness: 0,
             color: "#FF0000",
             eColor: "#FF0000",
             wireframe: false,
@@ -393,7 +401,26 @@ export class SceneService {
                                 if (currentGroup.userData['metalness'] && materialItem.metalness !== undefined) {
                                     materialItem.metalness = currentGroup.userData['metalness'];
                                 }
+
+                                if (this.attributeExists(currentGroup.userData, 'clearcoat')) {
+                                    materialItem.clearcoat = currentGroup.userData['clearcoat'];
+                                }
+
+                                if (this.attributeExists(currentGroup.userData, 'clearcoatRoughness')) {
+                                    materialItem.clearcoat = currentGroup.userData['clearcoatRoughness'];
+                                }
                             }
+    }
+
+    attributeExists(userData: any, property: string): boolean
+    {
+        if (!Object.hasOwn(userData, property)) {
+            return false;
+        }
+
+        const value = (userData as unknown as Record<string, unknown>)[property];
+
+        return value !== undefined && value !== null;    
     }
 
     importScene(scene: THREE.Scene): void {

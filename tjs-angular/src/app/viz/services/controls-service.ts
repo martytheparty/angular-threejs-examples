@@ -40,6 +40,8 @@ export class ControlsService {
   eIntensity: WritableSignal<number> = signal<number>(0);
   roughness: WritableSignal<number> = signal<number>(0);
   metalness: WritableSignal<number> = signal<number>(0);
+  clearcoat: WritableSignal<number> = signal<number>(0);
+  clearcoatRoughness: WritableSignal<number> = signal<number>(0);
 
   selected: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
   selectedPosition: WritableSignal<'x'|'y'|'z'> = signal<'x'|'y'|'z'>('x');
@@ -90,6 +92,8 @@ export class ControlsService {
     this.eIntensity.set(userData.eIntensity);
     this.roughness.set(userData.roughness);
     this.metalness.set(userData.metalness);
+    this.clearcoat.set(userData.clearcoat);
+    this.clearcoatRoughness.set(userData.clearcoatRoughness);
     this.animationRotationX.set(userData.animationRotationX);
     this.animationRotationY.set(userData.animationRotationY);
     this.animationRotationZ.set(userData.animationRotationZ);
@@ -199,11 +203,19 @@ export class ControlsService {
   }
 
   setRoughness(roughness: number): void {
-    console.log("SETTING ROUGHNESS", roughness);
     this.roughness.set(roughness);
   }
 
   setMetalness(metalness: number): void {
-    console.log("SETTING METALNESS", metalness);
     this.metalness.set(metalness);
-  }}
+  }
+
+  setClearcoat(clearcoat: number): void {
+    this.clearcoat.set(clearcoat);
+  }
+
+  setClearcoatRoughness(clearcoatRoughness: number): void {
+    this.clearcoatRoughness.set(clearcoatRoughness);
+  }
+
+}
